@@ -1,17 +1,5 @@
 package com.taskmanager;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-
-import com.taskmanager.entity.Project;
-import com.taskmanager.entity.Task;
-import com.taskmanager.entity.User;
-import com.taskmanager.repository.UserRepository;
-
-import java.io.*;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.util.*;
-
 
 public class Model {
 

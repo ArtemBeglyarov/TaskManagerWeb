@@ -45,17 +45,22 @@
 
     </dependencies>
 
-<!--    <build>-->
-<!--        <plugins>-->
-<!--        <plugin>-->
-<!--            <groupId>org.apache.maven.plugins</groupId>-->
-<!--            <artifactId>maven-war-plugin</artifactId>-->
-<!--            <configuration>-->
-<!--                <webXml>src\main\webapp\WEB-INF\web.xml</webXml>-->
-<!--            </configuration>-->
-<!--        </plugin>-->
-<!--        </plugins>-->
-<!--    </build>-->
+    <build>
+        <plugins>
+            <plugin>
+                <groupId>org.wildfly.plugins</groupId>
+                <artifactId>wildfly-maven-plugin</artifactId>
+                <version>2.1.0.Beta1</version>
+                <configuration>
+                    <hostname>192.168.99.100</hostname>
+                    <port>9993</port>
+                    <username>admin</username>
+                    <password>admin</password>
+                    <runtimeName>TM.war</runtimeName>>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
 
     <properties>
         <maven.compiler.source>11</maven.compiler.source>

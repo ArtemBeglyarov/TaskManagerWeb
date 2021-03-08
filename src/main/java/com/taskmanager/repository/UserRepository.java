@@ -1,6 +1,4 @@
 package com.taskmanager.repository;
-import com.taskmanager.entity.User;
-
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.sql.DataSource;
@@ -21,14 +19,14 @@ public class UserRepository implements Serializable {
             Connection connection = dataSource.getConnection();
             Statement statement = connection.createStatement();
 
-            statement.executeUpdate("create table USERS()");
+            statement.executeUpdate("INSERT INTO users VALUES ('0','Ivan','Semenov','Ivan63',123);)");
         }
-    public User findByUser(long id) {
-
-    }
-
-    public void removeUser(long id) {
-
-    }
+//    public User findByUser(long id) {
+//
+//    }
+//
+//    public void removeUser(long id) {
+//
+//    }
 
 }
