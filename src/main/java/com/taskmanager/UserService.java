@@ -9,7 +9,7 @@ import javax.inject.Inject;
 import java.sql.SQLException;
 
 @Stateless
-public class userService {
+public class UserService {
 
     @Inject
     UserRepository userRepository;

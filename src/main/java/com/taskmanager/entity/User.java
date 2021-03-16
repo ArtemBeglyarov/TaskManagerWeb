@@ -23,7 +23,6 @@ public class User implements Serializable {
 
     public User(String firstName, String lastName, String userName, String password) {
 
-//        this.ID =Model.createID(User.class);
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;

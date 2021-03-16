@@ -3,6 +3,7 @@ package com.taskmanager;
 import com.taskmanager.entity.User;
 
 
+import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,8 +14,8 @@ import java.io.IOException;
 @WebServlet("/user")
 public class UserServlet extends HttpServlet {
 
-
-    userService userService;
+    @Inject
+    UserService userService;
 
 
     @Override
