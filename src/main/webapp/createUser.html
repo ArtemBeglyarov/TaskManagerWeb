@@ -2,22 +2,28 @@
 <html>
 
 <head>
+
 	<meta charset="utf-8">
-	<title>Add User</title>
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
+	<title>Create User</title>
+	<style>
+		body{
+			background: url(images/pap.jpg);
+		}
+	</style>
 </head>
 <body>
-<p>ADD USER</p>
-
+<h1 class="title" align=center>CREATE USER</h1>
 <form action="user" method="post">
-<p>FIRST NAME	
-<p><input type="text" name="firstName">
-<p>LAST NAME
-<p><input type="text" name="secondName">
-<p>USER NAME
-<p><input type="text" name="userName">
-<p>PASSWORD	
-<p><input type="text" name="password">
-<p><input type="submit" value="Добавить">
+	<p class="title" align=center>First name:
+		<input  type="text" name="firstName">
+	<p class="title" align=center >Last name:
+		<input type="text" name="secondName">
+	<p class="title" align=center>User name:
+		<input type="text" name="userName">
+	<p class="title" align=center>Password:
+		<input type="text" name="password">
+	<p class="title" align=center><input type="submit" value="Create">
 </form>
 
 </body>

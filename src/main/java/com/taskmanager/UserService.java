@@ -21,5 +21,12 @@ public class UserService {
             throwables.printStackTrace();
         }
     }
+    public void removeUserById(String id) {
+        try {
+            userRepository.removeUser(id);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        }
+    }
 
 }

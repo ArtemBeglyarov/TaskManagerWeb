@@ -34,4 +34,16 @@ public class UserServlet extends HttpServlet {
         userService.saveUser(user);
         resp.getWriter().println("страница такс менеджера");
     }
+
+    @Override
+    protected void doPut(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        super.doPut(req, resp);
+    }
+
+    @Override
+    protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String id = req.getParameter("id");
+        userService.removeUserById(id);
+
+    }
 }
