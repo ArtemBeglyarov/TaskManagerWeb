@@ -9,12 +9,12 @@ import javax.inject.Inject;
 import java.sql.SQLException;
 
 @Stateless
-public class UserService {
+public class UsersOperations {
 
     @Inject
     UserRepository userRepository;
 
-    public void saveUser(User user) {
+    public void createUser(User user) {
         try {
             userRepository.createUser(user);
         } catch (SQLException throwables) {
@@ -28,5 +28,13 @@ public class UserService {
             throwables.printStackTrace();
         }
     }
+//    public void findUser(String id) {
+//        try {
+//       userRepository.findUserById(id);
+//        } catch (SQLException throwables) {
+//            throwables.printStackTrace();
+//        }
+//
+//    }
 
 }

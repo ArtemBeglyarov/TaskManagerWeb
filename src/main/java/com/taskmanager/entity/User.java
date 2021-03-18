@@ -6,6 +6,8 @@ import java.io.Serializable;
 
 public class User implements Serializable {
 
+
+
     private  long ID;
 
     private String firstName;
@@ -27,10 +29,20 @@ public class User implements Serializable {
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
+
+    } public User(Long id, String firstName, String lastName, String userName, String password) {
+        this.ID = id;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.userName = userName;
+        this.password = password;
     }
 
     public long getID() {
         return ID;
+    }
+    public void setID(long ID) {
+        this.ID = ID;
     }
 
     public String getFirstName() {

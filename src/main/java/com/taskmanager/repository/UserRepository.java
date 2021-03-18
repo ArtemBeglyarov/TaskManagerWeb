@@ -6,10 +6,7 @@ import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.sql.DataSource;
 import java.io.Serializable;
-import java.sql.Connection;
-import java.sql.PreparedStatement;
-import java.sql.ResultSet;
-import java.sql.SQLException;
+import java.sql.*;
 
 
 @ApplicationScoped
@@ -22,7 +19,7 @@ public class UserRepository implements Serializable {
     private static final String findUser = "SELECT * FROM users WHERE id IN (?)";
     private static final String removeUser = "DELETE FROM users WHERE id IN (?)";
 
-    public String createUser(User user) throws SQLException {
+    public void createUser(User user) throws SQLException {
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(insertUserQuery);
         statement.setString(1, user.getFirstName());
@@ -31,18 +28,28 @@ public class UserRepository implements Serializable {
         statement.setString(4,user.getPassword());
         statement.executeUpdate();
     }
-//    public User findUserById(long id) throws SQLException{
+//    public User findUserById(String id) throws SQLException{
 //        Connection connection = dataSource.getConnection();
-//        PreparedStatement statement = connection.prepareStatement(findUser);
-//        statement.setString(1,get);
+//        Statement statement = connection.createStatement();
+//        ResultSet resultSet = statement.executeQuery(findUser);
+//        Long longID = Long.parseLong(id);
+//        User user = new User();
+//        while (resultSet.next()) {
+//        user.setID(resultSet.getInt("id"));
+//        user.setFirstName(resultSet.getString("first_name"));
+//        user.setLastName(resultSet.getString("last_name"));
+//        user.setUserName(resultSet.getString("user_name"));
+//        user.setPassword(resultSet.getString("password"));
+//        }
+//     return user;
 //    }
-//
+
     public void removeUser(String id) throws SQLException {
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(removeUser);
-        statement.setString(1,id);
+        Long longID = Long.parseLong(id);
+        statement.setLong(1,longID);
         statement.executeUpdate();
 
     }
-    public
 }

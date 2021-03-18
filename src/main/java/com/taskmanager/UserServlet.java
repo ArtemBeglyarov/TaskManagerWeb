@@ -15,12 +15,13 @@ import java.io.IOException;
 public class UserServlet extends HttpServlet {
 
     @Inject
-    UserService userService;
+    UsersOperations usersOperations;
 
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+//        String id =req.getParameter("id");
+//        usersOperations.findUser(id);
 
     }
 
@@ -31,7 +32,7 @@ public class UserServlet extends HttpServlet {
         String userName = req.getParameter("userName");
         String password = req.getParameter("password");
         User user = new User(firstName, secondName, userName, password);
-        userService.saveUser(user);
+        usersOperations.createUser(user);
         resp.getWriter().println("страница такс менеджера");
     }
 
@@ -43,7 +44,7 @@ public class UserServlet extends HttpServlet {
     @Override
     protected void doDelete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String id = req.getParameter("id");
-        userService.removeUserById(id);
+        usersOperations.removeUserById(id);
 
     }
 }
