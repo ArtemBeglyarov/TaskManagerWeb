@@ -20,8 +20,9 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-//        String id =req.getParameter("id");
-//        usersOperations.findUser(id);
+        String id =req.getParameter("id");
+        User user = usersOperations.findUser(id);
+        resp.getWriter().println("you ID" + " - " + user.getUserName()+" " + user.getFirstName());
 
     }
 
@@ -33,7 +34,7 @@ public class UserServlet extends HttpServlet {
         String password = req.getParameter("password");
         User user = new User(firstName, secondName, userName, password);
         usersOperations.createUser(user);
-        resp.getWriter().println("страница такс менеджера");
+        resp.getWriter().println("you ID" + " - ");
     }
 
     @Override
