@@ -1,8 +1,5 @@
 package com.taskmanager;
 
-import com.taskmanager.entity.User;
-
-
 import javax.inject.Inject;
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -20,21 +17,25 @@ public class UserServlet extends HttpServlet {
 
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String id =req.getParameter("id");
-        User user = usersOperations.findUser(id);
-        resp.getWriter().println("you ID" + " - " + user.getUserName()+" " + user.getFirstName());
+//        String id =req.getParameter("id");
+//        User user = usersOperations.findUser(id);
+//        resp.getWriter().println("you ID" + " - " + user.getUserName()+" " + user.getFirstName());
+        System.out.println(req.getMethod());
+        System.out.println(req.getParameterMap());
 
     }
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String firstName = req.getParameter("firstName");
-        String secondName = req.getParameter("secondName");
-        String userName = req.getParameter("userName");
-        String password = req.getParameter("password");
-        User user = new User(firstName, secondName, userName, password);
-        usersOperations.createUser(user);
-        resp.getWriter().println("you ID" + " - ");
+
+//        String firstName = req.getParameter("firstName");
+//        String secondName = req.getParameter("secondName");
+//        String userName = req.getParameter("userName");
+//        String password = req.getParameter("password");
+//        User user = new User(firstName, secondName, userName, password);
+//        usersOperations.createUser(user);
+//        resp.getWriter().println("you ID" + " - ");
+
     }
 
     @Override
