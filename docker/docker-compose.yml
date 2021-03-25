@@ -1,0 +1,42 @@
+version: "3.8"
+networks: 
+  internalnw:
+    driver: bridge
+services:
+  pg:
+    image: postgres:9.5
+    networks: 
+      - internalnw 
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+    environment: 
+      - POSTGRES_PASSWORD=postgres
+  wildfly:
+    image: mrfij/wf-pg-tm:16
+    networks: 
+      - internalnw
+    ports: 
+      - "50807:50807"
+      - "8080:8080"
+      - "9993:9990"
+    command: 
+      - /opt/jboss/wildfly/bin/standalone.sh
+      - "-b"
+      - "0.0.0.0"
+      - "-bmanagement"
+      - "0.0.0.0"
+    environment:
+      - DB_HOST=pg
+      - DB_NAME=postgres
+      - DB_USER=postgres
+      - DB_PASS=postgres
+    depends_on:
+            - pg
+
+    stdin_open: true # docker run -i
+    tty: true        # docker run -t
+volumes: 
+  pgdata: 
+  wildflydata:
