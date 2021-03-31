@@ -1,6 +1,8 @@
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="com.taskmanager.UsersOperations" %>
 <%@ page import="javax.inject.Inject" %>
+<%@ page import="javax.ws.rs.HttpMethod" %>
+<%@ page import="com.taskmanager.BeansStore" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -16,7 +18,7 @@
 <body>
 
 <h1 class="title" align=center>CREATE USER</h1>
-<form action="user" method="POST">
+<form action="createUser.jsp" method="POST">
     <p class="title" align=center>First name:
         <input type="text" name="firstName">
     <p class="title" align=center>Last name:
@@ -30,17 +32,22 @@
 
 
 <%!
-    UsersOperations usersOperations = new UsersOperations();
-    User user = new User();
+    UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
 
 
 
-<% user.setFirstName(request.getParameter("firstName"));
+<% if (request.getMethod().equals(HttpMethod.POST)) {
+    User user = new User();
+    user.setFirstName(request.getParameter("firstName"));
     user.setLastName(request.getParameter("secondName"));
     user.setUserName(request.getParameter("userName"));
     user.setPassword(request.getParameter("password"));
-    usersOperations.createUser(user);%>
+    usersOperations.createUser(user);
+    response.sendRedirect("findAllUsers.jsp");
+}
+
+%>
 
 
 </body>
