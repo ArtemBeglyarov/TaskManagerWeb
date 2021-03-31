@@ -30,19 +30,16 @@
 
 
 <%!
-    String firstName;
-    String secondName;
-    String userName;
-    String password;
+    UsersOperations usersOperations = new UsersOperations();
+    User user = new User();
 %>
-<% String  firstName = request.getParameter("firstName");
-    String secondName = request.getParameter("secondName");
-    String userName = request.getParameter("userName");
-    String password = request.getParameter("password");%>
 
-<%! User user = new User(firstName, secondName, userName, password);
-    @Inject
-    UsersOperations usersOperations;
+
+
+<% user.setFirstName(request.getParameter("firstName"));
+    user.setLastName(request.getParameter("secondName"));
+    user.setUserName(request.getParameter("userName"));
+    user.setPassword(request.getParameter("password"));
     usersOperations.createUser(user);%>
 
 
