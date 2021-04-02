@@ -14,28 +14,26 @@ public class UsersOperations {
     @Inject
     UserRepository userRepository;
 
-    public Long createUser(User user) {
+    public void createUser(User user) {
         try{
-            userRepository.createUser(user);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+             userRepository.createUser(user);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-        return null;
     }
     public void removeUserById(String id) {
         try {
             userRepository.removeUser(id);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+        }  catch (SQLException e) {
+            throw new RuntimeException(e);
         }
     }
     public User findUser(String id) {
         try {
-       userRepository.findUserById(id);
-        } catch (SQLException throwables) {
-            throwables.printStackTrace();
+       return userRepository.findUserById(id);
+        } catch (SQLException e) {
+            throw new RuntimeException(e);
         }
-    return null;
     }
 
 }

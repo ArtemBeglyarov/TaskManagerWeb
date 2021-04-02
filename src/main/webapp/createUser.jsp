@@ -22,6 +22,7 @@
     <p class="title" align=center>First name:
         <input type="text" name="firstName">
     <p class="title" align=center>Last name:
+
         <input type="text" name="secondName">
     <p class="title" align=center>User name:
         <input type="text" name="userName">
@@ -44,7 +45,7 @@
     user.setUserName(request.getParameter("userName"));
     user.setPassword(request.getParameter("password"));
     usersOperations.createUser(user);
-    response.sendRedirect("findAllUsers.jsp");
+    response.sendRedirect("index.jsp");
 }
 
 %>
