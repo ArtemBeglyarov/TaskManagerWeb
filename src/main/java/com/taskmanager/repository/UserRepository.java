@@ -32,12 +32,14 @@ public class UserRepository implements Serializable {
     }
     public User findUserById(String id) throws SQLException{
         Connection connection = dataSource.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(findUser);
-        Long longID = Long.parseLong(id);
+        PreparedStatement statement = connection.prepareStatement(findUser);
+        Integer ID = Integer.parseInt(id);
+        statement.setInt(1,ID);
+
         User user = new User();
+        ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-        user.setID(resultSet.getLong("id"));
+        user.setID(resultSet.getInt("id"));
         user.setFirstName(resultSet.getString("first_name"));
         user.setLastName(resultSet.getString("last_name"));
         user.setUserName(resultSet.getString("user_name"));
@@ -60,6 +62,7 @@ public class UserRepository implements Serializable {
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(findAllUser);
+
         for (int i = 0; i < users.length; i++) {
             User user = new User();
             while (resultSet.next()) {

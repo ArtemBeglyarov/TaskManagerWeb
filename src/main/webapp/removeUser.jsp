@@ -18,7 +18,7 @@
 </head>
 <body>
 <h1 class="title" align=center>DELETE USER</h1>
-<form action="removeUser.jsp" method="DELETE">
+<form action="removeUser.jsp" method="POST">
 	<p class="title" align=center>Enter the id of the user you want to delete:
 	<p align=center>	<input type="text" name="id">
 	<p class="title" align=center><input type="submit" value="Remove">
@@ -28,7 +28,7 @@
 	UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
 <%
-	if (request.getMethod().equals(HttpMethod.DELETE)){
+	if (request.getMethod().equals(HttpMethod.POST)){
 		String  ID = request.getParameter("id");
 		usersOperations.removeUserById(ID);
 	}
