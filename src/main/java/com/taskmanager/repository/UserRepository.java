@@ -7,6 +7,8 @@ import javax.enterprise.context.ApplicationScoped;
 import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.*;
+import java.util.ArrayList;
+import java.util.List;
 
 
 @ApplicationScoped
@@ -57,23 +59,21 @@ public class UserRepository implements Serializable {
 
     }
 
-    public User[] findAllUsers() throws SQLException {
-        User[] users = null;
+    public ArrayList<User> findAllUsers() throws SQLException {
+        ArrayList<User> users = new ArrayList<User>();
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(findAllUser);
 
-        for (int i = 0; i < users.length; i++) {
-            User user = new User();
             while (resultSet.next()) {
+                User user = new User();
                 user.setID(resultSet.getInt("id"));
                 user.setFirstName(resultSet.getString("first_name"));
                 user.setLastName(resultSet.getString("last_name"));
                 user.setUserName(resultSet.getString("user_name"));
                 user.setPassword(resultSet.getString("password"));
+             users.add(user);
             }
-
-        }
 
         return users;
     }

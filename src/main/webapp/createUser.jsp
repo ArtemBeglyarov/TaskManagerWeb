@@ -1,5 +1,5 @@
 <%@ page import="com.taskmanager.entity.User" %>
-<%@ page import="com.taskmanager.UsersOperations" %>
+<%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="javax.inject.Inject" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
 <%@ page import="com.taskmanager.BeansStore" %>

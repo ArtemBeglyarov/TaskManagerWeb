@@ -1,4 +1,4 @@
-<%@ page import="com.taskmanager.UsersOperations" %>
+<%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
 <%@ page import="com.taskmanager.entity.User" %>
