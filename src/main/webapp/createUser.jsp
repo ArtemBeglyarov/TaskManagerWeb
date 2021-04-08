@@ -28,6 +28,8 @@
         <input type="text" name="userName">
     <p class="title" align=center>Password:
         <input type="text" name="password">
+    <p class="title" align=center>Status:
+        <input type="text" name="status">
     <p class="title" align=center><input type="submit" value="Create">
 </form>
 
@@ -44,6 +46,7 @@
     user.setLastName(request.getParameter("secondName"));
     user.setUserName(request.getParameter("userName"));
     user.setPassword(request.getParameter("password"));
+    user.setPassword(request.getParameter("status"));
     usersOperations.createUser(user);
     response.sendRedirect("index.jsp");
 }

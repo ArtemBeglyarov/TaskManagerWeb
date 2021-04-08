@@ -1,6 +1,8 @@
 package com.taskmanager.entity;
 
 
+import liquibase.pro.packaged.S;
+
 import java.io.Serializable;
 
 
@@ -18,24 +20,36 @@ public class User implements Serializable {
 
     private String password;
 
+    public String getStatus() {
+        return status;
+    }
+
+    public void setStatus(String status) {
+        this.status = status;
+    }
+
+    private String status;
+
 
     public User() {
 
     }
 
-    public User(String firstName, String lastName, String userName, String password) {
+    public User(String firstName, String lastName, String userName, String password,String status) {
 
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
+        this.status = status;
 
-    } public User(Long id, String firstName, String lastName, String userName, String password) {
+    } public User(Long id, String firstName, String lastName, String userName, String password, String status) {
         this.ID = id;
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
+        this.status = status;
     }
 
     public long getID() {

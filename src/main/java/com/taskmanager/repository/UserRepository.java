@@ -17,7 +17,7 @@ public class UserRepository implements Serializable {
     @Resource(lookup = "java:/AppDS")
     DataSource dataSource;
 
-    private static final String insertUserQuery = "INSERT INTO users VALUES (DEFAULT,?,?,?,?)";
+    private static final String insertUserQuery = "INSERT INTO users VALUES (DEFAULT,?,?,?,?,?)";
     private static final String findUser = "SELECT * FROM users WHERE id IN (?)";
     private static final String findAllUser = "SELECT * FROM users";
     private static final String removeUser = "DELETE FROM users WHERE id IN (?)";
@@ -29,6 +29,7 @@ public class UserRepository implements Serializable {
         statement.setString(2, user.getLastName());
         statement.setString(3, user.getUserName());
         statement.setString(4, user.getPassword());
+        statement.setString(5, user.getStatus());
         statement.executeUpdate();
 
     }
@@ -46,6 +47,7 @@ public class UserRepository implements Serializable {
         user.setLastName(resultSet.getString("last_name"));
         user.setUserName(resultSet.getString("user_name"));
         user.setPassword(resultSet.getString("password"));
+        user.setStatus(resultSet.getString("status"));
         }
      return user;
     }
@@ -72,9 +74,14 @@ public class UserRepository implements Serializable {
                 user.setLastName(resultSet.getString("last_name"));
                 user.setUserName(resultSet.getString("user_name"));
                 user.setPassword(resultSet.getString("password"));
+                user.setStatus(resultSet.getString("status"));
              users.add(user);
             }
 
         return users;
+    }
+    public void updateUser(String id) {
+
+
     }
 }
