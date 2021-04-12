@@ -28,7 +28,10 @@
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
 <%String ID = request.getParameter("id");
-    User user = usersOperations.findUser(ID);
+    if (ID != null) {
+        User user = usersOperations.findUser(ID);
+    }
+
 %>
 
 

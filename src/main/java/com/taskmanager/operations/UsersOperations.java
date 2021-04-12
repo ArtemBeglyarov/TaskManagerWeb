@@ -3,6 +3,7 @@ package com.taskmanager.operations;
 
 import com.taskmanager.entity.User;
 import com.taskmanager.repository.UserRepository;
+import liquibase.pro.packaged.S;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -41,6 +42,13 @@ public class UsersOperations {
        return userRepository.findAllUsers();
         } catch (SQLException e) {
             throw new RuntimeException(e);
+        }
+    }
+    public User loginUser(String userName, String password) {
+        try {
+            return userRepository.loginUser(userName, password);
+        } catch (SQLException e) {
+            throw new RuntimeException();
         }
     }
 
