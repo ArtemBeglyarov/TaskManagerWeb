@@ -9,34 +9,38 @@
 <head>
 
     <meta charset="utf-8">
-    <link rel="stylesheet" href="css/style.css" type="text/css"/>
-    <title>Find User</title>
-    <style>
-        body {
-            background: url(images/pap.jpg);
-        }
-    </style>
+
 </head>
 <body>
-<h1 class="title" align=center>FIND USER</h1>
+<h1 class="title" align=center>ALL USER</h1>
 <form action="findAllUsers.jsp" method="GET">
-    <p class="title" align=center>Enter the id of the user you want to find:
-
-    <p class="title" align=center><input type="submit" value="Find">
 </form>
 
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
+<table>
+    <tr>
+        <th>Name</th>
+        <th>Last name</th>
+        <th>User name</th>
+        <th>ID</th>
+        <th>Password</th>
+        <th>Status</th>
+    </tr>
 <%
     ArrayList<User> users = usersOperations.findAllUser();
     for (User k : users) {
-        System.out.println( k.getUserName());
-//        String id;
-//        response.sendRedirect(id = String.valueOf(k.getID()));
-    }
+
 %>
 
+<tr><td><%out.print(k.getFirstName());%></td><td><%out.print(k.getLastName()); %></td><td
+><%out.print(k.getUserName()); %></td><td><%out.print(k.getID()); %></td><td
+><%out.print(k.getPassword());%></td><td><%out.print(k.getStatus());%></td></tr>
 
+<%
+    }
+%>
+</table>
 </body>
 </html>

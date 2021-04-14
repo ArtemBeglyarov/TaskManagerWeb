@@ -20,13 +20,8 @@ public class User implements Serializable {
 
     private String password;
 
-    public String getStatus() {
-        return status;
-    }
 
-    public void setStatus(String status) {
-        this.status = status;
-    }
+
 
     private String status;
 
@@ -90,13 +85,19 @@ public class User implements Serializable {
     public void setPassword(String password) {
         this.password = password;
     }
+    public String getStatus() {
+        return status;
+    }
 
+    public void setStatus(String status) {
+        this.status = status;}
     @Override
     public String toString() {
-        return "User - " + userName +
-                " " + "ID  - " + ID +
-                " " + "First Name  - " + firstName +
-                " " + "Last Name  - " + lastName +
-                " " + "Password - " + password;
+        return "User: " + userName +
+                ";  " + "Id: " + ID +
+                ";  " + "First Name: " + firstName +
+                ";  " + "Last Name: " + lastName +
+                ";  " + "Password: " + password +
+                ";  " + "Status: " + status;
     }
 }

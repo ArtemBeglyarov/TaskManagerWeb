@@ -8,7 +8,7 @@
 <head>
     <title>Login</title>
 </head>
-<body>
+<body style="margin-top: 300px">
 <h1 class="title" align=center>Login User</h1>
 <form action="login.jsp" method="POST">
 
@@ -36,10 +36,7 @@
             response.sendRedirect("login.jsp");
         }
 
-        System.out.println(user.getFirstName());
-        System.out.println(user.getLastName());
-
-        request.getSession().setAttribute("currUser", user);
+        session.setAttribute("currUser", user);
     }
 %>
 

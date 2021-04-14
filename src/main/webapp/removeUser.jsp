@@ -8,11 +8,11 @@
 <head>
 
 	<meta charset="utf-8">
-	<link rel="stylesheet" href="../css/style.css" type="text/css" />
+	<link rel="stylesheet" href="css/style.css" type="text/css" />
 	<title>Remove User</title>
 	<style>
 		body{
-			background: url(../images/pap.jpg);
+			background: url(images/pap.jpg);
 		}
 	</style>
 </head>
@@ -28,8 +28,9 @@
 	UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
 <%
-	if (request.getMethod().equals(HttpMethod.POST)){
-		String  ID = request.getParameter("id");
+	String  ID = request.getParameter("id");
+	if (ID != null){
+
 		usersOperations.removeUserById(ID);
 	}
 %>

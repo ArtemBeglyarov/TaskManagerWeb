@@ -27,9 +27,14 @@
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
-<%String ID = request.getParameter("id");
+<%
+    String ID = request.getParameter("id");
     if (ID != null) {
         User user = usersOperations.findUser(ID);
+        System.out.println(user.getFirstName());
+
+
+
     }
 
 %>
