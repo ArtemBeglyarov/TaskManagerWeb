@@ -7,7 +7,7 @@
 
 <head>
 
-	<meta charset="utf-8">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
 	<title>Remove User</title>
 	<style>

@@ -23,6 +23,9 @@ public class UserRepository implements Serializable {
     private static final String loginUser = "SELECT * FROM users WHERE user_name =(?) and password =(?)";
     private static final String findAllUser = "SELECT * FROM users";
     private static final String removeUser = "DELETE FROM users WHERE id IN (?)";
+    private static final String updateUser = "UPDATE users SET first_name=(?),last_name =(?),user_name = (?), password=(?), status =(?) WHERE id IN (?)";
+
+
 
     public void createUser(User user) throws SQLException {
         Connection connection = dataSource.getConnection();
@@ -82,8 +85,16 @@ public class UserRepository implements Serializable {
 
         return users;
     }
-    public void updateUser(String id) {
-
+    public void updateUser(User user) throws SQLException {
+            Connection connection = dataSource.getConnection();
+            PreparedStatement statement = connection.prepareStatement(updateUser);
+            statement.setString(1, user.getFirstName());
+            statement.setString(2, user.getLastName());
+            statement.setString(3, user.getUserName());
+            statement.setString(4, user.getPassword());
+            statement.setString(5, user.getStatus());
+            statement.setLong(6,user.getID());
+            statement.executeUpdate();
 
     }
     public User loginUser(String userName,String password) throws SQLException {

@@ -44,6 +44,13 @@ public class UsersOperations {
             throw new RuntimeException(e);
         }
     }
+    public void updateUser(User user) {
+        try {
+        userRepository.updateUser(user);
+        } catch (SQLException e) {
+            throw new RuntimeException();
+        }
+    }
     public User loginUser(String userName, String password) {
         try {
             return userRepository.loginUser(userName, password);

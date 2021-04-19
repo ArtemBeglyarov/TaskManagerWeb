@@ -6,6 +6,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Login</title>
 </head>
 <body style="margin-top: 300px">
@@ -31,12 +32,13 @@
 
         User user = usersOperations.loginUser(userName, password);
 
-        if (user.getUserName().equals(userName) &&
-                user.getPassword().equals(password)) {
-            response.sendRedirect("login.jsp");
-        }
+//        if (user.getUserName().equals(userName) &&
+//                user.getPassword().equals(password)) {
+//            response.sendRedirect("login.jsp");
+//        }
 
         session.setAttribute("currUser", user);
+        response.sendRedirect("index.jsp");
     }
 %>
 

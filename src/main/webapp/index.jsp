@@ -9,7 +9,7 @@
           crossorigin="anonymous">
     <title></title>
 </head>
-<body style="background: url(images/pap.jpg);">
+<body style="background: url(images/pap.jpg);" lang="ru">
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" align="center" a>Task
         Manager</a>
@@ -21,7 +21,8 @@
     </ul>
 </header>
 
-<p> <button class="btn btm-primary  btn-dark btn-block" type="button"
+<p>
+    <button class="btn btm-primary  btn-dark btn-block" type="button"
             data-bs-toggle="collapse" data-bs-target="#Project"
             aria-expanded="false" aria-controls="collapseExample">
         PROJECT
@@ -32,28 +33,52 @@
             aria-expanded="false" aria-controls="collapseExample">
         TASK
     </button>
+
 <p>
     <button class="btn btn-dark" type="button"
-            data-bs-toggle="collapse" data-bs-target="#User"
+            data-bs-toggle="collapse" data-bs-target="#UserOperations"
             aria-expanded="false" aria-controls="collapseExample">
         USER
     </button>
-<p>
-    <button class="btn  btn-dark btn-block btn-sm" type="button"
-            data-bs-toggle="collapse" data-bs-target="#AllUser"
-            aria-expanded="false" aria-controls="collapseExample">
-        All USER
-    </button>
-<p>
-    <button class="btn btn-dark" type="button"
-            data-bs-toggle="collapse"
-            data-bs-target="#CreateUser"
-            aria-expanded="false" aria-controls="collapseExample">
-        Create User
-    </button>
 <div class="container-fluid">
-    <div class="col-md-12" style="background-color: #000000">
-        ПАНЕЛЬ q12ffffffffffff
+    <div class="col-md-1">
+        <div class="collapse" id="UserOperations">
+            <div class="card card-body">
+                <p>
+                    <button class="btn btn-dark" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#User"
+                            aria-expanded="false"
+                            aria-controls="collapseExample">
+                        USER
+                    </button>
+                <p>
+                    <button class="btn  btn-dark btn-block btn-sm" type="button"
+                            data-bs-toggle="collapse" data-bs-target="#AllUser"
+                            aria-expanded="false"
+                            aria-controls="collapseExample">
+                        All USER
+                    </button>
+                <p>
+                    <button class="btn btn-dark" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#CreateUser"
+                            aria-expanded="false"
+                            aria-controls="collapseExample">
+                        Create USER
+                    </button>
+                <p>
+                    <button class="btn btn-dark" type="button"
+                            data-bs-toggle="collapse"
+                            data-bs-target="#UpdateUser"
+                            aria-expanded="false"
+                            aria-controls="collapseExample">
+                        Update USER
+                    </button>
+            </div>
+        </div>
+    </div>
+    <div class="col-xxl-11" style="background-color: #000000">
+        ПАНЕЛЬ
         </p>
         <div class="collapse" id="Project">
             <div class="card card-body">
@@ -81,9 +106,15 @@
                 <jsp:include page="createUser.jsp"/>
             </div>
         </div>
+        <div class="collapse" id="UpdateUser"
+             style="background-image:url(images/pap.jpg); ">
+            <div class="card card-body">
+                <jsp:include page="updateUser.jsp"/>
+            </div>
+        </div>
     </div>
 </div>
-</div>
+
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
