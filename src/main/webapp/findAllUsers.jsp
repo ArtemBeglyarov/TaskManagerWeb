@@ -7,7 +7,7 @@
 <html>
 
 <head>
-
+    <style>@import url(css/style.css);</style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 </head>

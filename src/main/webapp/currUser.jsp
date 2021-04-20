@@ -5,7 +5,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 
 </head>
-<body>
+<body style="align-items: center">
 <%
     User user = (User) session.getAttribute("currUser");
 %>

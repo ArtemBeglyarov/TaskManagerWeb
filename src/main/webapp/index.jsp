@@ -1,3 +1,4 @@
+<%@ page import="com.taskmanager.entity.User" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -8,108 +9,155 @@
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
           crossorigin="anonymous">
     <title></title>
+
 </head>
-<body style="background: url(images/pap.jpg);" lang="ru">
+
+<%
+
+        User user = (User) session.getAttribute("currUser");
+    if (user == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>
+<body style="background: url(images/background.jpg);" lang="ru">
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-    <a class="navbar-brand col-md-3 col-lg-2 me-0 px-3" align="center" a>Task
+    <a class="navbar-brand col-md-2"   href="index.jsp"
+       a>Task
         Manager</a>
-    </button>
+    <a class="navbar-brand col-md-1 " align="center" a>
+        <button class="btn btn-dark" type="button"
+                data-bs-toggle="collapse" data-bs-target="#UserOperations"
+                aria-expanded="false" aria-controls="collapseExample">
+            USER
+        </button>
+        <button class="btn btm-primary  btn-dark btn-block" type="button"
+                data-bs-toggle="collapse" data-bs-target="#Project"
+                aria-expanded="false" aria-controls="collapseExample"
+                style="align: left">
+            PROJECT
+        </button>
+
+        <button class="btn  btn-dark" type="button"
+                data-bs-toggle="collapse" data-bs-target="#Task"
+                aria-expanded="false" aria-controls="collapseExample">
+            TASK
+        </button>
+    </a>
+
+
+
+    <ul  class="navbar-brand col-md-2 " ; align="center"
+         style="color:
+     forestgreen;">
+        <%out.println("USER: " + user.getUserName());%>
+        <% out.println("ID: " + user.getID()); %>
+    </ul>
+
+
+
     <ul class="navbar-nav px-3">
         <li class="nav-item text-nowrap">
-            <a class="nav-link" href="login.jsp">Sign out</a>
+            <a class="nav-link" href="singOut.jsp">Sign out</a>
         </li>
     </ul>
+
 </header>
-
-<p>
-    <button class="btn btm-primary  btn-dark btn-block" type="button"
-            data-bs-toggle="collapse" data-bs-target="#Project"
-            aria-expanded="false" aria-controls="collapseExample">
-        PROJECT
-    </button>
-<p>
-    <button class="btn  btn-dark" type="button"
-            data-bs-toggle="collapse" data-bs-target="#Task"
-            aria-expanded="false" aria-controls="collapseExample">
-        TASK
-    </button>
-
-<p>
-    <button class="btn btn-dark" type="button"
-            data-bs-toggle="collapse" data-bs-target="#UserOperations"
-            aria-expanded="false" aria-controls="collapseExample">
-        USER
-    </button>
-<div class="container-fluid">
-    <div class="col-md-1">
-        <div class="collapse" id="UserOperations">
-            <div class="card card-body">
-                <p>
-                    <button class="btn btn-dark" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#User"
-                            aria-expanded="false"
-                            aria-controls="collapseExample">
-                        USER
-                    </button>
-                <p>
-                    <button class="btn  btn-dark btn-block btn-sm" type="button"
-                            data-bs-toggle="collapse" data-bs-target="#AllUser"
-                            aria-expanded="false"
-                            aria-controls="collapseExample">
-                        All USER
-                    </button>
-                <p>
-                    <button class="btn btn-dark" type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#CreateUser"
-                            aria-expanded="false"
-                            aria-controls="collapseExample">
-                        Create USER
-                    </button>
-                <p>
-                    <button class="btn btn-dark" type="button"
-                            data-bs-toggle="collapse"
-                            data-bs-target="#UpdateUser"
-                            aria-expanded="false"
-                            aria-controls="collapseExample">
-                        Update USER
-                    </button>
+<div id="container" style="width:100%;">
+    <div id="left" style="float:left; width:9%;">
+        <div class="col-md-12">
+            <div class="collapse" id="UserOperations">
+                <div class="card card-body" style="background-color: #000000;
+                 border-radius: 20px; align-items: center; display: flex">
+                    <p>
+                        <button class="btn btn-dark btn-block " type="button"
+                                data-bs-toggle="collapse" data-bs-target="#User"
+                                aria-expanded="false"
+                                aria-controls="collapseExample">
+                            My data
+                        </button>
+                    <p>
+                        <button class="btn btn-dark" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#AllUser"
+                                aria-expanded="false"
+                                aria-controls="collapseExample">
+                            Show all users
+                        </button>
+                    <p>
+                        <button class="btn btn-dark" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#CreateUser"
+                                aria-expanded="false"
+                                aria-controls="collapseExample">
+                            Create user
+                        </button>
+                    <p>
+                        <button class="btn btn-dark" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#UpdateUser"
+                                aria-expanded="false"
+                                aria-controls="collapseExample">
+                            Update user
+                        </button>
+                    <p>
+                        <button class="btn btn-dark" type="button"
+                                data-bs-toggle="collapse"
+                                data-bs-target="#RemoveUser"
+                                aria-expanded="false"
+                                aria-controls="collapseExample">
+                            Remove user
+                        </button>
+                </div>
+            </div>
+            <div class="collapse" id="Project">
+                <div class="card card-body" style="background-color: #000000;
+                 border-radius: 20px; align-items: center;">
+                    ОПИСАНИЕ ПРОЕКТА
+                </div>
+            </div>
+            <div class="collapse" id="Task">
+                <div class="card card-body" style="background-color: #000000;
+                 border-radius: 20px; align-items: center;">
+                    ОПИСАНИЕ ЗАДАЧ
+                </div>
             </div>
         </div>
     </div>
-    <div class="col-xxl-11" style="background-color: #000000">
-        ПАНЕЛЬ
-        </p>
-        <div class="collapse" id="Project">
-            <div class="card card-body">
-                ОПИСАНИЕ ПРОЕКТА
-            </div>
-        </div>
-        <div class="collapse" id="Task">
-            <div class="card card-body">
-                ОПИСАНИЕ ЗАДАЧ
-            </div>
-        </div>
-        <div class="collapse" id="User">
-            <div class="card card-body">
-                <jsp:include page="currUser.jsp"/>
-            </div>
-        </div>
-        <div class="collapse" id="AllUser">
-            <div class="card card-body">
-                <jsp:include page="findAllUsers.jsp"/>
-            </div>
-        </div>
-        <div class="collapse" id="CreateUser"
-             style="background-image:url(images/pap.jpg); ">
-            <div class="card card-body">
-                <jsp:include page="createUser.jsp"/>
-            </div>
-        </div>
-        <div class="collapse" id="UpdateUser"
-             style="background-image:url(images/pap.jpg); ">
-            <div class="card card-body">
-                <jsp:include page="updateUser.jsp"/>
+    <div id="right" style="float:left; width:91%;">
+        <div class="container-fluid">
+            <div class="col-12"
+                 style="background-color: #000000;border-radius: 30px">
+                </p>
+                <div class="collapse" id="User">
+                    <div class="card card-body"
+                         style="background-color: lightslategray">
+                        <jsp:include page="currUser.jsp"/>
+                    </div>
+                </div>
+                <div class="collapse" id="AllUser">
+                    <div class="card card-body"
+                         style="background-color: lightslategray">
+                        <jsp:include page="findAllUsers.jsp"/>
+                    </div>
+                </div>
+                <div class="collapse" id="CreateUser">
+                    <div class="card card-body"
+                         style="background-color: lightslategray">
+                        <jsp:include page="createUser.jsp"/>
+                    </div>
+                </div>
+                <div class="collapse" id="UpdateUser">
+                    <div class="card card-body"
+                         style="background-color: lightslategray">
+                        <jsp:include page="updateUser.jsp"/>
+                    </div>
+                </div>
+                <div class="collapse" id="RemoveUser">
+                    <div class="card card-body"
+                         style="background-color: lightslategray">
+                        <jsp:include page="removeUser.jsp"/>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

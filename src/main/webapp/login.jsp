@@ -9,13 +9,14 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Login</title>
 </head>
-<body style="margin-top: 300px">
-<h1 class="title" align=center>Login User</h1>
+<style>@import url(css/style.css);</style>
+<body style="margin-top: 300px; background-image: url(images/background.jpg);)" >
+<h1 class="title" align=center>LOGIN USER</h1>
 <form action="login.jsp" method="POST">
 
-    <p class="title" align=center>User name:
+    <p class="title" align=center>USER NAME:
         <input type="text" name="userName">
-    <p class="title" align=center>Password:
+    <p class="title" align=center>PASSWORD:
         <input type="text" name="password">
     <p class="title" align=center><input type="submit" value="Login">
 </form>

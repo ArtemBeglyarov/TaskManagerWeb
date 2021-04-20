@@ -1,14 +1,5 @@
-.title{
-	color:#e35242;
-}
+
 input {
 	background-color: #ABCDEF;
-
-}
-.titele1{
-	color:#e35242;
-}
-body{
-	margin-top: 300px;
-	background: url(/images/pap.jpg);
+	border-radius: 24px;
 }

@@ -10,14 +10,10 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 	<link rel="stylesheet" href="css/style.css" type="text/css" />
 	<title>Remove User</title>
-	<style>
-		body{
-			background: url(images/pap.jpg);
-		}
-	</style>
+	<style>@import url(css/style.css);</style>
 </head>
 <body>
-<h1 class="title" align=center>DELETE USER</h1>
+<h1 class="title" align=center>REMOVE USER</h1>
 <form action="removeUser.jsp" method="GET">
 	<p class="title" align=center>Enter the id of the user you want to delete:
 	<p align=center>	<input type="text" name="id">

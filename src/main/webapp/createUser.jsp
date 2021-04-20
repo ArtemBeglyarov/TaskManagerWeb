@@ -5,12 +5,14 @@
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
+    <style>@import url(css/style.css);</style>
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
 </head>
-<body >
+<body style="background-image: url(images/background.jpg);)">
+
 <h1 class="title" align=center >CREATE USER</h1>
 <form action="createUser.jsp" method="POST">
-    <p class="title" align=center>First name:
+    <p class="title" align=center >First name:
         <input type="text" name="firstName">
     <p class="title" align=center>Last name:
         <input type="text" name="secondName">

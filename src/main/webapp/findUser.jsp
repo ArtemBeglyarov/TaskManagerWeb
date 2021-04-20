@@ -10,11 +10,7 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <link rel="stylesheet" href="css/style.css" type="text/css"/>
     <title>Find User</title>
-    <style>
-        body {
-            background: url(images/pap.jpg);
-        }
-    </style>
+    <style>@import url(css/style.css);</style>
 </head>
 <body>
 <h1 class="title" align=center>FIND USER</h1>
