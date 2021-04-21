@@ -1,8 +1,9 @@
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
-<%@ page import="com.taskmanager.entity.User" %>
+<%@ page import="com.taskmanager.entity.UserEntity" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="com.taskmanager.entity.UserEntity" %>
 <!DOCTYPE HTML>
 <html>
 
@@ -29,8 +30,8 @@
         <th>Status</th>
     </tr>
 <%
-    ArrayList<User> users = usersOperations.findAllUser();
-    for (User k : users) {
+    ArrayList<UserEntity> userEntities = usersOperations.findAllUser();
+    for (UserEntity k : userEntities) {
 
 %>
 

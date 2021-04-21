@@ -1,15 +1,19 @@
 package com.taskmanager.entity;
 
 
-import liquibase.pro.packaged.S;
 
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
 import java.io.Serializable;
 
+@Entity
+public class UserEntity implements Serializable {
 
-public class User implements Serializable {
 
-
-
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private  long ID;
 
     private String firstName;
@@ -26,11 +30,11 @@ public class User implements Serializable {
     private String status;
 
 
-    public User() {
+    public UserEntity() {
 
     }
 
-    public User(String firstName, String lastName, String userName, String password,String status) {
+    public UserEntity(String firstName, String lastName, String userName, String password, String status) {
 
         this.firstName = firstName;
         this.lastName = lastName;
@@ -38,7 +42,7 @@ public class User implements Serializable {
         this.password = password;
         this.status = status;
 
-    } public User(Long id, String firstName, String lastName, String userName, String password, String status) {
+    } public UserEntity(Long id, String firstName, String lastName, String userName, String password, String status) {
         this.ID = id;
         this.firstName = firstName;
         this.lastName = lastName;

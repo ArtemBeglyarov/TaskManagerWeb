@@ -1,7 +1,6 @@
 package com.taskmanager.repository;
 
-import com.taskmanager.entity.User;
-import liquibase.pro.packaged.U;
+import com.taskmanager.entity.UserEntity;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
@@ -9,7 +8,6 @@ import javax.sql.DataSource;
 import java.io.Serializable;
 import java.sql.*;
 import java.util.ArrayList;
-import java.util.List;
 
 
 @ApplicationScoped
@@ -27,34 +25,34 @@ public class UserRepository implements Serializable {
 
 
 
-    public void createUser(User user) throws SQLException {
+    public void createUser(UserEntity userEntity) throws SQLException {
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(insertUserQuery);
-        statement.setString(1, user.getFirstName());
-        statement.setString(2, user.getLastName());
-        statement.setString(3, user.getUserName());
-        statement.setString(4, user.getPassword());
-        statement.setString(5, user.getStatus());
+        statement.setString(1, userEntity.getFirstName());
+        statement.setString(2, userEntity.getLastName());
+        statement.setString(3, userEntity.getUserName());
+        statement.setString(4, userEntity.getPassword());
+        statement.setString(5, userEntity.getStatus());
         statement.executeUpdate();
 
     }
-    public User findUserById(String id) throws SQLException{
+    public UserEntity findUserById(String id) throws SQLException{
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(findUser);
         Integer ID = Integer.parseInt(id);
         statement.setInt(1,ID);
 
-        User user = new User();
+        UserEntity userEntity = new UserEntity();
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-        user.setID(resultSet.getInt("id"));
-        user.setFirstName(resultSet.getString("first_name"));
-        user.setLastName(resultSet.getString("last_name"));
-        user.setUserName(resultSet.getString("user_name"));
-        user.setPassword(resultSet.getString("password"));
-        user.setStatus(resultSet.getString("status"));
+        userEntity.setID(resultSet.getInt("id"));
+        userEntity.setFirstName(resultSet.getString("first_name"));
+        userEntity.setLastName(resultSet.getString("last_name"));
+        userEntity.setUserName(resultSet.getString("user_name"));
+        userEntity.setPassword(resultSet.getString("password"));
+        userEntity.setStatus(resultSet.getString("status"));
         }
-     return user;
+     return userEntity;
     }
 
     public void removeUser(String id) throws SQLException {
@@ -66,38 +64,38 @@ public class UserRepository implements Serializable {
 
     }
 
-    public ArrayList<User> findAllUsers() throws SQLException {
-        ArrayList<User> users = new ArrayList<User>();
+    public ArrayList<UserEntity> findAllUsers() throws SQLException {
+        ArrayList<UserEntity> userEntities = new ArrayList<UserEntity>();
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(findAllUser);
 
             while (resultSet.next()) {
-                User user = new User();
-                user.setID(resultSet.getInt("id"));
-                user.setFirstName(resultSet.getString("first_name"));
-                user.setLastName(resultSet.getString("last_name"));
-                user.setUserName(resultSet.getString("user_name"));
-                user.setPassword(resultSet.getString("password"));
-                user.setStatus(resultSet.getString("status"));
-             users.add(user);
+                UserEntity userEntity = new UserEntity();
+                userEntity.setID(resultSet.getInt("id"));
+                userEntity.setFirstName(resultSet.getString("first_name"));
+                userEntity.setLastName(resultSet.getString("last_name"));
+                userEntity.setUserName(resultSet.getString("user_name"));
+                userEntity.setPassword(resultSet.getString("password"));
+                userEntity.setStatus(resultSet.getString("status"));
+             userEntities.add(userEntity);
             }
 
-        return users;
+        return userEntities;
     }
-    public void updateUser(User user) throws SQLException {
+    public void updateUser(UserEntity userEntity) throws SQLException {
             Connection connection = dataSource.getConnection();
             PreparedStatement statement = connection.prepareStatement(updateUser);
-            statement.setString(1, user.getFirstName());
-            statement.setString(2, user.getLastName());
-            statement.setString(3, user.getUserName());
-            statement.setString(4, user.getPassword());
-            statement.setString(5, user.getStatus());
-            statement.setLong(6,user.getID());
+            statement.setString(1, userEntity.getFirstName());
+            statement.setString(2, userEntity.getLastName());
+            statement.setString(3, userEntity.getUserName());
+            statement.setString(4, userEntity.getPassword());
+            statement.setString(5, userEntity.getStatus());
+            statement.setLong(6, userEntity.getID());
             statement.executeUpdate();
 
     }
-    public User loginUser(String userName,String password) throws SQLException {
+    public UserEntity loginUser(String userName, String password) throws SQLException {
 
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(loginUser);
@@ -105,17 +103,17 @@ public class UserRepository implements Serializable {
         statement.setString(1, userName);
         statement.setString(2, password);
 
-        User user = new User();
+        UserEntity userEntity = new UserEntity();
         ResultSet resultSet = statement.executeQuery();
         while (resultSet.next()) {
-            user.setID(resultSet.getInt("id"));
-            user.setFirstName(resultSet.getString("first_name"));
-            user.setLastName(resultSet.getString("last_name"));
-            user.setUserName(resultSet.getString("user_name"));
-            user.setPassword(resultSet.getString("password"));
-            user.setStatus(resultSet.getString("status"));
+            userEntity.setID(resultSet.getInt("id"));
+            userEntity.setFirstName(resultSet.getString("first_name"));
+            userEntity.setLastName(resultSet.getString("last_name"));
+            userEntity.setUserName(resultSet.getString("user_name"));
+            userEntity.setPassword(resultSet.getString("password"));
+            userEntity.setStatus(resultSet.getString("status"));
         }
-        return user;
+        return userEntity;
     }
 
 }

@@ -1,9 +1,8 @@
 package com.taskmanager.operations;
 
 
-import com.taskmanager.entity.User;
+import com.taskmanager.entity.UserEntity;
 import com.taskmanager.repository.UserRepository;
-import liquibase.pro.packaged.S;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -16,9 +15,9 @@ public class UsersOperations {
     @Inject
     UserRepository userRepository;
 
-    public void createUser(User user) {
+    public void createUser(UserEntity userEntity) {
         try{
-             userRepository.createUser(user);
+             userRepository.createUser(userEntity);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -30,28 +29,28 @@ public class UsersOperations {
             throw new RuntimeException(e);
         }
     }
-    public User findUser(String id) {
+    public UserEntity findUser(String id) {
         try {
        return userRepository.findUserById(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-  public ArrayList<User> findAllUser() {
+  public ArrayList<UserEntity> findAllUser() {
         try {
        return userRepository.findAllUsers();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void updateUser(User user) {
+    public void updateUser(UserEntity userEntity) {
         try {
-        userRepository.updateUser(user);
+        userRepository.updateUser(userEntity);
         } catch (SQLException e) {
             throw new RuntimeException();
         }
     }
-    public User loginUser(String userName, String password) {
+    public UserEntity loginUser(String userName, String password) {
         try {
             return userRepository.loginUser(userName, password);
         } catch (SQLException e) {

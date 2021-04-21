@@ -1,7 +1,10 @@
-<%@ page import="com.taskmanager.entity.User" %>
+<%@ page import="com.taskmanager.entity.UserEntity" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
 <%@ page import="com.taskmanager.BeansStore" %>
+<%@ page import="com.taskmanager.entity.UserEntity" %>
+<%@ page import="javax.ejb.EJB" %>
+<%@ page import="com.taskmanager.JavaBean" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -28,19 +31,22 @@
 
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
+    @EJB
+    JavaBean javaBean;
 %>
 
 
 
 <% if (request.getMethod().equals(HttpMethod.POST)) {
-    User user = new User();
-    user.setFirstName(request.getParameter("firstName"));
-    user.setLastName(request.getParameter("secondName"));
-    user.setUserName(request.getParameter("userName"));
-    user.setPassword(request.getParameter("password"));
-    user.setStatus(request.getParameter("status"));
-    usersOperations.createUser(user);
-//    response.sendRedirect("");
+    UserEntity userEntity = new UserEntity();
+    userEntity.setFirstName(request.getParameter("firstName"));
+    userEntity.setLastName(request.getParameter("secondName"));
+    userEntity.setUserName(request.getParameter("userName"));
+    userEntity.setPassword(request.getParameter("password"));
+    userEntity.setStatus(request.getParameter("status"));
+//    usersOperations.createUser(userEntity);
+////    response.sendRedirect("");
+    javaBean.saveUser(userEntity);
 }
 
 %>

@@ -1,7 +1,7 @@
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
-<%@ page import="com.taskmanager.entity.User" %>
+<%@ page import="com.taskmanager.entity.UserEntity" %>
 <!DOCTYPE HTML>
 <html>
 
@@ -15,7 +15,7 @@
 <body>
 <h1 class="title" align=center>FIND USER</h1>
 <form action="findUser.jsp" method="GET">
-    <p class="title" align=center>Enter the id of the user you want to find:
+    <p class="title" align=center>Enter the id of the userEntity you want to find:
     <p align=center><input type="text" name="id">
     <p class="title" align=center><input type="submit" value="Find">
 </form>
@@ -26,8 +26,8 @@
 <%
     String ID = request.getParameter("id");
     if (ID != null) {
-        User user = usersOperations.findUser(ID);
-        System.out.println(user.getFirstName());
+        UserEntity userEntity = usersOperations.findUser(ID);
+        System.out.println(userEntity.getFirstName());
 
 
 

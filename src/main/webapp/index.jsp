@@ -1,4 +1,5 @@
-<%@ page import="com.taskmanager.entity.User" %>
+<%@ page import="com.taskmanager.entity.UserEntity" %>
+<%@ page import="com.taskmanager.entity.UserEntity" %>
 <!DOCTYPE html>
 <html lang="ru">
 <head>
@@ -14,8 +15,8 @@
 
 <%
 
-        User user = (User) session.getAttribute("currUser");
-    if (user == null) {
+        UserEntity userEntity = (UserEntity) session.getAttribute("currUser");
+    if (userEntity == null) {
         response.sendRedirect("login.jsp");
     }
 %>
@@ -49,8 +50,8 @@
     <ul  class="navbar-brand col-md-2 " ; align="center"
          style="color:
      forestgreen;">
-        <%out.println("USER: " + user.getUserName());%>
-        <% out.println("ID: " + user.getID()); %>
+        <%out.println("USER: " + userEntity.getUserName());%>
+        <% out.println("ID: " + userEntity.getID()); %>
     </ul>
 
 
@@ -81,7 +82,7 @@
                                 data-bs-target="#AllUser"
                                 aria-expanded="false"
                                 aria-controls="collapseExample">
-                            Show all users
+                            Show all userEntities
                         </button>
                     <p>
                         <button class="btn btn-dark" type="button"
@@ -89,7 +90,7 @@
                                 data-bs-target="#CreateUser"
                                 aria-expanded="false"
                                 aria-controls="collapseExample">
-                            Create user
+                            Create userEntity
                         </button>
                     <p>
                         <button class="btn btn-dark" type="button"
@@ -97,7 +98,7 @@
                                 data-bs-target="#UpdateUser"
                                 aria-expanded="false"
                                 aria-controls="collapseExample">
-                            Update user
+                            Update userEntity
                         </button>
                     <p>
                         <button class="btn btn-dark" type="button"
@@ -105,7 +106,7 @@
                                 data-bs-target="#RemoveUser"
                                 aria-expanded="false"
                                 aria-controls="collapseExample">
-                            Remove user
+                            Remove userEntity
                         </button>
                 </div>
             </div>

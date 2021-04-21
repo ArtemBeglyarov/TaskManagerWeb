@@ -1,7 +1,7 @@
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
-<%@ page import="com.taskmanager.entity.User" %>
+<%@ page import="com.taskmanager.entity.UserEntity" %>
 <!DOCTYPE HTML>
 <html>
 
@@ -15,7 +15,7 @@
 <body>
 <h1 class="title" align=center>REMOVE USER</h1>
 <form action="removeUser.jsp" method="GET">
-	<p class="title" align=center>Enter the id of the user you want to delete:
+	<p class="title" align=center>Enter the id of the userEntity you want to delete:
 	<p align=center>	<input type="text" name="id">
 	<p class="title" align=center><input type="submit" value="Remove">
 </form>
