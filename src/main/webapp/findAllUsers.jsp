@@ -19,6 +19,7 @@
 
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
+
 %>
 <table>
     <tr>
