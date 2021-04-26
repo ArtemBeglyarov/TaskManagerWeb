@@ -17,9 +17,9 @@ public class JavaBeans {
     public void saveUser(UserEntity user) {
         entityManager.persist(user);
     }
-    public void List() {
-        entityManager.getTransaction().begin();
-        List<UserEntity> result = entityManager.createQuery( "from UserEntity ", UserEntity.class ).getResultList();
-        entityManager.getTransaction().commit();
-    }
+//    public void List() {
+//        entityManager.getTransaction().begin();
+//        List<UserEntity> result = entityManager.createQuery( "from UserEntity ", UserEntity.class ).getResultList();
+//        entityManager.getTransaction().commit();
+//    }
 }

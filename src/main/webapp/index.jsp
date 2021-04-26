@@ -14,13 +14,12 @@
 </head>
 
 <%
-
-        UserEntity userEntity = (UserEntity) session.getAttribute("currUser");
+    UserEntity userEntity = (UserEntity) session.getAttribute("currUser");
     if (userEntity == null) {
         response.sendRedirect("login.jsp");
     }
 %>
-<body style="background: url(images/background.jpg);" lang="ru">
+<body style="background: url(css/images/background.jpg);" lang="ru">
 <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
     <a class="navbar-brand col-md-2"   href="index.jsp"
        a>Task
@@ -50,8 +49,8 @@
     <ul  class="navbar-brand col-md-2 " ; align="center"
          style="color:
      forestgreen;">
-        <%out.println("USER: " + userEntity.getUserName());%>
-        <% out.println("ID: " + userEntity.getID()); %>
+<%--        <%out.println("USER: " + userEntity.getUserName());%>--%>
+<%--        <% out.println("ID: " + userEntity.getID()); %>--%>
     </ul>
 
 
@@ -163,7 +162,6 @@
         </div>
     </div>
 </div>
-
 
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"

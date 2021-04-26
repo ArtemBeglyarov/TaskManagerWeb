@@ -1,5 +1,10 @@
 
 input {
-	background-color: #ABCDEF;
 	border-radius: 24px;
+}
+body {
+}
+
+body {
+	background-image: url(images/background.jpg);
 }

@@ -7,7 +7,6 @@ public class BeansStore {
     public static Object getBean(Class clazz) {
         try {
             InitialContext initialContext = new InitialContext();
-            System.out.println(initialContext.getEnvironment());
             return initialContext.lookup("java:comp/" + clazz.getSimpleName());
 
         } catch (NamingException e) {
