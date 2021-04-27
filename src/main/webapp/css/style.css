@@ -1,10 +1,17 @@
 
 input {
+	background-color: #778899;
 	border-radius: 24px;
-}
-body {
+	margin: auto;
 }
 
 body {
 	background-image: url(images/background.jpg);
+	color: #000000;
+}
+p.title {
+	color: #000000;
+}
+h1.title {
+	color: #000000;
 }

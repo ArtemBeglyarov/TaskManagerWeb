@@ -6,71 +6,79 @@
 <%@ page import="javax.ejb.EJB" %>
 <%@ page import="com.taskmanager.JavaBeans" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
+
 <html>
 <head>
     <style>@import url(css/style.css);</style>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
           rel="stylesheet"
           integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
           crossorigin="anonymous">
-    <title></title>
+    <title>TASK MANAGER</title>
     <%
-
         UserEntity currUser = (UserEntity) session.getAttribute("currUser");
         if (currUser == null) {
             response.sendRedirect("login.jsp");
         }
     %>
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-2" href="index.jsp"
-           a>Task
-            Manager</a>
-        <a class="navbar-brand col-md-1 " align="center" a>
-            <button class="btn btn-dark" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#UserOperations"
-                    aria-expanded="false" aria-controls="collapseExample">
-                USER
+    <header
+            class="navbar navbar-expand-lg  bg-dark flex-column flex-md-row ">
+        <a href="index.jsp"><img style=" margin:10px" src="css/images/home-circle-512.webp"
+                                 width="50"
+                                 height="45" class="me-3" alt="HOME"> </a>
+        </button>
+        <div class="dropdown" style=" margin:10px">
+            <button class="btn btn-success   dropdown-toggle" style="background-color:
+            #0B614B"
+                    type="button"
+                    data-toggle="dropdown">USER
             </button>
-            <button class="btn btm-primary  btn-dark btn-block" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#Project"
-                    aria-expanded="false" aria-controls="collapseExample"
-                    style="align: left">
-                PROJECT
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="currUser.jsp">My data</a>
+                <a class="dropdown-item" href="createUser.jsp">Create
+                    user</a>
+                <a class="dropdown-item" href="findAllUsers.jsp">Find all
+                    user</a>
+                <a class="dropdown-item" href="findUser.jsp">Find user</a>
+                <a class="dropdown-item" href="removeUser.jsp">Remove
+                    user</a>
+                <a class="dropdown-item" href="findUser.jsp">Update user</a>
+            </div>
+        </div>
+        <div class="dropdown" style=" margin:10px">
+            <button class="btn btn-success dropdown-toggle"  style="background-color: #0B614B" type="button"
+                    data-toggle="dropdown">TASK
             </button>
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="">description</a>
+                <a class="dropdown-item" href="">description</a>
+                <a class="dropdown-item" href="">description</a>
 
-            <button class="btn  btn-dark" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#Task"
-                    aria-expanded="false" aria-controls="collapseExample">
-                TASK
+            </div>
+        </div>
+
+        <div class="dropdown" style=" margin:10px">
+            <button class="btn btn-success dropdown-toggle"  style="background-color: #0B614B" type="button"
+                    data-toggle="dropdown">PROJECT
             </button>
-        </a>
-
-
-        <ul class="navbar-brand col-md-2 " ; align="center"
-            style="color:
-     forestgreen;">
-            <%out.println("USER: " + currUser.getUserName());%>
-            <% out.println("ID: " + currUser.getID()); %>
-        </ul>
-
-
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="singOut.jsp">Sign out</a>
-            </li>
-        </ul>
-
+            <div class="dropdown-menu">
+                <a class="dropdown-item" href="">description</a>
+                <a class="dropdown-item" href="">description</a>
+                <a class="dropdown-item" href="">description</a>
+            </div>
+        </div>
+        <button class="btn btn-success" style="margin-left: auto!important;
+        margin:10px; background-color: #0B614B"
+                type="button"
+                href="singOut.jsp">Sign out
+        </button>
     </header>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-            crossorigin="anonymous"></script>
+
 </head>
-<body style="background-image: url(css/images/background.jpg);">
+
+<body>
 
 <h1 class="title" align=center>CREATE USER</h1>
 <form action="createUser.jsp" method="POST">
@@ -83,15 +91,15 @@
     <p class="title" align=center>Password:
         <input type="text" name="password">
     <p class="title" align=center>Status:
-        <input type="text" name="status">
+        <input type="password" name="status">
     <p class="title" align=center><input type="submit" value="Create">
 </form>
 
 
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
-
-    JavaBeans javaBeans = (JavaBeans) BeansStore.getBean(JavaBeans.class);
+//
+//    JavaBeans javaBeans = (JavaBeans) BeansStore.getBean(JavaBeans.class);
 
 %>
 
@@ -103,14 +111,22 @@
     userEntity.setUserName(request.getParameter("userName"));
     userEntity.setPassword(request.getParameter("password"));
     userEntity.setStatus(request.getParameter("status"));
-//    usersOperations.createUser(userEntity);
-    javaBeans.saveUser(userEntity);
+    usersOperations.createUser(userEntity);
+//    javaBeans.saveUser(userEntity);
     response.sendRedirect("findAllUser");
 
 }
 
 %>
-
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 
 </body>
 </html>
