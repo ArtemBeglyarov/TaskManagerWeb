@@ -36,14 +36,14 @@ public class UserRepository implements Serializable {
         statement.executeUpdate();
 
     }
-    public UserEntity findUserById(String id) throws SQLException{
+    public UserEntity findUserById(String id) throws SQLException{ //почему стринг а не лонг
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(findUser);
         Integer ID = Integer.parseInt(id);
         statement.setInt(1,ID);
 
-        UserEntity userEntity = new UserEntity();
-        ResultSet resultSet = statement.executeQuery();
+        UserEntity userEntity = new UserEntity();// почему в пустой конструктор
+        ResultSet resultSet = statement.executeQuery(); //результ сет прочитать
         while (resultSet.next()) {
         userEntity.setID(resultSet.getInt("id"));
         userEntity.setFirstName(resultSet.getString("first_name"));
@@ -61,7 +61,6 @@ public class UserRepository implements Serializable {
         Long longID = Long.parseLong(id);
         statement.setLong(1, longID);
         statement.executeUpdate();
-
     }
 
     public ArrayList<UserEntity> findAllUsers() throws SQLException {

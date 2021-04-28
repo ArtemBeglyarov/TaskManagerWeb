@@ -33,7 +33,14 @@ public class Project implements Serializable  {
     }
 
     public Project(String nameProject, List<Long> usersID, List<Long> tasksID, String description, Long creatorID) {
-//        this.ID = Model.createID(Project.class);
+        this.nameProject = nameProject;
+        this.usersId = usersID;
+        this.tasksId = tasksID;
+        this.description = description;
+        this.creatorID = creatorID;
+    }
+    public Project( long ID, String nameProject, List<Long> usersID, List<Long> tasksID, String description, Long creatorID) {
+        this.ID = ID;
         this.nameProject = nameProject;
         this.usersId = usersID;
         this.tasksId = tasksID;
@@ -53,5 +60,51 @@ public class Project implements Serializable  {
 
     }
 
+    public long getID() {
+        return ID;
+    }
 
+    public void setID(long ID) {
+        this.ID = ID;
+    }
+
+    public String getNameProject() {
+        return nameProject;
+    }
+
+    public void setNameProject(String nameProject) {
+        this.nameProject = nameProject;
+    }
+
+    public List<Long> getUsersId() {
+        return usersId;
+    }
+
+    public void setUsersId(List<Long> usersId) {
+        this.usersId = usersId;
+    }
+
+    public List<Long> getTasksId() {
+        return tasksId;
+    }
+
+    public void setTasksId(List<Long> tasksId) {
+        this.tasksId = tasksId;
+    }
+
+    public String getDescription() {
+        return description;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public Long getCreatorID() {
+        return creatorID;
+    }
+
+    public void setCreatorID(Long creatorID) {
+        this.creatorID = creatorID;
+    }
 }

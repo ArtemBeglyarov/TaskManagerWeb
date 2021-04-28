@@ -24,9 +24,6 @@ public class UserEntity implements Serializable {
 
     private String password;
 
-
-
-
     private String status;
 
 
@@ -35,14 +32,13 @@ public class UserEntity implements Serializable {
     }
 
     public UserEntity(String firstName, String lastName, String userName, String password, String status) {
-
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.status = status;
 
-    } public UserEntity(Long id, String firstName, String lastName, String userName, String password, String status) {
+    }public UserEntity(Long id, String firstName, String lastName, String userName, String password, String status) {
         this.ID = id;
         this.firstName = firstName;
         this.lastName = lastName;
