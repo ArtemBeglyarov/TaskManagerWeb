@@ -113,7 +113,7 @@
     userEntity.setStatus(request.getParameter("status"));
     usersOperations.createUser(userEntity);
 //    javaBeans.saveUser(userEntity);
-    response.sendRedirect("findAllUser");
+    response.sendRedirect("findAllUsers.jsp");
 
 }
 

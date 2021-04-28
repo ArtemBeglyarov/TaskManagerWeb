@@ -1,5 +1,6 @@
 <%@ page import="com.taskmanager.entity.UserEntity" %>
 <%@ page import="com.taskmanager.entity.UserEntity" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <head>
     <style>@import url(css/style.css);</style>
@@ -71,15 +72,30 @@
 
 </head>
 
-<body style="align-items: center" style="background-image: url(css/images/background.jpg);">
+<body>
+
 <%
     UserEntity userEntity = (UserEntity) session.getAttribute("currUser");
 %>
-    <p> <%out.println("Name: "+ userEntity.getFirstName()); %></p>
-    <p> <%out.println("Last name: "+ userEntity.getLastName()); %></p>
-    <p> <%out.println("User name: "+ userEntity.getUserName()); %></p>
-    <p> <%out.println("Id: "+ userEntity.getID()); %></p>
-
+<h1 class="title" align=center>MY DATA</h1>
+<table id="myTable">
+    <tr>
+        <th>ID</th>
+        <th>First name</th>
+        <th>Last name</th>
+        <th>User name</th>
+        <th>Password</th>
+        <th>Status</th>
+    </tr>
+    <tr>
+        <td><%out.print(userEntity.getID());%></td>
+        <td><%out.print(userEntity.getFirstName());%></td>
+        <td><%out.print(userEntity.getLastName()); %></td>
+        <td><%out.print(userEntity.getUserName()); %></td>
+        <td><%out.print(userEntity.getPassword());%></td>
+        <td><%out.print(userEntity.getStatus());%></td>
+    </tr>
+</table>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
         integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
         crossorigin="anonymous"></script>

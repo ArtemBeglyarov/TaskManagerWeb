@@ -1,10 +1,8 @@
-
 input {
 	background-color: #778899;
 	border-radius: 24px;
 	margin: auto;
 }
-
 body {
 	background-image: url(images/background.jpg);
 	color: #000000;
@@ -14,4 +12,23 @@ p.title {
 }
 h1.title {
 	color: #000000;
+	margin-top: 150px;
+}
+table {
+	border-spacing: 0;
+	width: 100%;
+	border: 1px solid #ddd;
+
+}
+th {
+	cursor: pointer;
+	color: white;
+	background-color: black;
+
+}
+ td {
+	text-align: left;
+	background-color: #778899;
+	color: black;
+
 }
