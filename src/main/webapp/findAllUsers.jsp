@@ -107,7 +107,7 @@
         <td>
             <form action="removeUser.jsp" method="GET">
                 <input type="checkbox" class="custom-checkbox" id="id"
-                       name="id" value="yes"></form>
+                       name="id" value="<%out.print(k.getID());%>"></form>
         </td>
         <td><%out.print(k.getID());%></td>
         <td><%out.print(k.getFirstName());%></td>
