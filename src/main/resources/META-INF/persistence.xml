@@ -6,7 +6,7 @@
 <persistence-unit name="tm" >
     <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
     <jta-data-source>java:/AppDS</jta-data-source>
-    <class>com.taskmanager.entity.UserEntity</class>
+    <class>com.taskmanager.entity.User</class>
     <properties>
         <property name="hibernate.show_sql" value="true" />
         <property name="hibernate.format_sql" value="true" />

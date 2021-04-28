@@ -1,11 +1,10 @@
 package com.taskmanager;
 
-import com.taskmanager.entity.UserEntity;
+import com.taskmanager.entity.User;
 
 import javax.ejb.Stateless;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import java.util.List;
 
 
 @Stateless
@@ -14,7 +13,7 @@ public class JavaBeans {
     @PersistenceContext(unitName = "tm")
     EntityManager entityManager;
 
-    public void saveUser(UserEntity user) {
+    public void saveUser(User user) {
         entityManager.persist(user);
     }
 //    public void List() {
