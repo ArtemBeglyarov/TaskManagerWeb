@@ -41,7 +41,7 @@
 				<a class="dropdown-item" href="findUser.jsp">Find user</a>
 				<a class="dropdown-item" href="removeUser.jsp">Remove
 					user</a>
-				<a class="dropdown-item" href="findUser.jsp">Update user</a>
+				<a class="dropdown-item" href="updateUser.jsp">Update user</a>
 			</div>
 		</div>
 		<div class="dropdown" style=" margin:10px">
@@ -80,7 +80,8 @@
 <form action="removeUser.jsp" method="GET">
 	<p class="title" align=center>Enter the id of the userEntity you want to delete:
 	<p align=center>	<input type="text" name="id">
-	<p class="title" align=center><input type="submit" value="Remove">
+	<p class="title" align=center><input type="submit" value="Remove"
+										 onclick="return confirmation()">
 </form>
 
 <%!
@@ -91,6 +92,7 @@
 	if (ID != null){
 
 		usersOperations.removeUserById(ID);
+		response.sendRedirect("findAllUsers.jsp");
 	}
 %>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
@@ -102,5 +104,6 @@
 <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
 		integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
 		crossorigin="anonymous"></script>
+<script src="css/TM.js"></script>
 </body>
 </html>

@@ -1,7 +1,7 @@
 input {
 	background-color: #778899;
 	border-radius: 24px;
-	margin: auto;
+
 }
 body {
 	background-image: url(images/background.jpg);
@@ -31,4 +31,7 @@ th {
 	background-color: #778899;
 	color: black;
 
+}
+title {
+	margin: 0px auto; text-align: left;
 }

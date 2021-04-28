@@ -38,7 +38,7 @@
                 <a class="dropdown-item" href="findUser.jsp">Find user</a>
                 <a class="dropdown-item" href="removeUser.jsp">Remove
                     user</a>
-                <a class="dropdown-item" href="findUser.jsp">Update user</a>
+                <a class="dropdown-item" href="updateUser.jsp">Update user</a>
             </div>
         </div>
         <div class="dropdown" style=" margin:10px">
@@ -75,69 +75,6 @@
 
 <body style="background: url(css/images/background.jpg);" lang="ru">
 
-
-<%--<div id="container" style="width:100%;">--%>
-<%--    <div id="left" style="float:left; width:9%;">--%>
-<%--        <div class="col-md-12">--%>
-<%--            <div class="collapse" id="UserOperations">--%>
-<%--                <div class="card card-body" style="background-color: #000000;--%>
-<%--                 border-radius: 20px; align-items: center; display: flex">--%>
-<%--                    <p>--%>
-<%--                        <button class="btn btn-dark btn-block " type="button"--%>
-<%--                                data-bs-toggle="collapse" data-bs-target="#User"--%>
-<%--                                aria-expanded="false"--%>
-<%--                                aria-controls="collapseExample">--%>
-<%--                            My data--%>
-<%--                        </button>--%>
-<%--                    <p>--%>
-<%--                        <button class="btn btn-dark" type="button"--%>
-<%--                                data-bs-toggle="collapse"--%>
-<%--                                data-bs-target="#AllUser"--%>
-<%--                                aria-expanded="false"--%>
-<%--                                aria-controls="collapseExample">--%>
-<%--                            Show all userEntities--%>
-<%--                        </button>--%>
-<%--                    <p>--%>
-<%--                        <button class="btn btn-dark" type="button"--%>
-<%--                                data-bs-toggle="collapse"--%>
-<%--                                data-bs-target="#CreateUser"--%>
-<%--                                aria-expanded="false"--%>
-<%--                                aria-controls="collapseExample">--%>
-<%--                            Create userEntity--%>
-<%--                        </button>--%>
-<%--                    <p>--%>
-<%--                        <button class="btn btn-dark" type="button"--%>
-<%--                                data-bs-toggle="collapse"--%>
-<%--                                data-bs-target="#UpdateUser"--%>
-<%--                                aria-expanded="false"--%>
-<%--                                aria-controls="collapseExample">--%>
-<%--                            Update userEntity--%>
-<%--                        </button>--%>
-<%--                    <p>--%>
-<%--                        <button class="btn btn-dark" type="button"--%>
-<%--                                data-bs-toggle="collapse"--%>
-<%--                                data-bs-target="#RemoveUser"--%>
-<%--                                aria-expanded="false"--%>
-<%--                                aria-controls="collapseExample">--%>
-<%--                            Remove userEntity--%>
-<%--                        </button>--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="collapse" id="Project">--%>
-<%--                <div class="card card-body" style="background-color: #000000;--%>
-<%--                 border-radius: 20px; align-items: center;">--%>
-<%--                    ОПИСАНИЕ ПРОЕКТА--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--            <div class="collapse" id="Task">--%>
-<%--                <div class="card card-body" style="background-color: #000000;--%>
-<%--                 border-radius: 20px; align-items: center;">--%>
-<%--                    ОПИСАНИЕ ЗАДАЧ--%>
-<%--                </div>--%>
-<%--            </div>--%>
-<%--        </div>--%>
-<%--    </div>--%>
-<%--</div>--%>
 
 
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

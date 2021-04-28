@@ -41,7 +41,7 @@
                 <a class="dropdown-item" href="findUser.jsp">Find user</a>
                 <a class="dropdown-item" href="removeUser.jsp">Remove
                     user</a>
-                <a class="dropdown-item" href="findUser.jsp">Update user</a>
+                <a class="dropdown-item" href="updateUser.jsp">Update user</a>
             </div>
         </div>
         <div class="dropdown" style=" margin:10px">
