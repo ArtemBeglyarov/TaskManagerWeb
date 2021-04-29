@@ -16,22 +16,27 @@ h1.title {
 }
 table {
 	border-spacing: 0;
-	width: 100%;
+	width: 50%;
 	border: 1px solid #ddd;
+	border-radius: 24px;
 
 }
 th {
 	cursor: pointer;
 	color: white;
 	background-color: black;
+	width: 50px;
 
 }
  td {
 	text-align: left;
-	background-color: #778899;
-	color: black;
+	background-color:black;
+	color: white;
 
 }
 title {
 	margin: 0px auto; text-align: left;
+}
+tr {
+
 }

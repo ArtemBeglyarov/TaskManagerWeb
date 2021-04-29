@@ -17,21 +17,21 @@ public class UsersOperations {
 
     public void createUser(User user) {
         try{
-             userRepository.createUser(user);
+             userRepository.create(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void removeUserById(String id) {
+    public void removeUserById(long id) {
         try {
-            userRepository.removeUser(id);
+            userRepository.delete(id);
         }  catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public User findUser(String id) {
+    public User findUser(long id) {
         try {
-       return userRepository.findUserById(id);
+       return userRepository.find(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
@@ -45,7 +45,7 @@ public class UsersOperations {
     }
     public void updateUser(User user) {
         try {
-        userRepository.updateUser(user);
+        userRepository.update(user);
         } catch (SQLException e) {
             throw new RuntimeException();
         }

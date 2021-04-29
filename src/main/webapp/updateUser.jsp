@@ -2,96 +2,33 @@
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
-<%@ page import="com.taskmanager.entity.UserEntity" %>
+<%@ page import="com.taskmanager.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    User currUser = (User) session.getAttribute("currUser");
+    if (currUser == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>
 <html>
 <head>
-    <style>@import url(css/style.css);</style>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-          crossorigin="anonymous">
-    <title>TASK MANAGER</title>
-    <%
-        UserEntity currUser = (UserEntity) session.getAttribute("currUser");
-        if (currUser == null) {
-            response.sendRedirect("login.jsp");
-        }
-    %>
-    <header
-            class="navbar navbar-expand-lg  bg-dark flex-column flex-md-row ">
-        <a href="index.jsp"><img style=" margin:10px" src="css/images/home-circle-512.webp"
-                                 width="50"
-                                 height="45" class="me-3" alt="HOME"> </a>
-        </button>
-        <div class="dropdown" style=" margin:10px">
-            <button class="btn btn-success   dropdown-toggle" style="background-color:
-            #0B614B"
-                    type="button"
-                    data-toggle="dropdown">USER
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="currUser.jsp">My data</a>
-                <a class="dropdown-item" href="createUser.jsp">Create
-                    user</a>
-                <a class="dropdown-item" href="findAllUsers.jsp">Find all
-                    user</a>
-                <a class="dropdown-item" href="findUser.jsp">Find user</a>
-                <a class="dropdown-item" href="removeUser.jsp">Remove
-                    user</a>
-                <a class="dropdown-item" href="updateUser.jsp">Update user</a>
-            </div>
-        </div>
-        <div class="dropdown" style=" margin:10px">
-            <button class="btn btn-success dropdown-toggle"  style="background-color: #0B614B" type="button"
-                    data-toggle="dropdown">TASK
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="">description</a>
-                <a class="dropdown-item" href="">description</a>
-                <a class="dropdown-item" href="">description</a>
-
-            </div>
-        </div>
-
-        <div class="dropdown" style=" margin:10px">
-            <button class="btn btn-success dropdown-toggle"  style="background-color: #0B614B" type="button"
-                    data-toggle="dropdown">PROJECT
-            </button>
-            <div class="dropdown-menu">
-                <a class="dropdown-item" href="">description</a>
-                <a class="dropdown-item" href="">description</a>
-                <a class="dropdown-item" href="">description</a>
-            </div>
-        </div>
-        <button class="btn btn-success" style="margin-left: auto!important;
-        margin:10px; background-color: #0B614B"
-                type="button"
-                href="singOut.jsp">Sign out
-        </button>
-    </header>
-
+    <jsp:include page='header.jsp'/>
 </head>
 
 <body style="background-image: url(css/images/background.jpg);">
-<%
-    UserEntity userEntity = (UserEntity) session.getAttribute("currUser");
-%>
 <h1 class="title" align=center>UPDATE USER</h1>
 <form action="updateUser.jsp" method="POST">
     <p class="title" align=center>Change first name to:
-        <input type="text" name="firstName" value="<%out.print(userEntity.getFirstName());%>">
+        <input type="text" name="firstName" value="<%out.print(currUser.getFirstName());%>">
     <p class="title" align=center>Change last name to:
         <input type="text" name="secondName"
-               value="<%out.print(userEntity.getLastName());%>">
+               value="<%out.print(currUser.getLastName());%>">
     <p class="title" align=center>Change userEntity name to:
-        <input type="text" name="userName" value="<%out.print(userEntity.getUserName());%>">
+        <input type="text" name="userName" value="<%out.print(currUser.getUserName());%>">
     <p class="title" align=center>Change password to:
-        <input type="text" name="password" value="<%out.print(userEntity.getPassword());%>">
+        <input type="text" name="password" value="<%out.print(currUser.getPassword());%>">
     <p class="title" align=center>Change status to:
-        <input type="text" name="status" value="<%out.print(userEntity.getStatus());%>">
+        <input type="text" name="status" value="<%out.print(currUser.getStatus());%>">
     <p class="title" align=center><input type="submit" value="Update">
 </form>
 
@@ -100,12 +37,12 @@
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
 <% if (request.getMethod().equals(HttpMethod.POST)) {
-    userEntity.setFirstName(request.getParameter("firstName"));
-    userEntity.setLastName(request.getParameter("secondName"));
-    userEntity.setUserName(request.getParameter("userName"));
-    userEntity.setPassword(request.getParameter("password"));
-    userEntity.setStatus(request.getParameter("status"));
-    usersOperations.updateUser(userEntity);
+    currUser.setFirstName(request.getParameter("firstName"));
+    currUser.setLastName(request.getParameter("secondName"));
+    currUser.setUserName(request.getParameter("userName"));
+    currUser.setPassword(request.getParameter("password"));
+    currUser.setStatus(request.getParameter("status"));
+    usersOperations.updateUser(currUser);
 }
 
 %>

@@ -1,8 +1,7 @@
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
-<%@ page import="com.taskmanager.entity.UserEntity" %>
-<%@ page import="com.taskmanager.entity.UserEntity" %>
+<%@ page import="com.taskmanager.entity.User" %>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
@@ -22,7 +21,6 @@
     <p class="title" align=center><input type="submit" value="Login">
 </form>
 
-
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
@@ -32,7 +30,7 @@
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
 
-        UserEntity userEntity = usersOperations.loginUser(userName, password);
+        User userEntity = usersOperations.loginUser(userName, password);
 
 //        if (userEntity.getUserName().equals(userName) &&
 //                userEntity.getPassword().equals(password)) {
@@ -43,7 +41,6 @@
         response.sendRedirect("index.jsp");
     }
 %>
-
 </form>
 </body>
 </html>
