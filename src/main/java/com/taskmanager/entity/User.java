@@ -2,14 +2,12 @@ package com.taskmanager.entity;
 
 
 
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-public class UserEntity implements Serializable {
+@Table(name = "user_table")
+public class User implements Serializable {
 
 
     @Id
@@ -24,21 +22,25 @@ public class UserEntity implements Serializable {
 
     private String password;
 
+
+
+
     private String status;
 
 
-    public UserEntity() {
+    public User() {
 
     }
 
-    public UserEntity(String firstName, String lastName, String userName, String password, String status) {
+    public User(String firstName, String lastName, String userName, String password, String status) {
+
         this.firstName = firstName;
         this.lastName = lastName;
         this.userName = userName;
         this.password = password;
         this.status = status;
 
-    }public UserEntity(Long id, String firstName, String lastName, String userName, String password, String status) {
+    } public User(Long id, String firstName, String lastName, String userName, String password, String status) {
         this.ID = id;
         this.firstName = firstName;
         this.lastName = lastName;

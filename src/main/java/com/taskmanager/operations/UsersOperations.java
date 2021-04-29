@@ -1,7 +1,7 @@
 package com.taskmanager.operations;
 
 
-import com.taskmanager.entity.UserEntity;
+import com.taskmanager.entity.User;
 import com.taskmanager.repository.UserRepository;
 
 import javax.ejb.Stateless;
@@ -15,42 +15,42 @@ public class UsersOperations {
     @Inject
     UserRepository userRepository;
 
-    public void createUser(UserEntity userEntity) {
+    public void createUser(User user) {
         try{
-             userRepository.createUser(userEntity);
+             userRepository.create(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void removeUserById(String id) {
+    public void removeUserById(long id) {
         try {
-            userRepository.removeUser(id);
+            userRepository.delete(id);
         }  catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public UserEntity findUser(String id) {
+    public User findUser(long id) {
         try {
-       return userRepository.findUserById(id);
+       return userRepository.find(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-  public ArrayList<UserEntity> findAllUser() {
+  public ArrayList<User> findAllUser() {
         try {
        return userRepository.findAllUsers();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void updateUser(UserEntity userEntity) {
+    public void updateUser(User user) {
         try {
-        userRepository.updateUser(userEntity);
+        userRepository.update(user);
         } catch (SQLException e) {
             throw new RuntimeException();
         }
     }
-    public UserEntity loginUser(String userName, String password) {
+    public User loginUser(String userName, String password) {
         try {
             return userRepository.loginUser(userName, password);
         } catch (SQLException e) {

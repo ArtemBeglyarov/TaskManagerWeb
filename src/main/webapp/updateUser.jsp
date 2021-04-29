@@ -2,89 +2,33 @@
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
-<%@ page import="com.taskmanager.entity.UserEntity" %>
+<%@ page import="com.taskmanager.entity.User" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%
+    User currUser = (User) session.getAttribute("currUser");
+    if (currUser == null) {
+        response.sendRedirect("login.jsp");
+    }
+%>
 <html>
 <head>
-    <style>@import url(css/style.css);</style>
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-
-    <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/css/bootstrap.min.css"
-          rel="stylesheet"
-          integrity="sha384-BmbxuPwQa2lc/FVzBcNJ7UAyJxM6wuqIj61tLrc4wSX0szH/Ev+nYRRuWlolflfl"
-          crossorigin="anonymous">
-    <title></title>
-    <%
-
-        UserEntity currUser = (UserEntity) session.getAttribute("currUser");
-        if (currUser == null) {
-            response.sendRedirect("login.jsp");
-        }
-    %>
-    <header class="navbar navbar-dark sticky-top bg-dark flex-md-nowrap p-0 shadow">
-        <a class="navbar-brand col-md-2" href="index.jsp"
-           a>Task
-            Manager</a>
-        <a class="navbar-brand col-md-1 " align="center" a>
-            <button class="btn btn-dark" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#UserOperations"
-                    aria-expanded="false" aria-controls="collapseExample">
-                USER
-            </button>
-            <button class="btn btm-primary  btn-dark btn-block" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#Project"
-                    aria-expanded="false" aria-controls="collapseExample"
-                    style="align: left">
-                PROJECT
-            </button>
-
-            <button class="btn  btn-dark" type="button"
-                    data-bs-toggle="collapse" data-bs-target="#Task"
-                    aria-expanded="false" aria-controls="collapseExample">
-                TASK
-            </button>
-        </a>
-
-
-        <ul class="navbar-brand col-md-2 " ; align="center"
-            style="color:
-     forestgreen;">
-            <%out.println("USER: " + currUser.getUserName());%>
-            <% out.println("ID: " + currUser.getID()); %>
-        </ul>
-
-
-        <ul class="navbar-nav px-3">
-            <li class="nav-item text-nowrap">
-                <a class="nav-link" href="singOut.jsp">Sign out</a>
-            </li>
-        </ul>
-
-    </header>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta2/dist/js/bootstrap.bundle.min.js"
-            integrity="sha384-b5kHyXgcpbZJO/tY9Ul7kGkf1S0CWuKcCD38l8YkeH8z8QjE0GmW1gYU5S9FOnJ0"
-            crossorigin="anonymous"></script>
+    <jsp:include page='header.jsp'/>
 </head>
+
 <body style="background-image: url(css/images/background.jpg);">
-<%
-    UserEntity userEntity = (UserEntity) session.getAttribute("currUser");
-%>
 <h1 class="title" align=center>UPDATE USER</h1>
 <form action="updateUser.jsp" method="POST">
     <p class="title" align=center>Change first name to:
-        <input type="text" name="firstName" value="<%out.print(userEntity.getFirstName());%>">
+        <input type="text" name="firstName" value="<%out.print(currUser.getFirstName());%>">
     <p class="title" align=center>Change last name to:
         <input type="text" name="secondName"
-               value="<%out.print(userEntity.getLastName());%>">
+               value="<%out.print(currUser.getLastName());%>">
     <p class="title" align=center>Change userEntity name to:
-        <input type="text" name="userName" value="<%out.print(userEntity.getUserName());%>">
+        <input type="text" name="userName" value="<%out.print(currUser.getUserName());%>">
     <p class="title" align=center>Change password to:
-        <input type="text" name="password" value="<%out.print(userEntity.getPassword());%>">
+        <input type="text" name="password" value="<%out.print(currUser.getPassword());%>">
     <p class="title" align=center>Change status to:
-        <input type="text" name="status" value="<%out.print(userEntity.getStatus());%>">
+        <input type="text" name="status" value="<%out.print(currUser.getStatus());%>">
     <p class="title" align=center><input type="submit" value="Update">
 </form>
 
@@ -93,14 +37,23 @@
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
 <% if (request.getMethod().equals(HttpMethod.POST)) {
-    userEntity.setFirstName(request.getParameter("firstName"));
-    userEntity.setLastName(request.getParameter("secondName"));
-    userEntity.setUserName(request.getParameter("userName"));
-    userEntity.setPassword(request.getParameter("password"));
-    userEntity.setStatus(request.getParameter("status"));
-    usersOperations.updateUser(userEntity);
+    currUser.setFirstName(request.getParameter("firstName"));
+    currUser.setLastName(request.getParameter("secondName"));
+    currUser.setUserName(request.getParameter("userName"));
+    currUser.setPassword(request.getParameter("password"));
+    currUser.setStatus(request.getParameter("status"));
+    usersOperations.updateUser(currUser);
 }
 
 %>
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+        integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+        crossorigin="anonymous"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"
+        integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q"
+        crossorigin="anonymous"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+        integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+        crossorigin="anonymous"></script>
 </body>
 </html>

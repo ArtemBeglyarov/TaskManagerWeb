@@ -8,7 +8,7 @@ ENV DATASOURCE_JNDI java:/AppDS
 
 ENV DB_HOST database
 ENV DB_PORT 5432
-ENV DB_USER userEntity
+ENV DB_USER user
 ENV DB_PASS password
 ENV DB_NAME dbname
 
