@@ -6,44 +6,49 @@ import com.taskmanager.Model;
 import lombok.Data;
 
 
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
 
-@Data
-@JsonView
-public class Project implements Serializable  {
-    @JsonProperty("id")
-    private  long ID;
+
+@Entity
+@Table(name = "PROJECT")
+public class Project implements Serializable {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private long ID;
 
     private String nameProject;
-
-    //private List<User> users;
-    private List<Long> usersId;
-
-    //private List<Task> tasks;
-    private List<Long> tasksId;
+    @ManyToMany
+    private List<User> users;
+    // private long usersId; ////
+    @OneToMany
+    private List<Task> tasks;
+    //private long tasksId;
 
     private String description;
 
-    private Long creatorID;
-
+    @ManyToOne
+    private User creatorID;
 
     public Project() {
 
     }
 
-    public Project(String nameProject, List<Long> usersID, List<Long> tasksID, String description, Long creatorID) {
+    public Project(String nameProject, List<User> users, List<Task> tasks, String description, User creatorID) {
         this.nameProject = nameProject;
-        this.usersId = usersID;
-        this.tasksId = tasksID;
+        this.users = users;
+        this.tasks = tasks;
         this.description = description;
         this.creatorID = creatorID;
     }
-    public Project( long ID, String nameProject, List<Long> usersID, List<Long> tasksID, String description, Long creatorID) {
+
+    public Project(long ID, String nameProject, List<User> users, List<Task> tasks, String description, User creatorID) {
         this.ID = ID;
         this.nameProject = nameProject;
-        this.usersId = usersID;
-        this.tasksId = tasksID;
+        this.users = users;
+        this.tasks = tasks;
         this.description = description;
         this.creatorID = creatorID;
     }
@@ -53,8 +58,8 @@ public class Project implements Serializable  {
         return
                 "projectID=" + ID +
                         ", nameProject='" + nameProject +
-                        ", users=" + usersId +
-                        ", tasks=" + tasksId +
+                        ", users=" + users +
+                        ", tasks=" + tasks +
                         ", description='" + description +
                         ", creator=" + creatorID;
 
@@ -76,20 +81,20 @@ public class Project implements Serializable  {
         this.nameProject = nameProject;
     }
 
-    public List<Long> getUsersId() {
-        return usersId;
+    public List<User> getUsers() {
+        return users;
     }
 
-    public void setUsersId(List<Long> usersId) {
-        this.usersId = usersId;
+    public void setUsers(List<User> users) {
+        this.users = users;
     }
 
-    public List<Long> getTasksId() {
-        return tasksId;
+    public List<Task> getTasks() {
+        return tasks;
     }
 
-    public void setTasksId(List<Long> tasksId) {
-        this.tasksId = tasksId;
+    public void setTasks(List<Task> tasks) {
+        this.tasks = tasks;
     }
 
     public String getDescription() {
@@ -100,11 +105,12 @@ public class Project implements Serializable  {
         this.description = description;
     }
 
-    public Long getCreatorID() {
+    public User getCreatorID() {
         return creatorID;
     }
 
-    public void setCreatorID(Long creatorID) {
+    public void setCreatorID(User creatorID) {
         this.creatorID = creatorID;
     }
 }
+

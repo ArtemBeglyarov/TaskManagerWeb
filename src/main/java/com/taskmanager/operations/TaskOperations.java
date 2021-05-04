@@ -1,7 +1,8 @@
 package com.taskmanager.operations;
 
 import com.taskmanager.entity.Task;
-import com.taskmanager.entity.UserEntity;
+import com.taskmanager.entity.User;
+import com.taskmanager.repository.TaskHibernateRepository;
 import com.taskmanager.repository.TaskRepository;
 
 import javax.ejb.Stateless;
@@ -14,41 +15,45 @@ public class TaskOperations {
 
     @Inject
     TaskRepository taskRepository;
+    @Inject
+    TaskHibernateRepository taskHibernateRepository;
 
     public void createTask(Task task) {
         try{
-            taskRepository.createTask(task);
+            taskHibernateRepository.create(task);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public void removeTaskById(String id) {
+    public void removeTaskById(long id) {
         try {
-            taskRepository.removeTask(id);
+            taskHibernateRepository.delete(id);
         }  catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
-    public Task findTask(String id) {
+    public void findTask(long id) {
         try {
-            return taskRepository.findTask(id);
+            taskHibernateRepository.find(id);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+    /*
     public ArrayList<Task> findAllTask() {
+
         try {
             return taskRepository.findAllTask();
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }
     }
+    */
     public void updateTask(Task task) {
         try {
-            taskRepository.updateTask(task);
+            taskHibernateRepository.update(task);
         } catch (SQLException e) {
             throw new RuntimeException();
         }
     }
-
 }

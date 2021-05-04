@@ -10,7 +10,7 @@ import java.util.ArrayList;
 
 
 @ApplicationScoped
-public class UserRepository implements Repository<User> {
+public class UserRepository  {
 
     @Resource(lookup = "java:/AppDS")
    private DataSource dataSource;
@@ -23,7 +23,7 @@ public class UserRepository implements Repository<User> {
     private static final String updateUser = "UPDATE users SET first_name=(?),last_name =(?),user_name = (?), password=(?), status =(?) WHERE id IN (?)";
 
 
-    @Override
+    /*@Override
     public User create(User user) throws SQLException {
         Connection connection = dataSource.getConnection();
         PreparedStatement statement = connection.prepareStatement(insertUserQuery);
@@ -80,6 +80,7 @@ public class UserRepository implements Repository<User> {
         statement.setLong(1, id);
         statement.executeUpdate();
     }
+
     public ArrayList<User> findAllUsers() throws SQLException {
         ArrayList<User> userEntities = new ArrayList<User>();
         Connection connection = dataSource.getConnection();
@@ -99,6 +100,8 @@ public class UserRepository implements Repository<User> {
 
         return userEntities;
     }
+
+     */
     public User loginUser(String userName, String password) throws SQLException {
 
         Connection connection = dataSource.getConnection();

@@ -14,7 +14,8 @@ public class UsersOperations {
 
     @Inject
     UserRepository userRepository;
-
+    @Inject
+    UserHibernateRepository userHibernateRepository;
     public User createUser(User user) {
         try{
             return userRepository.create(user);

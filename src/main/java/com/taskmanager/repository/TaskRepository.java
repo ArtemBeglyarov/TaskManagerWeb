@@ -1,6 +1,8 @@
 package com.taskmanager.repository;
 
 import com.taskmanager.entity.Task;
+import com.taskmanager.entity.User;
+import lombok.ToString;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
@@ -12,10 +14,11 @@ import java.util.ArrayList;
 import java.util.Calendar;
 
 @ApplicationScoped
-public class TaskRepository implements Serializable {
+public class TaskRepository  {
 
     @Resource(lookup = "java:/AppDS")
     DataSource dataSource;
+    /*DataSource dataSource;
     private static final String insertTaskQuery = "INSERT INTO TASK VALUES (DEFAULT,?,?,?,?,?,?,?,?,?)";
     private static final String findTask = "SELECT * FROM TASK WHERE id IN (?)";
     private static final String findAllTask = "SELECT * FROM TASk";
@@ -102,4 +105,72 @@ public class TaskRepository implements Serializable {
         statement.setLong(10,task.getID());
         statement.executeUpdate();
     }
+
+    @Override
+    public Task create(Task task) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(insertTaskQuery);
+        statement.setString(1, task.getName());
+        statement.setString(2, String.valueOf(task.getStatus()));
+        statement.setString(3, String.valueOf(task.getPriority()));
+        statement.setString(4, task.getDescription());
+        statement.setDate(5, new Date(Calendar.getInstance().getTimeInMillis()));
+        statement.setDate(6, (Date) task.getEndDate());
+        statement.setLong(7, task.getProjectId());
+        statement.setLong(8, task.getReporterId());
+        statement.setLong(9, task.getAssigneeId());
+        statement.executeUpdate();
+        return  null;
+    }
+
+    @Override
+    public Task find(long id) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(findTask);
+        statement.setLong(1, id);
+        Task task = new Task();
+        ResultSet resultSet = statement.executeQuery();
+        while (resultSet.next()) {
+            task.setID(resultSet.getInt("TASKID"));
+            task.setName(resultSet.getString("TASKNAME"));
+            task.setStatus(Task.Status.valueOf(resultSet.getString("STATUS")));
+            task.setPriority(Task.Priority.valueOf(resultSet.getString("PRIORITY")));
+            task.setDescription(resultSet.getString("DECSR"));
+            task.setStartData(resultSet.getDate("START_DATE"));
+            task.setEndDate(resultSet.getDate("END_DATE"));
+            task.setProjectId(resultSet.getLong("PROJ_ID"));
+            task.setReporterId(resultSet.getLong("REPORTER_ID"));
+            task.setAssigneeId(resultSet.getLong("ASSIGNEEID_ID"));
+        }
+        return task;
+    }
+
+    @Override
+    public Task update(Task task) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(updateTask);
+        statement.setString(1, task.getName());
+        statement.setString(2, task.getStatus().toString();
+        statement.setString(3, task.
+        statement.setString(4, task.getDescription());
+        statement.setDate(5, new Date(Calendar.getInstance().getTimeInMillis()));
+        statement.setDate(6, (Date) task.getEndDate());
+        statement.setLong(7, task.getProjectId());
+        statement.setLong(8, task.getReporterId());
+        statement.setLong(9, task.getAssigneeId());
+        statement.setLong(10,task.getID());
+        statement.executeUpdate();
+        return null;
+    }
+
+    @Override
+    public void delete(long id) throws SQLException {
+        Connection connection = dataSource.getConnection();
+        PreparedStatement statement = connection.prepareStatement(removeTask);
+        statement.setLong(1,id);
+        statement.executeUpdate();
+    }
+}
+
+     */
 }

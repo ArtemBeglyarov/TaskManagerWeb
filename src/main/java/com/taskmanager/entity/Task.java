@@ -4,15 +4,13 @@ import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import lombok.Data;
 
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
+import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
 
-@Data
-@JsonView
+@Entity
+@Table(name = "TASK")
 public class Task implements Serializable {
 
     public enum Priority {
@@ -24,61 +22,67 @@ public class Task implements Serializable {
 
     public enum Status {
         OPEN,
-        SUSPENDED,
-        ASSIGNED,
-        DISCUSSION,
-        CLOSED,
+        SUSPENDED, //endDate
+        ASSIGNED, //появляется пользователь
+        DISCUSSION, //startDate
+        CLOSED, //
 
     }
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    @JsonProperty("id")
     private long ID;
     private String name;
     private Status status;
     private Priority priority;
     private String description;
     private Date startData;
-    private Date duoDate;
+    private Date dueDate; //ожидание конца работы
     private Date endDate;
-    private long projectId;
-    private long reporterId; // исполнитель задачи
-    private long assigneeId; //создател задачи
+    private Date createDate;
+    @ManyToOne
+    private Project project;
+    @ManyToOne
+    private User reporterId;// исполнитель задачи
+    @ManyToOne
+    private User assigneeId; //создател задачи
     //TODO если сгенерируется 0
     //private final long DEFAULT_LONG = -1;
     public final Priority DEFAULT_PRIORITY = Priority.NORMAL;
     public final Status DEFAULT_STATUS = Status.OPEN;
 
     public Task() {
-
+    priority = DEFAULT_PRIORITY;
+    status = DEFAULT_STATUS;
     }
-    public Task( String name, Status status, Priority priority, String description,
-                Date startData, Date duoDate, Date endDate, long projectId, long reporterId, long assigneeId) {
+    public Task(String name, Status status, Priority priority, String description,
+                Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporterId, User assigneeId) {
         this.name = name;
         this.status = status;
         this.priority = priority;
         this.description = description;
         this.startData = startData;
-        this.duoDate = duoDate;
+        this.dueDate = dueDate;
         this.endDate = endDate;
-        this.projectId = projectId;
+        this.project = project;
         this.reporterId = reporterId;
         this.assigneeId = assigneeId;
+        this.createDate = createDate;
     }
 
-    public Task(long ID, String name, Status status, Priority priority, String description,
-                Date startData, Date duoDate, Date endDate, long projectId, long reporterId, long assigneeId) {
+    public Task( long ID, String name, Status status, Priority priority, String description,
+                Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporterId, User assigneeId) {
         this.ID = ID;
         this.name = name;
         this.status = status;
         this.priority = priority;
         this.description = description;
         this.startData = startData;
-        this.duoDate = duoDate;
+        this.dueDate = dueDate;
         this.endDate = endDate;
-        this.projectId = projectId;
+        this.project = project;
         this.reporterId = reporterId;
         this.assigneeId = assigneeId;
+        this.createDate = createDate;
     }
 
     public long getID() {
@@ -129,12 +133,12 @@ public class Task implements Serializable {
         this.startData = startData;
     }
 
-    public Date getDuoDate() {
-        return duoDate;
+    public Date getDueDate() {
+        return dueDate;
     }
 
-    public void setDuoDate(Date duoDate) {
-        this.duoDate = duoDate;
+    public void setDueDate(Date dueDate) {
+        this.dueDate = dueDate;
     }
 
     public Date getEndDate() {
@@ -145,27 +149,35 @@ public class Task implements Serializable {
         this.endDate = endDate;
     }
 
-    public long getProjectId() {
-        return projectId;
+    public Date getCreateDate() {
+        return createDate;
     }
 
-    public void setProjectId(long projectId) {
-        this.projectId = projectId;
+    public void setCreateDate(Date createDate) {
+        this.createDate = createDate;
     }
 
-    public long getReporterId() {
+    public Project getProject() {
+        return project;
+    }
+
+    public void setProject(Project project) {
+        this.project = project;
+    }
+
+    public User getReporterId() {
         return reporterId;
     }
 
-    public void setReporterId(long reporterId) {
+    public void setReporterId(User reporterId) {
         this.reporterId = reporterId;
     }
 
-    public long getAssigneeId() {
+    public User getAssigneeId() {
         return assigneeId;
     }
 
-    public void setAssigneeId(long assigneeId) {
+    public void setAssigneeId(User assigneeId) {
         this.assigneeId = assigneeId;
     }
 
@@ -186,9 +198,9 @@ public class Task implements Serializable {
                 ", priority=" + priority +
                 ", description='" + description + '\'' +
                 ", startData=" + startData +
-                ", duoDate=" + duoDate +
+                ", duoDate=" + dueDate +
                 ", endDate=" + endDate +
-                ", projectId=" + projectId +
+                ", projectId=" + project +
                 ", reporterId=" + reporterId +
                 ", assigneeId=" + assigneeId +
                 ", DEFAULT_PRIORITY=" + DEFAULT_PRIORITY +
