@@ -1,4 +1,4 @@
-<%@ page import="com.taskmanager.entity.UserEntity" %>
+
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
@@ -10,6 +10,7 @@
         response.sendRedirect("login.jsp");
     }
 %>
+<!DOCTYPE HTML>
 <html>
 <head>
     <jsp:include page='header.jsp'/>

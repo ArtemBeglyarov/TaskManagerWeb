@@ -15,9 +15,9 @@ public class UsersOperations {
     @Inject
     UserRepository userRepository;
 
-    public void createUser(User user) {
+    public User createUser(User user) {
         try{
-             userRepository.create(user);
+            return userRepository.create(user);
         } catch (SQLException e) {
             throw new RuntimeException(e);
         }

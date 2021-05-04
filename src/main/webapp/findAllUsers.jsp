@@ -14,18 +14,29 @@
 
 <head>
     <jsp:include page='header.jsp'/>
+    <form action="removeUser.jsp" method="GET">
+        <input style="margin-left:80%; margin-top: 30px" type="text" name="id"><input type="submit" value="Remove"
+                                                        onclick="return confirmation()">
+    </form>
+    <form action="findUserByClick.jsp" method="GET" >
+        <input style="margin-left:80%;" type="text" name="id"><input type="submit" value="Find">
+    </form>
+    <a class="btn btn-success"
+       style="background-color:  #0B614B; margin-left:90%;  margin-top: 30px"  href="createUser.jsp"
+       role="button">Create user
+    </a>
 </head>
 
 <body>
 <h1 class="title" align=center>ALL USER</h1>
+
 <form action="findAllUsers.jsp" method="GET">
 </form>
 
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
-
 %>
-<table id="myTable">
+<table id="myTable" style=" margin: auto!important; border-radius: 24px;">
     <tr>
         <th onclick="sortTable(0)"></th>
         <th onclick="sortTable(0)">ID</th>
@@ -39,11 +50,10 @@
         ArrayList<User> userEntities = usersOperations.findAllUser();
         for (User k : userEntities) {
     %>
-    <tr>
-        <td>
+    <tr >
+        <td style="align-content: center">
             <form action="removeUser.jsp" method="GET">
-                <input type="checkbox" class="custom-checkbox" id="id"
-                       name="id" value="<%k.getID();%>"></form>
+                <input  type="checkbox" class="custom-checkbox" id="id" name="id" value="<%=k.getID()%>"></form>
         </td>
         <td><%out.print(k.getID());%></td>
         <td>

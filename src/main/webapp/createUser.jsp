@@ -11,6 +11,7 @@
         response.sendRedirect("login.jsp");
     }
 %>
+<!DOCTYPE HTML>
 <html>
 <head>
     <jsp:include page='header.jsp'/>
@@ -49,9 +50,10 @@
     userEntity.setUserName(request.getParameter("userName"));
     userEntity.setPassword(request.getParameter("password"));
     userEntity.setStatus(request.getParameter("status"));
-    usersOperations.createUser(userEntity);
+    User user = usersOperations.createUser(userEntity);
 //    javaBeans.saveUser(userEntity);
     response.sendRedirect("findAllUsers.jsp");
+    System.out.println(user.getID());
 
 }
 %>

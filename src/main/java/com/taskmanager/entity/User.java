@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.io.Serializable;
 
 @Entity
-@Table(name = "user_table")
+@Table(name = "users")
 public class User implements Serializable {
 
 
@@ -21,10 +21,7 @@ public class User implements Serializable {
     private String userName;
 
     private String password;
-
-
-
-
+    
     private String status;
 
 

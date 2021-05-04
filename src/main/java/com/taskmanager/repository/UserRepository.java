@@ -33,7 +33,11 @@ public class UserRepository implements Repository<User> {
         statement.setString(4, user.getPassword());
         statement.setString(5, user.getStatus());
         statement.executeUpdate();
-        return null;
+        ResultSet resultSet = statement.getGeneratedKeys();
+        if (resultSet.next()) {
+            user.setID(resultSet.getLong(1));
+        }
+        return user;
     }
 
     @Override
