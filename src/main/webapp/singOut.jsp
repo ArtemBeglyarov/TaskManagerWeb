@@ -7,7 +7,7 @@
         response.sendRedirect("login.jsp");
     }
 %>
-
+<!DOCTYPE HTML>
 <html>
 <head>
 </head>

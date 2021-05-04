@@ -10,7 +10,7 @@
     <title>Login</title>
 </head>
 <style>@import url(css/style.css);</style>
-<body style="margin-top: 300px;)" >
+<body style="margin-top: 300px;)">
 <h1 class="title" align=center>LOGIN USER</h1>
 <form action="login.jsp" method="POST">
 
@@ -32,13 +32,23 @@
 
         User userEntity = usersOperations.loginUser(userName, password);
 
-//        if (userEntity.getUserName().equals(userName) &&
-//                userEntity.getPassword().equals(password)) {
-//            response.sendRedirect("login.jsp");
-//        }
+        if (userEntity == null) {
 
-        session.setAttribute("currUser", userEntity);
-        response.sendRedirect("index.jsp");
+%>
+<form action="login.jsp" method="POST">
+
+    <p class="title" align=center>USER NAME:
+        <input type="text" name="userName">
+    <p class="title" align=center>PASSWORD:
+        <input type="password" name="password">
+    <p class="title" align=center><input type="submit" value="Login">
+        <a>Incorrect login or password</a>
+</form>
+<%
+        } else {
+            session.setAttribute("currUser", userEntity);
+            response.sendRedirect("index.jsp");
+        }
     }
 %>
 </form>

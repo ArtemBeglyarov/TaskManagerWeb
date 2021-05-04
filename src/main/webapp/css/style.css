@@ -24,19 +24,21 @@ table {
 th {
 	cursor: pointer;
 	color: white;
-	background-color: black;
+	background-color:  #0B614B;
 	width: 50px;
+	text-align: center;
 
 }
- td {
-	text-align: left;
+td {
+	text-align: center;
 	background-color:black;
 	color: white;
+
 
 }
 title {
 	margin: 0px auto; text-align: left;
 }
 tr {
-
+	text-align: center;
 }

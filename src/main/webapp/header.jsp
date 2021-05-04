@@ -53,11 +53,10 @@
                 <a class="dropdown-item" href="">description</a>
             </div>
         </div>
-        <button class="btn btn-success" style="margin-left: auto!important;
+        <a class="btn btn-success" style="margin-left: auto!important;
         margin:10px; background-color: #0B614B"
-                type="button"
-                href="singOut.jsp">Sign out
-        </button>
+        role="button" href="singOut.jsp">Sign out
+        </a>
     </header>
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
             integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
