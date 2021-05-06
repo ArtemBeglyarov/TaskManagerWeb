@@ -23,12 +23,12 @@
         <th>Status</th>
     </tr>
     <tr>
-        <td><%out.print(currUser.getID());%></td>
-        <td><%out.print(currUser.getFirstName());%></td>
-        <td><%out.print(currUser.getLastName()); %></td>
-        <td><%out.print(currUser.getUserName()); %></td>
-        <td><%out.print(currUser.getPassword());%></td>
-        <td><%out.print(currUser.getStatus());%></td>
+        <td><%=currUser.getID()%></td>
+        <td><%=currUser.getFirstName()%></td>
+        <td><%=currUser.getLastName() %></td>
+        <td><%=currUser.getUserName() %></td>
+        <td><%=currUser.getPassword()%></td>
+        <td><%=currUser.getStatus()%></td>
     </tr>
 </table>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

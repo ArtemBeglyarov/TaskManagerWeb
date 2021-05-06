@@ -30,21 +30,10 @@
         String userName = request.getParameter("userName");
         String password = request.getParameter("password");
 
-        User userEntity = usersOperations.loginUser(userName, password);
+        User userEntity = usersOperations.loginUser(userName,password);
 
         if (userEntity == null) {
 
-%>
-<form action="login.jsp" method="POST">
-
-    <p class="title" align=center>USER NAME:
-        <input type="text" name="userName">
-    <p class="title" align=center>PASSWORD:
-        <input type="password" name="password">
-    <p class="title" align=center><input type="submit" value="Login">
-        <a>Incorrect login or password</a>
-</form>
-<%
         } else {
             session.setAttribute("currUser", userEntity);
             response.sendRedirect("index.jsp");

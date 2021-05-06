@@ -4,12 +4,14 @@
 <%@ page import="com.taskmanager.BeansStore" %>
 
 <%@ page import="com.taskmanager.entity.User" %>
+<%@ page import="com.taskmanager.repository.Repository" %>
+<%@ page import="com.taskmanager.repository.UserRepositoryHibernate" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%
-    User currUser = (User) session.getAttribute("currUser");
-    if (currUser == null) {
-        response.sendRedirect("login.jsp");
-    }
+//    User currUser = (User) session.getAttribute("currUser");
+//    if (currUser == null) {
+//        response.sendRedirect("login.jsp");
+//    }
 %>
 <!DOCTYPE HTML>
 <html>
@@ -37,9 +39,7 @@
 
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
-//
-//    JavaBeans javaBeans = (JavaBeans) BeansStore.getBean(JavaBeans.class);
-
+//    Repository<User> urh = (Repository<User>)  BeansStore.getBean(UserRepositoryHibernate.class);
 %>
 
 
@@ -51,10 +51,7 @@
     userEntity.setPassword(request.getParameter("password"));
     userEntity.setStatus(request.getParameter("status"));
     User user = usersOperations.createUser(userEntity);
-//    javaBeans.saveUser(userEntity);
-    response.sendRedirect("findAllUsers.jsp");
-    System.out.println(user.getID());
-
+    response.sendRedirect("findUsers.jsp");
 }
 %>
 
