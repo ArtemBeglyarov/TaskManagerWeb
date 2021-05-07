@@ -8,10 +8,10 @@
 <%@ page import="com.taskmanager.repository.UserRepositoryHibernate" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%
-//    User currUser = (User) session.getAttribute("currUser");
-//    if (currUser == null) {
-//        response.sendRedirect("login.jsp");
-//    }
+    User currUser = (User) session.getAttribute("currUser");
+    if (currUser == null) {
+        response.sendRedirect("login.jsp");
+    }
 %>
 <!DOCTYPE HTML>
 <html>

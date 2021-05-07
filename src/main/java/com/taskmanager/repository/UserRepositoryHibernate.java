@@ -42,15 +42,20 @@ public class UserRepositoryHibernate implements Repository<User> {
     }
 
     public User login(String username) {
-        User user = entityManager.find(User.class, username);
-        return user;
+
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
+        Root<User> userRoot = cq.from(User.class);
+        CriteriaQuery<User> userByNameQuery = cq.select(userRoot).where(cb.equal(userRoot.get("userName"),username));
+        TypedQuery<User> allQuery = entityManager.createQuery(userByNameQuery);
+        return allQuery.getSingleResult();
     }
 
     public List<User> findUsers() {
-        CriteriaBuilder criteriaBuilder = entityManager.getCriteriaBuilder();
-        CriteriaQuery<User> cq = criteriaBuilder.createQuery(User.class);
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<User> cq = cb.createQuery(User.class);
         Root<User> userRoot = cq.from(User.class);
-        CriteriaQuery<User> all = cq.select(userRoot);
+        CriteriaQuery<User> all = cq.select(userRoot).where();
         TypedQuery<User> allQuery = entityManager.createQuery(all);
         return allQuery.getResultList();
     }
