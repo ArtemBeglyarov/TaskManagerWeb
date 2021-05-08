@@ -3,6 +3,7 @@
 <%@ page import="javax.ws.rs.HttpMethod" %>
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.util.List" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
@@ -30,7 +31,7 @@
 <body>
 <h1 class="title" align=center>ALL USER</h1>
 
-<form action="findAllUsers.jsp" method="GET">
+<form action="findUsers.jsp" method="GET">
 </form>
 
 <%!
@@ -47,7 +48,7 @@
         <th onclick="sortTable(1)">Status</th>
     </tr>
     <%
-        ArrayList<User> userEntities = usersOperations.findAllUser();
+        List<User> userEntities = usersOperations.findUsers();
         for (User k : userEntities) {
     %>
     <tr >
@@ -55,15 +56,15 @@
             <form action="removeUser.jsp" method="GET">
                 <input  type="checkbox" class="custom-checkbox" id="id" name="id" value="<%=k.getID()%>"></form>
         </td>
-        <td><%out.print(k.getID());%></td>
+        <td><%=k.getID()%></td>
         <td>
                 <a href="findUserByClick.jsp?id=<%=k.getID()%>" style="text-decoration: none;
-	color: white;"><%out.print(k.getUserName());%></a>
+	color: white;"><%=k.getUserName()%></a>
         </td>
-        <td><%out.print(k.getFirstName());%></td>
-        <td><%out.print(k.getLastName()); %></td>
-        <td><%out.print(k.getPassword());%></td>
-        <td><%out.print(k.getStatus());%></td>
+        <td><%=k.getFirstName()%></td>
+        <td><%=k.getLastName()%></td>
+        <td><%=k.getPassword()%></td>
+        <td><%=k.getStatus()%></td>
     </tr>
     <%
         }

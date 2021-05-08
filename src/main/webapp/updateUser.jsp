@@ -20,19 +20,18 @@
 <h1 class="title" align=center>UPDATE USER</h1>
 <form action="updateUser.jsp" method="POST">
     <p class="title" align=center>Change first name to:
-        <input type="text" name="firstName" value="<%out.print(currUser.getFirstName());%>">
+        <input type="text" name="firstName" value="<%=currUser.getFirstName()%>">
     <p class="title" align=center>Change last name to:
         <input type="text" name="secondName"
-               value="<%out.print(currUser.getLastName());%>">
+               value="<%=currUser.getLastName()%>">
     <p class="title" align=center>Change userEntity name to:
-        <input type="text" name="userName" value="<%out.print(currUser.getUserName());%>">
+        <input type="text" name="userName" value="<%=currUser.getUserName()%>">
     <p class="title" align=center>Change password to:
-        <input type="text" name="password" value="<%out.print(currUser.getPassword());%>">
+        <input type="text" name="password" value="<%=currUser.getPassword()%>">
     <p class="title" align=center>Change status to:
-        <input type="text" name="status" value="<%out.print(currUser.getStatus());%>">
+        <input type="text" name="status" value="<%=currUser.getStatus()%>">
     <p class="title" align=center><input type="submit" value="Update">
 </form>
-
 
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);

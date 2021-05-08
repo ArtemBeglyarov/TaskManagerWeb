@@ -16,14 +16,14 @@
         </button>
         <div class="dropdown" style=" margin:10px">
             <a class="btn btn-success"
-                    style="background-color:  #0B614B" href="findAllUsers.jsp"
+                    style="background-color:  #0B614B" href="findUsers.jsp"
                     role="button">USER
             </a>
             <div class="dropdown-menu">
                 <a class="dropdown-item" href="currUser.jsp">My data</a>
                 <a class="dropdown-item" href="createUser.jsp">Create
                     user</a>
-                <a class="dropdown-item" href="findAllUsers.jsp">Find all
+                <a class="dropdown-item" href="findUsers.jsp">Find all
                     user</a>
                 <a class="dropdown-item" href="findUser.jsp">Find user</a>
                 <a class="dropdown-item" href="removeUser.jsp">Remove

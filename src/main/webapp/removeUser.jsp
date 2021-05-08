@@ -1,10 +1,8 @@
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
-<%@ page import="javax.ws.rs.HttpMethod" %>
 <%@ page import="com.taskmanager.entity.User" %>
-<%@ page import="com.taskmanager.repository.UserRepositoryHibernate" %>
-<%@ page import="javax.ejb.EJB" %>
-<%@ page import="com.taskmanager.repository.Repository" %>
+
+
 <%
 	User currUser = (User) session.getAttribute("currUser");
 	if (currUser == null) {
@@ -28,16 +26,15 @@
 </form>
 
 <%!
-//	UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
-	Repository<User> urh = (Repository<User>)  BeansStore.getBean(UserRepositoryHibernate.class);
+	UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
+
 %>
 <%
 	String  ID = request.getParameter("id");
 	if (ID != null){
 		Long id = Long.parseLong(ID);
-//		usersOperations.removeUserById(id);
-		urh.delete(id);
-		response.sendRedirect("findAllUsers.jsp");
+		usersOperations.removeUserById(id);
+		response.sendRedirect("findUsers.jsp");
 	}
 %>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"

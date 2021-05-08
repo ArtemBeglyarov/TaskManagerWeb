@@ -19,11 +19,11 @@
      style="width: 300px;height: 300px; margin-top: 20px;
      border-radius: 24px; color: #dddddd">
 
-    <p >ID: <%out.print(currUser.getID());%></p>
-    <p>User name:  <%out.print(currUser.getUserName()); %></p>
-    <p>Fist name: <%out.print(currUser.getFirstName());%></p>
-    <p>Last name:  <%out.print(currUser.getLastName()); %></p>
-    <p>Status:     <%out.print(currUser.getStatus());%></p>
+    <p >ID: <%=currUser.getID()%></p>
+    <p>User name:  <%=currUser.getUserName() %></p>
+    <p>Fist name: <%=currUser.getFirstName()%></p>
+    <p>Last name:  <%=currUser.getLastName() %></p>
+    <p>Status:     <%=currUser.getStatus()%></p>
     <a class="btn btn-success"
        style="background-color:  #0B614B" href="updateUser.jsp"
        role="button">EDIT
