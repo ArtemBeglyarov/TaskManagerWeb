@@ -43,6 +43,7 @@
     currUser.setPassword(request.getParameter("password"));
     currUser.setStatus(request.getParameter("status"));
     usersOperations.updateUser(currUser);
+    response.sendRedirect("findUsers.jsp");
 }
 
 %>
