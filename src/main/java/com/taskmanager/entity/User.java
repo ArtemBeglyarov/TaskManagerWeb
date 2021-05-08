@@ -2,6 +2,8 @@ package com.taskmanager.entity;
 
 
 
+import org.hibernate.annotations.GenericGenerator;
+
 import javax.persistence.*;
 import java.io.Serializable;
 
@@ -11,22 +13,16 @@ public class User implements Serializable {
 
 
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GenericGenerator(name = "random",strategy = "com.taskmanager.GenerateID")
+    @GeneratedValue(generator = "random")
     private  long ID;
-
     private String firstName;
-
     private String lastName;
-
     private String userName;
-
     private String password;
-    
     private String status;
 
-
     public User() {
-
     }
 
     public User(String firstName, String lastName, String userName, String password, String status) {
