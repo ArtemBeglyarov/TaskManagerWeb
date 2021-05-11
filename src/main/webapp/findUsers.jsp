@@ -10,26 +10,20 @@
         response.sendRedirect("login.jsp");
     }
 %>
+
 <!DOCTYPE HTML>
 <html>
 
 <head>
     <jsp:include page='header.jsp'/>
-    <form action="removeUser.jsp" method="GET">
-        <input style="margin-left:80%; margin-top: 30px" type="text" name="id"><input type="submit" value="Remove"
-                                                        onclick="return confirmation()">
-    </form>
-    <form action="findUserByClick.jsp" method="GET" >
-        <input style="margin-left:80%;" type="text" name="id"><input type="submit" value="Find">
-    </form>
-    <a class="btn btn-success"
-       style="background-color:  #0B614B; margin-left:90%;  margin-top: 30px"  href="createUser.jsp"
-       role="button">Create user
-    </a>
-</head>
 
+    <form action="findUserByClick.jsp" method="GET">
+        <input style="margin-left:80%;" type="text" name="id"><input
+            type="submit" value="Find">
+    </form>
+
+</head>
 <body>
-<h1 class="title" align=center>ALL USER</h1>
 
 <form action="findUsers.jsp" method="GET">
 </form>
@@ -38,6 +32,25 @@
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
 <table id="myTable" style=" margin: auto!important; border-radius: 24px;">
+    <tr>
+        <th></th>
+        <th> <a href="createUser.jsp"><img style=" margin:10px"
+                              src="css/images/add.png"
+                                      width="20"
+                                      height="20" class="me-3" alt="CRETAE">
+        </a>
+
+     <a href=""><img style=" margin:10px"
+                              src="css/images/deleteUser.png"
+                                      width="20"
+                                      height="20
+" class="me-3" alt="HOME"> </a>
+        </th>
+        <th> <form action="findUserByClick.jsp" method="GET">
+            <input type="text" placeholder="id...">
+            <button type="submit"></button>
+        </form></th>
+    </tr>
     <tr>
         <th onclick="sortTable(0)"></th>
         <th onclick="sortTable(0)">ID</th>
@@ -70,5 +83,7 @@
         }
     %>
 </table>
+
+<script src="css/TM.js"/>
 </body>
 </html>

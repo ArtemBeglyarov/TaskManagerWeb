@@ -13,7 +13,7 @@
         <a href="index.jsp"><img style=" margin:10px" src="css/images/home-circle-512.webp"
                                  width="50"
                                  height="45" class="me-3" alt="HOME"> </a>
-        </button>
+
         <div class="dropdown" style=" margin:10px">
             <a class="btn btn-success"
                     style="background-color:  #0B614B" href="findUsers.jsp"
