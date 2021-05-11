@@ -16,12 +16,6 @@
 
 <head>
     <jsp:include page='header.jsp'/>
-
-    <form action="findUserByClick.jsp" method="GET">
-        <input style="margin-left:80%;" type="text" name="id"><input
-            type="submit" value="Find">
-    </form>
-
 </head>
 <body>
 
@@ -34,22 +28,24 @@
 <table id="myTable" style=" margin: auto!important; border-radius: 24px;">
     <tr>
         <th></th>
-        <th> <a href="createUser.jsp"><img style=" margin:10px"
-                              src="css/images/add.png"
-                                      width="20"
-                                      height="20" class="me-3" alt="CRETAE">
+        <th><a href="createUser.jsp"><img style=" margin:10px"
+                                          src="css/images/add.png"
+                                          width="20"
+                                          height="20" class="me-3" alt="CRETE">
         </a>
 
-     <a href=""><img style=" margin:10px"
-                              src="css/images/deleteUser.png"
-                                      width="20"
-                                      height="20
+            <a href="javascript:void(0);" onclick="fixLeaseFacilities()"><img style=" margin:10px"
+                            src="css/images/deleteUser.png"
+                            width="20"
+                            height="20
 " class="me-3" alt="HOME"> </a>
         </th>
-        <th> <form action="findUserByClick.jsp" method="GET">
-            <input type="text" placeholder="id...">
-            <button type="submit"></button>
-        </form></th>
+        <th>
+            <form action="findUserByClick.jsp" method="GET">
+                <input type="text" placeholder="id...">
+                <button type="submit"></button>
+            </form>
+        </th>
     </tr>
     <tr>
         <th onclick="sortTable(0)"></th>
@@ -64,26 +60,32 @@
         List<User> userEntities = usersOperations.findUsers();
         for (User k : userEntities) {
     %>
-    <tr >
+    <tr>
         <td style="align-content: center">
-            <form action="removeUser.jsp" method="GET">
-                <input  type="checkbox" class="custom-checkbox" id="id" name="id" value="<%=k.getID()%>"></form>
+            <input type="checkbox" class="custom-checkbox" id="id" name="lfcheckboxes" value="<%=k.getID()%>">
         </td>
-        <td><%=k.getID()%></td>
+        <td><%=k.getID()%>
+        </td>
         <td>
-                <a href="findUserByClick.jsp?id=<%=k.getID()%>" style="text-decoration: none;
-	color: white;"><%=k.getUserName()%></a>
+            <a href="findUserByClick.jsp?id=<%=k.getID()%>" style="text-decoration: none;
+	color: white;"><%=k.getUserName()%>
+            </a>
         </td>
-        <td><%=k.getFirstName()%></td>
-        <td><%=k.getLastName()%></td>
-        <td><%=k.getPassword()%></td>
-        <td><%=k.getStatus()%></td>
+        <td><%=k.getFirstName()%>
+        </td>
+        <td><%=k.getLastName()%>
+        </td>
+        <td><%=k.getPassword()%>
+        </td>
+        <td><%=k.getStatus()%>
+        </td>
     </tr>
     <%
         }
     %>
 </table>
 
-<script src="css/TM.js"/>
+<script src="css/TM.js"></script>
+<script src="css/deleteUser.js"></script>
 </body>
 </html>

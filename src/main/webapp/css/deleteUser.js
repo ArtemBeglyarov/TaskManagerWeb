@@ -2,7 +2,7 @@ function getCheckedCheckBox(){
     var array = [];
     var checkboxes = document.querySelectorAll('input[type=checkbox][name=lfcheckboxes]:checked');
     for (var i = 0; i < checkboxes.length; i++) {
-        array.push(checkboxes[i].value);
+        array.push(Number(checkboxes[i].value));
     }
     return array;
 }
@@ -19,9 +19,9 @@ function fixLeaseFacilities(){
                 alert( 'Oops! Something went wrong.' );
             });
             XHR.addEventListener( 'load', function(event) {
-                location.reload();
+                // location.reload();
             });
-            XHR.open( 'GET', 'removeUser.jsp' );
+            XHR.open( 'POST','removeUser.jsp');
             XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
             XHR.send('leaseFacilityIDs='+JSON.stringify(leaseFacilities));
         }

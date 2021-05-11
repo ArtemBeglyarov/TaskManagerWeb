@@ -34,8 +34,12 @@
 	if (ID != null){
 		Long id = Long.parseLong(ID);
 		usersOperations.removeUserById(id);
-		response.sendRedirect("findUsers.jsp");
+//		response.sendRedirect("findUsers.jsp");
+
 	}
+    String  IDchek = request.getParameter("leaseFacilityIDs");
+    System.out.println(IDchek  + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+
 %>
 <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
 		integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
