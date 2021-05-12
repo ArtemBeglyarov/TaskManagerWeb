@@ -19,7 +19,7 @@ function fixLeaseFacilities(){
                 alert( 'Oops! Something went wrong.' );
             });
             XHR.addEventListener( 'load', function(event) {
-                // location.reload();
+                location.reload();
             });
             XHR.open( 'POST','removeUser.jsp');
             XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
