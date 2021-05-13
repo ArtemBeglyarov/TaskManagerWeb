@@ -7,7 +7,7 @@ function getCheckedCheckBox(){
     return array;
 }
 
-function fixLeaseFacilities(){
+function findUsers(){
     var leaseFacilities = getCheckedCheckBox();
     if(leaseFacilities.length === 0){
         alert('Please, check at least one object.');
@@ -21,7 +21,7 @@ function fixLeaseFacilities(){
             XHR.addEventListener( 'load', function(event) {
                 location.reload();
             });
-            XHR.open( 'POST','removeUser.jsp');
+            XHR.open( 'POST','findUsersByCheckbox.jsp');
             XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
             XHR.send('leaseFacilityIDs='+JSON.stringify(leaseFacilities));
         }
