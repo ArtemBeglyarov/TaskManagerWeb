@@ -48,6 +48,9 @@
                                                           height="20" class="me-3" alt="CRETE"></a>
                             <a href="javascript:void(0);" onclick="fixLeaseFacilities()"><img
                                     style=" margin:10px" src="css/images/deleteUser.png"
+                                    width="20" height="20" class="me-3" alt="HOME">
+                            </a><a href="javascript:void(0);" onclick="findUsers()"><img
+                                    style=" margin:10px" src="css/images/addUser.png"
                                     width="20" height="20" class="me-3" alt="HOME"> </a>
                         </th>
                         <th>
@@ -135,5 +138,6 @@
 </section>
 <script src="css/TM.js"></script>
 <script src="css/deleteUser.js"></script>
+<script src="css/findUserByCheckbox.js"></script>
 </body>
 </html>
