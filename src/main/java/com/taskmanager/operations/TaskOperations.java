@@ -9,6 +9,7 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.List;
 
 @Stateless
 public class TaskOperations {
@@ -18,42 +19,20 @@ public class TaskOperations {
     @Inject
     TaskHibernateRepository taskHibernateRepository;
 
-    public void createTask(Task task) {
-        try{
-            taskHibernateRepository.create(task);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public Task createTask(Task task) {
+        return taskHibernateRepository.create(task);
     }
     public void removeTaskById(long id) {
-        try {
             taskHibernateRepository.delete(id);
-        }  catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
     }
-    public void findTask(long id) {
-        try {
-            taskHibernateRepository.find(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public Task findTask(long id) {
+         return taskHibernateRepository.find(id);
     }
-    /*
-    public ArrayList<Task> findAllTask() {
 
-        try {
-            return taskRepository.findAllTask();
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public Task updateTask(Task task) {
+       return taskHibernateRepository.update(task);
     }
-    */
-    public void updateTask(Task task) {
-        try {
-            taskHibernateRepository.update(task);
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        }
+    public List<Task> findAllTasks() {
+        return taskHibernateRepository.findAll();
     }
 }

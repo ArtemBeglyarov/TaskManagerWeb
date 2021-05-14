@@ -7,7 +7,6 @@
 --%>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.taskmanager.entity.Task" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
 <%@ page import="com.taskmanager.operations.TaskOperations" %>
@@ -15,6 +14,7 @@
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.operations.ProjectOperations" %>
 <%@ page import="com.taskmanager.entity.Project" %>
+<%@ page import="java.util.List" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
@@ -31,37 +31,53 @@
     <p class="title" align=center>Name Project:
         <input type="text" name="ProjectName">
     <p class="title" align=center>select users:
+    <select name="Users">
+        <%
+            List<User> usersArrayList = usersOperations.findUsers();
+            for (User k : usersArrayList) {
+        %>
+        <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
 
-
+        <%
+        }
+    %>
+    </select>
+    <%--<p class="title" align=center>select Tasks:
+        <select name="Tasks">
+            <%
+                List<Task> tasksArrayList = taskOperations.findAllTask() ;
+                for (Task t : tasksArrayList) {
+            %>
+            <option value="<%=t.getID()%>"><%=t.getName()%></option>
+w
+            <%
+                }
+            %>
+        </select>
+    <p class="title" align=center>enter Description:--%>
+    <p class="title" align=center>enter Description:
+        <input type="text" name="Description">
+    <p class="title" align=center>Creator:
+        <input type="text" value="<%=currUser.getUserName()%>" >
+    <p class="title" align=center><input type="submit" value="Create">
 </form>
 
     <%!
-    ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(UsersOperations.class);//
-
-%>
+    ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);//
+    UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
+    TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
+    %>
 
 <% if (request.getMethod().equals(HttpMethod.POST)) {
-
     Project project = new Project();
     project.setNameProject(request.getParameter("ProjectName"));
-
-
-    task.setName(request.getParameter("TaskName"));
-    task.setStatus(Task.Status.valueOf(request.getParameter("Status")));
-    task.setPriority(Task.Priority.valueOf(request.getParameter("Prioritet")));
-    task.setDescription(request.getParameter("Description"));
-    try {
-        task.setEndDate(format.parse(request.getParameter("EndDate")));
-    } catch (ParseException e) {
-        throw new RuntimeException(e);
-    }
-    task.setProject(request.);
-    task.getReporterId();
-    Arrays.deepToString()
-    task.getAssigneeId(request);
-    taskOperations.createTask(task);
-    response.sendRedirect("findAllUsers.jsp");
+    project.setUsers(usersArrayList);
+    //project.setTasks(tasksArrayList);
+    project.setDescription(request.getParameter("Description"));
+    project.setCreatorID(currUser);
+    projectOperations.createProject(project);
+    response.sendRedirect("Projects.jsp");
 }
-    %
+%>
 </body>
 </html>

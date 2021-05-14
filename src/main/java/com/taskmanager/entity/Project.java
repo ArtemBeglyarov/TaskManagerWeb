@@ -12,7 +12,7 @@ import java.util.List;
 
 
 @Entity
-@Table(name = "PROJECT")
+@Table(name = "projects")
 public class Project implements Serializable {
 
     @Id

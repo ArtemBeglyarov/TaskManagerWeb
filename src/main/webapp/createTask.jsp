@@ -22,18 +22,21 @@
 <%@ page import="java.util.Arrays" %>
 <%@ page import="com.taskmanager.entity.Project" %>
 <%@ page import="com.taskmanager.operations.ProjectOperations" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
         response.sendRedirect("login.jsp");
     }
+
 %>
 <html>
 <head>
     <jsp:include page='header.jsp'/>
 </head>
 <body>
+
 <h1 class="title" align=center>CREATE TASK</h1>
 <form action="createTask.jsp" method="POST">
     <p class="title" align=center>Task name:
@@ -49,47 +52,74 @@
     <p class="title" align=center>Description:
         <input type="text" name="Description">
     <p class="title" align=center>StartDate:
-
+        <%
+        Date format1 = new Date(Calendar.getInstance().getTimeInMillis());
+        System.out.println(format1);
+    %>
 
         <input type="date" name="startDate">
-    <p class="title" align=center>EndDate:
+    <p class="title" align=center>DueDate:
         <input type="date" name="endDate">
             <%
         SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
     %>
-    <p class="title" align=center>ProjectID:
-        <input type="text" name="projectID">
-    <p class="title" align=center>ReporterID:
-        <input type="text" name="reporterId">
+    <p class="title" align=center> enter ProjectID :
+    <input type="text" name="projectID">
+    <p class="title" align=center>enter ReporterID:
+        <input type="text" value="<%=currUser.getUserName()%>">
     <p class="title" align=center>AssigneeID:
-        <input type="text" name="AssigneeId">
+        <select name="Users">
+            <%
+
+                List<User> assigneeArrayList = usersOperations.findUsers();
+                for (User k : assigneeArrayList) {
+
+            %>
+            <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
+            <%
+                }
+            %>
+        </select>
+
+
     <p class="title" align=center><input type="submit" value="Create">
+
 </form>
 <%!
-    TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(UsersOperations.class);
-    ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(UsersOperations.class);
-    Project currProject = new Project();
+    UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
+    TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
+    ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
 %>
+
+
 
 <% if (request.getMethod().equals(HttpMethod.POST)) {
     Task task = new Task();
 
     task.setName(request.getParameter("TaskName"));
-    task.setStatus(Task.Status.valueOf(request.getParameter("Status")));
+
     task.setPriority(Task.Priority.valueOf(request.getParameter("Prioritet")));
     task.setDescription(request.getParameter("Description"));
+    task.setCreateDate(format1);
     try {
-        task.setEndDate(format.parse(request.getParameter("EndDate")));
+        task.setDueDate(format.parse(request.getParameter("EndDate")));
     } catch (ParseException e) {
         throw new RuntimeException(e);
     }
-    task.setProject());
-    task.getReporterId();
-        Arrays.deepToString();
-    task.getAssigneeId();
+    String ID = request.getParameter("projectID");
+    Long id = Long.parseLong(ID);
+    task.setProject(projectOperations.findProject(id));
+
+    String assID = request.getParameter("Users");
+    Long idd = Long.parseLong(assID);
+    task.setAssigneeId(usersOperations.findUser(idd));
+
+    task.setReporterId(currUser);
+
     taskOperations.createTask(task);
-    response.sendRedirect("findAllProject.jsp");
+    response.sendRedirect("tasks.jsp");
 }
 %>
+
 </body>
 </html>

@@ -10,7 +10,7 @@ import java.util.Date;
 
 
 @Entity
-@Table(name = "TASK")
+@Table(name = "tasks")
 public class Task implements Serializable {
 
     public enum Priority {

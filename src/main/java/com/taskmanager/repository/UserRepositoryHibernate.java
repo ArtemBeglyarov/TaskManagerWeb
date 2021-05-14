@@ -41,6 +41,11 @@ public class UserRepositoryHibernate implements Repository<User> {
         entityManager.remove(user);
     }
 
+    @Override
+    public List<User> findAll() {
+        return null;
+    }
+
     public User login(String username) {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();

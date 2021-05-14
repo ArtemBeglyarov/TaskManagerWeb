@@ -2,6 +2,7 @@ package com.taskmanager.operations;
 
 import com.taskmanager.entity.Project;
 import com.taskmanager.entity.Task;
+import com.taskmanager.entity.User;
 import com.taskmanager.repository.ProjectHibernateRepository;
 import com.taskmanager.repository.ProjectRepository;
 import com.taskmanager.repository.TaskHibernateRepository;
@@ -9,6 +10,7 @@ import com.taskmanager.repository.TaskHibernateRepository;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.sql.SQLException;
+import java.util.List;
 
 @Stateless
 public class ProjectOperations {
@@ -16,32 +18,19 @@ public class ProjectOperations {
     ProjectRepository projectRepository;
     @Inject
     ProjectHibernateRepository projectHibernateRepository;
-    public void createProject(Project project){
-        try{
-            projectHibernateRepository.create(project);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public Project createProject(Project project){
+          return projectHibernateRepository.create(project);
     }
-    public void findProject(long id){
-        try{
-             projectHibernateRepository.find(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+    public Project findProject(long id){
+          return projectHibernateRepository.find(id);
     }
     public void deleteProjByID(long id){
-        try{
-            projectHibernateRepository.delete(id);
-        } catch (SQLException e) {
-            throw new RuntimeException(e);
-        }
+         projectHibernateRepository.delete(id);
     }
-    public void updateProject(Project project) {
-        try {
-            projectHibernateRepository.update(project);
-        } catch (SQLException e) {
-            throw new RuntimeException();
-        }
+    public Project updateProject(Project project) {
+         return projectHibernateRepository.update(project);
+    }
+    public List<Project> findAllProjects() {
+        return projectHibernateRepository.findAll();
     }
 }
