@@ -5,13 +5,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.File" %>
-<%@ page import="com.taskmanager.repository.Repository" %><%--
-  Created by IntelliJ IDEA.
-  User: BeglyarovAM
-  Date: 13.05.2021
-  Time: 15:00
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.taskmanager.repository.Repository" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>

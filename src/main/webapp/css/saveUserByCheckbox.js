@@ -21,7 +21,7 @@ function findUsers(){
             XHR.addEventListener( 'load', function(event) {
                 location.reload();
             });
-            XHR.open( 'POST','findUsersByCheckbox.jsp');
+            XHR.open( 'POST','saveUserByCheckbox.jsp');
             XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
             XHR.send('leaseFacilityIDs='+JSON.stringify(leaseFacilities));
         }

@@ -33,7 +33,7 @@
 <section>
 
     <div id="dtBasicExample_wrapper" class="dataTables_wrapper dt-bootstrap4"
-         >
+    >
         <div class="row">
             <div class="col-sm-12">
                 <table id="dtBasicExample"
@@ -44,19 +44,36 @@
                     <thead>
                     <tr>
                         <th><a href="createUser.jsp"><img style=" margin:10px"
-                                                          src="css/images/add.png" width="20"
-                                                          height="20" class="me-3" alt="CRETE"></a>
-                            <a href="javascript:void(0);" onclick="fixLeaseFacilities()"><img
-                                    style=" margin:10px" src="css/images/deleteUser.png"
-                                    width="20" height="20" class="me-3" alt="HOME">
-                            </a><a href="javascript:void(0);" onclick="findUsers()"><img
-                                    style=" margin:10px" src="css/images/addUser.png"
-                                    width="20" height="20" class="me-3" alt="HOME"> </a>
+                                                          src="css/images/add.png"
+                                                          width="20"
+                                                          height="20"
+                                                          class="me-3"
+                                                          alt="CRETE"></a>
+                            <a href="javascript:void(0);"
+                               onclick="fixLeaseFacilities()"><img
+                                    style=" margin:10px"
+                                    src="css/images/deleteUser.png"
+                                    width="20" height="20" class="me-3"
+                                    alt="HOME">
+                            </a><a href="javascript:void(0);"
+                                   onclick="findUsers()"><img
+                                    style=" margin:10px"
+                                    src="css/images/download.jpg"
+                                    width="20" height="20" class="me-3"
+                                    alt="HOME"> </a>
                         </th>
                         <th>
                             <form action="findUserByClick.jsp" method="GET">
                                 <input type="text" placeholder="id...">
                                 <button type="submit"></button>
+                            </form>
+                        </th>
+                        <th>
+                            <form action="load.and.save.entity/loadUsers.jsp"
+                                  method="POST"
+                                  enctype="multipart/form-data">
+                                <input type="file" id="myFile" name="filename">
+                                <input type="submit">
                             </form>
                         </th>
                     </tr>
@@ -65,7 +82,8 @@
                             aria-controls="dtBasicExample" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Name
           : activate to sort column descending" style="width: 123.2px;">
-                        </th> <th class="th-sm sorting_asc" tabindex="0"
+                        </th>
+                        <th class="th-sm sorting_asc" tabindex="0"
                             aria-controls="dtBasicExample" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Name
           : activate to sort column descending" style="width: 123.2px;">ID
@@ -138,6 +156,6 @@
 </section>
 <script src="css/TM.js"></script>
 <script src="css/deleteUser.js"></script>
-<script src="css/findUserByCheckbox.js"></script>
+<script src="css/saveUserByCheckbox.js"></script>
 </body>
 </html>
