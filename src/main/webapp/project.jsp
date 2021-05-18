@@ -20,8 +20,6 @@
 <%!
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
 %>
-
-
 <%
     String ID = request.getParameter("id");
     Long id = Long.parseLong(ID);
@@ -34,17 +32,73 @@
     <jsp:include page='header.jsp'/>
 </head>
 <body>
-
-<p class="title" align=center>ID project:
-    <input type="text" name="id">
-<a class="d-flex flex-column p-3 bg-dark"
-   style="width: 300px;height: 250px;;
-     margin-top: 20px;
-     border-radius: 24px; color: #dddddd">
-</a>
-
-
+<form action="project.jsp" method="GET"></form>
 <p>ID: <%=currProject.getID()%></p>
 <p>User name:  <%=currProject.getNameProject()%></p>
+<p class="title" align=center>Project users:
+<table id="projectsTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100">
+    <thead>
+    <tr>
+        <th class="th-sm">ID</th>
+        <th class="th-sm">UsersProject</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%
+        List<Task> listTask = currProject.getTasks() ;
+        for (Task k : listTask) {
+    %>
+    <tr>
+        <td><%=k.getID()%></td>
+        <td><a href="project.jsp?id=<%=k.getID()%>"
+               style="text-decoration: none;
+	color: white;"><%=k.getName()%>
+        </a></td>
+    </tr>
+    <%
+        }
+    %>
+    </tbody>
+    <tfoot>
+    <tr>
+        <th >ID</th>
+        <th >Name Task</th>
+    </tr>
+    </tfoot>
+</table>
+<p class="title" align=center>Project tasks:
+<table id="taskTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100">
+    <thead>
+    <tr>
+        <th class="th-sm">ID</th>
+        <th class="th-sm">taskProject</th>
+    </tr>
+    </thead>
+    <tbody>
+    <%
+        List<User> listUsers = currProject.getUsers() ;
+        for (User k : listUsers) {
+    %>
+    <tr>
+        <td><%=k.getID()%></td>
+        <td><a href="project.jsp?id=<%=k.getID()%>"
+               style="text-decoration: none;
+	color: white;"><%=k.getUserName()%>
+        </a></td>
+    </tr>
+    <%
+        }
+    %>
+    </tbody>
+    <tfoot>
+    <tr>
+        <th >ID</th>
+        <th >Name User</th>
+    </tr>
+    </tfoot>
+</table>
+
+<p>Description:  <%=currProject.getDescription()%></p>
+<p>Creator:  <%=currProject.getCreatorID()%></p>
 </body>
 </html>
