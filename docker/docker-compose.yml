@@ -13,6 +13,11 @@ services:
       - pgdata:/var/lib/postgresql/data
     environment: 
       - POSTGRES_PASSWORD=postgres
+  ngrok:
+    image: wernight/ngrok
+    command: ngrok http --region=eu webhook:8080
+    ports:
+      - 4040:4040    
   wildfly:
     image: mrfij/wf-pg-tm:16
     networks: 
