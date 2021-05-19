@@ -6,6 +6,7 @@
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.File" %>
 <%@ page import="com.taskmanager.repository.Repository" %>
+<%@ page import="javax.imageio.IIOException" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -17,7 +18,7 @@
 
 %>
 <%
-    String IDchek =request.getParameter("leaseFacilityIDs");
+    String IDchek =request.getParameter("ID");
 
     ObjectMapper mapper = new ObjectMapper();
     Long[] listID = mapper.readValue(IDchek,Long[].class);
@@ -28,7 +29,7 @@
     for (User k : usersByCheck) {
         System.out.println(k.toString());
     }
-    mapper.writeValue(new File("users.json"),usersByCheck);
+    mapper.writeValue(new File("users.json"), usersByCheck);
 %>
 </body>
 </html>

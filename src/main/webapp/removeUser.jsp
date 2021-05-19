@@ -42,11 +42,11 @@
 //
 
     }
-    String IDchek =request.getParameter("leaseFacilityIDs");
-//            System.out.println(IDchek + " !!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!");
+    String checkID =request.getParameter("ID");
+//
 
     ObjectMapper mapper = new ObjectMapper();
-  Long[] listID = mapper.readValue(IDchek,Long[].class);
+  Long[] listID = mapper.readValue(checkID,Long[].class);
     for (Long k:listID){
         usersOperations.removeUserById(k);
     }

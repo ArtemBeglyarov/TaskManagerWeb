@@ -50,12 +50,12 @@
                                                           class="me-3"
                                                           alt="CRETE"></a>
                             <a href="javascript:void(0);"
-                               onclick="fixLeaseFacilities()"><img
+                               onclick="deleteUsers()"><img
                                     style=" margin:10px"
                                     src="css/images/deleteUser.png"
                                     width="20" height="20" class="me-3"
-                                    alt="HOME">
-                            </a><a href="javascript:void(0);"
+                                    alt="HOME"></a>
+                            <a href="javascript:void(0);"
                                    onclick="findUsers()"><img
                                     style=" margin:10px"
                                     src="css/images/download.jpg"
