@@ -30,9 +30,9 @@
     <p class="title" align=center>User name:
         <input type="text" name="userName">
     <p class="title" align=center>Password:
-        <input type="text" name="password">
+        <input type="password" name="password">
     <p class="title" align=center>Status:
-        <input type="password" name="status">
+        <input type="text" name="status">
     <p class="title" align=center><input type="submit" value="Create">
 </form>
 

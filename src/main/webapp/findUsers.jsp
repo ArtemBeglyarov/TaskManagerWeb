@@ -43,24 +43,7 @@
                        style="width: 100%; margin-top: 200px">
                     <thead>
                     <tr>
-                        <th><a href="createUser.jsp"><img style=" margin:10px"
-                                                          src="css/images/add.png"
-                                                          width="20"
-                                                          height="20"
-                                                          class="me-3"
-                                                          alt="CRETE"></a>
-                            <a href="javascript:void(0);"
-                               onclick="deleteUsers()"><img
-                                    style=" margin:10px"
-                                    src="css/images/deleteUser.png"
-                                    width="20" height="20" class="me-3"
-                                    alt="HOME"></a>
-                            <a href="javascript:void(0);"
-                                   onclick="findUsers()"><img
-                                    style=" margin:10px"
-                                    src="css/images/download.jpg"
-                                    width="20" height="20" class="me-3"
-                                    alt="HOME"> </a>
+                        <th>
                         </th>
                         <th>
                             <form action="findUserByClick.jsp" method="GET">
@@ -81,7 +64,25 @@
                         <th class="th-sm sorting_asc" tabindex="0"
                             aria-controls="dtBasicExample" rowspan="1"
                             colspan="1" aria-sort="ascending" aria-label="Name
-          : activate to sort column descending" style="width: 123.2px;">
+          : activate to sort column descending" style="width: 123.2px;"><a
+                                href="createUser.jsp"><img style=" margin:10px"
+                                                           src="css/images/add.png"
+                                                           width="20"
+                                                           height="20"
+                                                           class="me-3"
+                                                           alt="CRETE"></a>
+                            <a href="javascript:void(0);"
+                               onclick="deleteUsers()"><img
+                                    style=" margin:10px"
+                                    src="css/images/deleteUser.png"
+                                    width="20" height="20" class="me-3"
+                                    alt="HOME"></a>
+                            <a href="javascript:void(0);"
+                               onclick="findUsers()"><img
+                                    style=" margin:10px"
+                                    src="css/images/download.jpg"
+                                    width="20" height="20" class="me-3"
+                                    alt="HOME"> </a>
                         </th>
                         <th class="th-sm sorting_asc" tabindex="0"
                             aria-controls="dtBasicExample" rowspan="1"
