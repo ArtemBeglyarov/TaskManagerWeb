@@ -5,13 +5,11 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
 <%@ page import="java.io.File" %>
-<%@ page import="com.taskmanager.repository.Repository" %><%--
-  Created by IntelliJ IDEA.
-  User: BeglyarovAM
-  Date: 13.05.2021
-  Time: 15:00
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.taskmanager.repository.Repository" %>
+<%@ page import="javax.imageio.IIOException" %>
+<%@ page import="java.nio.file.Files" %>
+<%@ page import="java.io.OutputStream" %>
+<%@ page import="java.io.FileOutputStream" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <html>
 <head>
@@ -23,7 +21,7 @@
 
 %>
 <%
-    String IDchek =request.getParameter("leaseFacilityIDs");
+    String IDchek =request.getParameter("ID");
 
     ObjectMapper mapper = new ObjectMapper();
     Long[] listID = mapper.readValue(IDchek,Long[].class);
@@ -34,7 +32,18 @@
     for (User k : usersByCheck) {
         System.out.println(k.toString());
     }
-    mapper.writeValue(new File("users.json"),usersByCheck);
+
+    String fileName = "user.json";
+
+
+    OutputStream outputStream = new FileOutputStream(fileName);
+    response.setHeader("Content-Disposition",
+            "attachment; filename=\"" + fileName + "\"");
+    out.write(mapper.writeValue(outputStream,usersByCheck));
+
+
+
+
 %>
 </body>
 </html>

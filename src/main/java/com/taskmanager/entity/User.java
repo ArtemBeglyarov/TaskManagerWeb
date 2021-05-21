@@ -2,11 +2,13 @@ package com.taskmanager.entity;
 
 
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.*;
 import java.io.Serializable;
-
+@JsonView
 @Entity
 @Table(name = "users")
 public class User implements Serializable {
@@ -15,6 +17,7 @@ public class User implements Serializable {
     @Id
     @GenericGenerator(name = "random",strategy = "com.taskmanager.GenerateID")
     @GeneratedValue(generator = "random")
+    @JsonProperty("ID")
     private  long ID;
     private String firstName;
     private String lastName;

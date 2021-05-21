@@ -7,12 +7,12 @@ function getCheckedCheckBox(){
     return array;
 }
 
-function fixLeaseFacilities(){
+function deleteUsers(){
     var leaseFacilities = getCheckedCheckBox();
     if(leaseFacilities.length === 0){
         alert('Please, check at least one object.');
     }else{
-        var r = confirm('Change the status of the specified Lease Facilities?');
+        var r = confirm('Are you sure, want to delete the user(s)?');
         if (r == true) {
             const XHR = new XMLHttpRequest();
             XHR.addEventListener( 'error', function(event) {
@@ -23,7 +23,7 @@ function fixLeaseFacilities(){
             });
             XHR.open( 'POST','removeUser.jsp');
             XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
-            XHR.send('leaseFacilityIDs='+JSON.stringify(leaseFacilities));
+            XHR.send('ID='+JSON.stringify(leaseFacilities));
         }
     }
 }

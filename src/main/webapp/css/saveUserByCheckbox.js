@@ -12,7 +12,7 @@ function findUsers(){
     if(leaseFacilities.length === 0){
         alert('Please, check at least one object.');
     }else{
-        var r = confirm('Change the status of the specified Lease Facilities?');
+        var r = confirm('download selected user(s)?');
         if (r == true) {
             const XHR = new XMLHttpRequest();
             XHR.addEventListener( 'error', function(event) {
@@ -21,9 +21,9 @@ function findUsers(){
             XHR.addEventListener( 'load', function(event) {
                 location.reload();
             });
-            XHR.open( 'POST','findUsersByCheckbox.jsp');
+            XHR.open( 'POST','load.and.save.entity/saveUserByCheckbox.jsp');
             XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
-            XHR.send('leaseFacilityIDs='+JSON.stringify(leaseFacilities));
+            XHR.send('ID='+JSON.stringify(leaseFacilities));
         }
     }
 }
