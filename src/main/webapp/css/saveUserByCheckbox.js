@@ -18,10 +18,21 @@ function findUsers(){
             XHR.addEventListener( 'error', function(event) {
                 alert( 'Oops! Something went wrong.' );
             });
-            XHR.addEventListener( 'load', function(event) {
-                location.reload();
-            });
-            XHR.open( 'POST','load.and.save.entity/saveUserByCheckbox.jsp');
+            XHR.onload = function(e) {
+                if (this.status == 200) {
+                    var blob = new Blob([this.response], {type: 'application/json'});
+                    let a = document.createElement("a");
+                    a.style = "display: none";
+                    document.body.appendChild(a);
+                    let url = window.URL.createObjectURL(blob);
+                    a.href = url;
+                    a.download = 'myFile.json';
+                    a.click();
+                    window.URL.revokeObjectURL(url);
+                }else{
+                }
+            };
+            XHR.open( 'POST','upload.download.entity/saveUserByCheckbox.jsp');
             XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
             XHR.send('ID='+JSON.stringify(leaseFacilities));
         }

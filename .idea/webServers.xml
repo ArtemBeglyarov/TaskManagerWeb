@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="WebServers">
+    <option name="servers">
+      <webServer id="6a2553ba-af8e-4fd0-98fe-faf4c173ace4" name="local" url="http://192.168.99.1">
+        <fileTransfer mountedRoot="C:\Users\MRFIJ\IdeaProjects\TaskManagerWeb" accessType="MOUNT" port="0" />
+      </webServer>
+    </option>
+  </component>
+</project>

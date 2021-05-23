@@ -4,21 +4,9 @@
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.ArrayList" %>
-<%@ page import="java.io.File" %>
-<%@ page import="com.taskmanager.repository.Repository" %>
-<%@ page import="javax.imageio.IIOException" %>
-<%@ page import="java.nio.file.Files" %>
-<%@ page import="java.io.OutputStream" %>
-<%@ page import="java.io.FileOutputStream" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<html>
-<head>
-</head>
-<body>
 
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
-
 %>
 <%
     String IDchek =request.getParameter("ID");
@@ -35,15 +23,12 @@
 
     String fileName = "user.json";
 
-
-    OutputStream outputStream = new FileOutputStream(fileName);
-    response.setHeader("Content-Disposition",
-            "attachment; filename=\"" + fileName + "\"");
-    out.write(mapper.writeValue(outputStream,usersByCheck));
+    response.setContentType("application/octet-stream");
+    response.setHeader("Content-Disposition","attachment;filename=\"" + fileName + "\"");
 
 
-
+    mapper.writeValue(response.getWriter(),usersByCheck);
+    response.getOutputStream().flush();
+    response.getOutputStream().close();
 
 %>
-</body>
-</html>

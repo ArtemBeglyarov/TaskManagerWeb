@@ -8,17 +8,13 @@
       content="width=device-width, initial-scale=1, shrink-to-fit=no"/>
 <meta http-equiv="x-ua-compatible" content="ie=edge"/>
 <link rel="icon" href="img/mdb-favicon.ico" type="image/x-icon"/>
-<!-- Font Awesome -->
 <link rel="stylesheet"
       href="https://use.fontawesome.com/releases/v5.11.2/css/all.css">
-<!-- Google Fonts Roboto -->
 <link rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap">
-<!-- Bootstrap core CSS -->
-<link rel="stylesheet" href="css/bootstrap.min.css">
-<!-- Material Design Bootstrap -->
-<link rel="stylesheet" href="css/mdb.min.css">
 
+<link rel="stylesheet" href="css/bootstrap.min.css">
+<link rel="stylesheet" href="css/mdb.min.css">
 <link rel="stylesheet" href="css/style.css">
 <header
         class="navbar navbar-expand-lg  bg-dark flex-column flex-md-row ">
@@ -91,24 +87,6 @@
 <script type="text/javascript" src="js/mdb.min.js"></script>
 <!-- Your custom scripts (optional) -->
 <script type="text/javascript">
-    var a = document.getElementById('disc-50');
-    a.onclick = function () {
-        Clipboard_CopyTo("T9TTVSQB");
-        var div = document.getElementById('code-success');
-        div.style.display = 'block';
-        setTimeout(function () {
-            document.getElementById('code-success').style.display = 'none';
-        }, 900);
-    };
-
-    function Clipboard_CopyTo(value) {
-        var tempInput = document.createElement("input");
-        tempInput.value = value;
-        document.body.appendChild(tempInput);
-        tempInput.select();
-        document.execCommand("copy");
-        document.body.removeChild(tempInput);
-    }
 </script>
 
 
