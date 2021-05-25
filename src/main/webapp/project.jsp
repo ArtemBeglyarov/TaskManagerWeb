@@ -99,6 +99,6 @@
 </table>
 
 <p>Description:  <%=currProject.getDescription()%></p>
-<p>Creator:  <%=currProject.getCreatorID()%></p>
+<p>Creator:  <%=currProject.getCreator()%></p>
 </body>
 </html>

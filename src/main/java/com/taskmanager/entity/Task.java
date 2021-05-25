@@ -1,9 +1,5 @@
 package com.taskmanager.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
-import lombok.Data;
-
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
@@ -28,6 +24,7 @@ public class Task implements Serializable {
         CLOSED, //
 
     }
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
@@ -40,22 +37,26 @@ public class Task implements Serializable {
     private Date endDate;
     private Date createDate;
     @ManyToOne
+    @JoinColumn(name = "project_id", nullable = false)
     private Project project;
     @ManyToOne
-    private User reporterId;// исполнитель задачи
+    @JoinColumn(name = "reporter_id", nullable = false)
+    private User reporter;// исполнитель задачи
     @ManyToOne
-    private User assigneeId; //создател задачи
+    @JoinColumn(name = "asignee_id", nullable = true)
+    private User assignee; //создател задачи
     //TODO если сгенерируется 0
     //private final long DEFAULT_LONG = -1;
-    public final Priority DEFAULT_PRIORITY = Priority.NORMAL;
-    public final Status DEFAULT_STATUS = Status.OPEN;
+
 
     public Task() {
-    priority = DEFAULT_PRIORITY;
-    status = DEFAULT_STATUS;
+        priority = Priority.NORMAL;
+        status = Status.OPEN;
     }
+
     public Task(String name, Status status, Priority priority, String description,
-                Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporterId, User assigneeId) {
+                Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporter, User assignee) {
+        this();
         this.name = name;
         this.status = status;
         this.priority = priority;
@@ -64,25 +65,16 @@ public class Task implements Serializable {
         this.dueDate = dueDate;
         this.endDate = endDate;
         this.project = project;
-        this.reporterId = reporterId;
-        this.assigneeId = assigneeId;
+        this.reporter = reporter;
+        this.assignee = assignee;
         this.createDate = createDate;
     }
 
-    public Task( long ID, String name, Status status, Priority priority, String description,
-                Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporterId, User assigneeId) {
+    public Task(long ID, String name, Status status, Priority priority, String description,
+                Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporter, User assignee) {
+        this(name, status, priority, description, startData, dueDate, endDate, createDate, project, reporter, assignee);
         this.ID = ID;
-        this.name = name;
-        this.status = status;
-        this.priority = priority;
-        this.description = description;
-        this.startData = startData;
-        this.dueDate = dueDate;
-        this.endDate = endDate;
-        this.project = project;
-        this.reporterId = reporterId;
-        this.assigneeId = assigneeId;
-        this.createDate = createDate;
+
     }
 
     public long getID() {
@@ -165,29 +157,22 @@ public class Task implements Serializable {
         this.project = project;
     }
 
-    public User getReporterId() {
-        return reporterId;
+    public User getReporter() {
+        return reporter;
     }
 
-    public void setReporterId(User reporterId) {
-        this.reporterId = reporterId;
+    public void setReporter(User reporterId) {
+        this.reporter = reporterId;
     }
 
-    public User getAssigneeId() {
-        return assigneeId;
+    public User getAssignee() {
+        return assignee;
     }
 
-    public void setAssigneeId(User assigneeId) {
-        this.assigneeId = assigneeId;
+    public void setAssignee(User assigneeId) {
+        this.assignee = assigneeId;
     }
 
-    public Priority getDEFAULT_PRIORITY() {
-        return DEFAULT_PRIORITY;
-    }
-
-    public Status getDEFAULT_STATUS() {
-        return DEFAULT_STATUS;
-    }
 
     @Override
     public String toString() {
@@ -201,10 +186,8 @@ public class Task implements Serializable {
                 ", duoDate=" + dueDate +
                 ", endDate=" + endDate +
                 ", projectId=" + project +
-                ", reporterId=" + reporterId +
-                ", assigneeId=" + assigneeId +
-                ", DEFAULT_PRIORITY=" + DEFAULT_PRIORITY +
-                ", DEFAULT_STATUS=" + DEFAULT_STATUS +
+                ", reporterId=" + reporter +
+                ", assigneeId=" + assignee +
                 '}';
     }
 }

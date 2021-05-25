@@ -112,9 +112,9 @@
 
     String assID = request.getParameter("Users");
     Long idd = Long.parseLong(assID);
-    task.setAssigneeId(usersOperations.findUser(idd));
+    task.setAssignee(usersOperations.findUser(idd));
 
-    task.setReporterId(currUser);
+    task.setReporter(currUser);
 
     taskOperations.createTask(task);
     response.sendRedirect("tasks.jsp");

@@ -45,28 +45,17 @@
         </div>
     </div>
     <div class="dropdown" style=" margin:10px">
-        <button class="btn btn-success dropdown-toggle"
-                style="background-color: #0B614B" type="button"
-                data-toggle="dropdown">TASK
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="">description</a>
-            <a class="dropdown-item" href="">description</a>
-            <a class="dropdown-item" href="">description</a>
-
-        </div>
+            <a class="btn btn-success"
+               style="background-color:  #0B614B" href="Tasks.jsp"
+               role="button">TASK
+            </a>
     </div>
 
     <div class="dropdown" style=" margin:10px">
-        <button class="btn btn-success dropdown-toggle"
-                style="background-color: #0B614B" type="button"
-                data-toggle="dropdown">PROJECT
-        </button>
-        <div class="dropdown-menu">
-            <a class="dropdown-item" href="">description</a>
-            <a class="dropdown-item" href="">description</a>
-            <a class="dropdown-item" href="">description</a>
-        </div>
+        <a class="btn btn-success"
+           style="background-color:  #0B614B" href="Projects.jsp"
+           role="button">Project
+        </a>
     </div>
     <a class="btn btn-success" style="margin-left: auto!important;
         margin:10px; background-color: #0B614B"

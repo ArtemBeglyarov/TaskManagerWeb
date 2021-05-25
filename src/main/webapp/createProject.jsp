@@ -74,7 +74,7 @@ w
     project.setUsers(usersArrayList);
     //project.setTasks(tasksArrayList);
     project.setDescription(request.getParameter("Description"));
-    project.setCreatorID(currUser);
+    project.setCreator(currUser);
     projectOperations.createProject(project);
     response.sendRedirect("Projects.jsp");
 }

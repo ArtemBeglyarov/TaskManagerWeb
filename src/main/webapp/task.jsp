@@ -43,16 +43,16 @@
    style="background-color:  #0B614B; margin-left:90%;  margin-top: 30px"  href="updateTask.jsp?id=<%=currTask.getID()%>"
    role="button">Update task
 </a>
-
+//кнопка
 <form action="task.jsp" method="GET"></form>
 <p >ID: <%=currTask.getID()%></p>
 <p>Task name:  <%=currTask.getName()%></p>
 <p>Description: <%=currTask.getDescription()%></p>
 <p>Priority: <%=currTask.getPriority()%></p>
 <p>Status: <%=currTask.getStatus()%></p>
-<p>Start Date: <%=currTask.getAssigneeId()%></p>
+<p>Start Date: <%=currTask.getAssignee()%></p>
 <p>Due Date: <%=currTask.getDueDate()%></p>
-<p>Reporter: <%=currTask.getReporterId()%></p>
-<p>Assignee: <%=currTask.getAssigneeId()%></p>
+<p>Reporter: <%=currTask.getReporter()%></p>
+<p>Assignee: <%=currTask.getAssignee()%></p>
 </body>
 </html>

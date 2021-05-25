@@ -1,14 +1,11 @@
 package com.taskmanager.entity;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonView;
-import com.taskmanager.Model;
-import lombok.Data;
-
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.List;
+
+import static javax.persistence.CascadeType.ALL;
 
 
 @Entity
@@ -23,34 +20,33 @@ public class Project implements Serializable {
     @ManyToMany
     private List<User> users;
     // private long usersId; ////
-    @OneToMany
+    @OneToMany(targetEntity=Task.class, cascade=ALL,
+            mappedBy="project")
     private List<Task> tasks;
     //private long tasksId;
 
     private String description;
 
     @ManyToOne
-    private User creatorID;
+    @JoinColumn(name="creator_id", nullable=false)
+    private User creator;
 
     public Project() {
 
     }
 
-    public Project(String nameProject, List<User> users, List<Task> tasks, String description, User creatorID) {
+    public Project(String nameProject, List<User> users, List<Task> tasks, String description, User creator) {
         this.nameProject = nameProject;
         this.users = users;
         this.tasks = tasks;
         this.description = description;
-        this.creatorID = creatorID;
+        this.creator = creator;
     }
 
-    public Project(long ID, String nameProject, List<User> users, List<Task> tasks, String description, User creatorID) {
+    public Project(long ID, String nameProject, List<User> users, List<Task> tasks, String description, User creator) {
+        this(nameProject,  users,  tasks, description,  creator);
         this.ID = ID;
-        this.nameProject = nameProject;
-        this.users = users;
-        this.tasks = tasks;
-        this.description = description;
-        this.creatorID = creatorID;
+
     }
 
     @Override
@@ -61,7 +57,7 @@ public class Project implements Serializable {
                         ", users=" + users +
                         ", tasks=" + tasks +
                         ", description='" + description +
-                        ", creator=" + creatorID;
+                        ", creator=" + creator;
 
     }
 
@@ -105,12 +101,12 @@ public class Project implements Serializable {
         this.description = description;
     }
 
-    public User getCreatorID() {
-        return creatorID;
+    public User getCreator() {
+        return creator;
     }
 
-    public void setCreatorID(User creatorID) {
-        this.creatorID = creatorID;
+    public void setCreator(User creatorID) {
+        this.creator = creatorID;
     }
 }
 
