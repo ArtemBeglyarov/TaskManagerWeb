@@ -1,70 +1,70 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: HP
-  Date: 14.05.2021
-  Time: 18:41
-  To change this template use File | Settings | File Templates.
---%>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
 <%@ page import="com.taskmanager.entity.User" %>
-<%@ page import="com.taskmanager.operations.TaskOperations" %>
-<%@ page import="com.taskmanager.entity.Task" %>
+<%@ page import="com.taskmanager.operations.ProjectOperations" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
         response.sendRedirect("login.jsp");
     }
-%>
-<%!
-    UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
-    TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
-%>
+    ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
+    User user = null;
+    String param = request.getParameter("id");
+    if (param != null && param != "") {
+        Long id = Long.parseLong(param);
+        user = usersOperations.findUser(id);
+    } else {
+        response.sendRedirect("projects.jsp");
+    }
 
+%>
 <html>
-<head>
-    <jsp:include page='header.jsp'/>
-</head>
-<%
-    String ID = request.getParameter("id");
-    Long id = Long.parseLong(ID);
-    Task currTask = taskOperations.findTask(id);
-
-%>
-ПОКА НЕ ГОТОВ
-<body style="background-image: url(css/images/background.jpg);">
-<h1 class="title" align=center>UPDATE TASK</h1>
-<form action="updateTask.jsp" method="POST">
-    <p class="title" align=center>Enter the id of the task you want update :
-    <p align=center><input type="text" name="id">
-    <p class="title" align=center><input type="submit" value="Find">
-
-    <p class="title" align=center>Change name to:
-        <input type="text" name="Name" value="<%=currTask.getName()%>">
-    <p class="title" align=center>Change status:
-        <input type="text" name="secondName" value="<%=currTask.getStatus()%>">
-
-    <p class="title" align=center>Change userEntity name to:
-        <input type="text" name="userName" value="<%=currUser.getUserName()%>">
-    <p class="title" align=center>Change password to:
-        <input type="text" name="password" value="<%=currUser.getPassword()%>">
-    <p class="title" align=center>Change status to:
-        <input type="text" name="status" value="<%=currUser.getStatus()%>">
-    <p class="title" align=center><input type="submit" value="Update">
-</form>
-
-<% if (request.getMethod().equals(HttpMethod.POST)) {
-    currUser.setFirstName(request.getParameter("firstName"));
-    currUser.setLastName(request.getParameter("secondName"));
-    currUser.setUserName(request.getParameter("userName"));
-    currUser.setPassword(request.getParameter("password"));
-    currUser.setStatus(request.getParameter("status"));
-    usersOperations.updateUser(currUser);
-    response.sendRedirect("findUsers.jsp");
+<jsp:include page='header.jsp'/>
+<body>
+<jsp:include page='navbar.jsp'/>
+<main class="container">
+    <div class="container-fluid">
+        <h1 class="title" align=center>UPDATE USER</h1>
+        <form action="updateUser.jsp?id=<%=user.getID()%>" method="POST">
+            <div class="mb-3 row form-floating">
+                <input type="text" class="form-control" id="floatingUsername" name="userName" placeholder="Username" value="<%=user.getUserName()%>">
+                <label for="floatingUsername">Username</label>
+            </div>
+            <div class="mb-3 row form-floating">
+                <input type="text" class="form-control" id="floatingFirstname" name="firstName" placeholder="Firstname" value="<%=user.getFirstName()%>">
+                <label for="floatingFirstname">Firstname</label>
+            </div>
+            <div class="mb-3 row form-floating">
+                <input type="text" class="form-control" id="floatingLastname" name="lastName" placeholder="Lastname" value="<%=user.getLastName()%>">
+                <label for="floatingLastname">Lastname</label>
+            </div>
+            <div class="mb-3 row form-floating">
+                <input type="password" class="form-control" id="floatingPassword" name="password"
+                       placeholder="Password">
+                <label for="floatingPassword">Password</label>
+            </div>
+            <div class="form-check">
+                <input class="form-check-input" type="checkbox" value="admin" name="status"
+                       id="isAdminCheck" <%="admin".equals(user.getStatus()) ? "checked" : ""%>>
+                <label class="form-check-label" for="isAdminCheck">
+                    Is Admin?
+                </label>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Update">
+            </div>
+        </form>
+    </div>
+</main>
+    <% if (request.getMethod().equals(HttpMethod.POST)) {
+    user.setFirstName(request.getParameter("firstName"));
+    user.setLastName(request.getParameter("lastName"));
+    user.setUserName(request.getParameter("userName"));
+    user.setPassword(request.getParameter("password"));
+    user.setStatus(request.getParameter("status"));
+    usersOperations.updateUser(user);
+    response.sendRedirect("users.jsp");
 }
 %>
-</body>
-</html>

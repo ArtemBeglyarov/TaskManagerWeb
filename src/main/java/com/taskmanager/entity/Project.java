@@ -19,16 +19,12 @@ public class Project implements Serializable {
     private String nameProject;
     @ManyToMany
     private List<User> users;
-    // private long usersId; ////
-    @OneToMany(targetEntity=Task.class, cascade=ALL,
-            mappedBy="project")
+    @OneToMany(targetEntity = Task.class, cascade = ALL,
+            mappedBy = "project")
     private List<Task> tasks;
-    //private long tasksId;
-
     private String description;
-
     @ManyToOne
-    @JoinColumn(name="creator_id", nullable=false)
+    @JoinColumn(name = "creator_id", nullable = false)
     private User creator;
 
     public Project() {
@@ -44,7 +40,7 @@ public class Project implements Serializable {
     }
 
     public Project(long ID, String nameProject, List<User> users, List<Task> tasks, String description, User creator) {
-        this(nameProject,  users,  tasks, description,  creator);
+        this(nameProject, users, tasks, description, creator);
         this.ID = ID;
 
     }
@@ -105,8 +101,8 @@ public class Project implements Serializable {
         return creator;
     }
 
-    public void setCreator(User creatorID) {
-        this.creator = creatorID;
+    public void setCreator(User creator) {
+        this.creator = creator;
     }
 }
 

@@ -9,7 +9,6 @@
     <meta http-equiv="Content-Type" content="text/html; charset=utf-8"/>
     <title>Login</title>
 </head>
-<style>@import url(css/style.css);</style>
 <body style="margin-top: 300px;)">
 <h1 class="title" align=center>LOGIN USER</h1>
 <form action="login.jsp" method="POST">

@@ -4,6 +4,7 @@ package com.taskmanager.operations;
 import com.taskmanager.entity.User;
 import com.taskmanager.repository.UserRepositoryHibernate;
 
+import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
 import java.util.List;

@@ -1,17 +1,19 @@
 package com.taskmanager.repository;
 
 import com.taskmanager.entity.User;
+import org.hibernate.Session;
+import org.hibernate.Transaction;
 
-import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
+import javax.ejb.LocalBean;
+import javax.ejb.Stateless;
+import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
 import java.util.List;
 
-@ApplicationScoped
+@Stateless
+@LocalBean
 public class UserRepositoryHibernate implements Repository<User> {
 
     @PersistenceContext(unitName = "tm")
@@ -19,8 +21,8 @@ public class UserRepositoryHibernate implements Repository<User> {
 
     @Override
     public User create(User user) {
-            entityManager.persist(user);
-            return user;
+        entityManager.persist(user);
+        return user;
     }
 
     @Override
@@ -51,17 +53,14 @@ public class UserRepositoryHibernate implements Repository<User> {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<User> cq = cb.createQuery(User.class);
         Root<User> userRoot = cq.from(User.class);
-        CriteriaQuery<User> userByNameQuery = cq.select(userRoot).where(cb.equal(userRoot.get("userName"),username));
+        CriteriaQuery<User> userByNameQuery = cq.select(userRoot).where(cb.equal(userRoot.get("userName"), username));
         TypedQuery<User> allQuery = entityManager.createQuery(userByNameQuery);
         return allQuery.getSingleResult();
     }
 
     public List<User> findUsers() {
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<User> cq = cb.createQuery(User.class);
-        Root<User> userRoot = cq.from(User.class);
-        CriteriaQuery<User> all = cq.select(userRoot).where();
-        TypedQuery<User> allQuery = entityManager.createQuery(all);
-        return allQuery.getResultList();
+        entityManager.flush();
+        entityManager.clear();
+        return entityManager.createQuery("from User", User.class).getResultList();
     }
 }

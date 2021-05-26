@@ -1,4 +1,3 @@
-
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
@@ -11,35 +10,46 @@
     if (currUser == null) {
         response.sendRedirect("login.jsp");
     }
-%>
-<!DOCTYPE HTML>
-<html>
-<head>
-    <jsp:include page='header.jsp'/>
-</head>
-    <%
-    String ID = request.getParameter("id");
-    Long id = Long.parseLong(ID);
-    Project currTask = projectOperations.findProject(id);
-
-%>
-<body style="background-image: url(css/images/background.jpg);">
-<h1 class="title" align=center>UPDATE PROJECT</h1>
-<form action="updateUser.jsp" method="POST">
-    <p class="title" align=center>Change name to:
-        <input type="text" name="NameProject" value="<%=currTask.getNameProject()%>">
-    <p class="title" align=center>Change last name to:
-        <input type="text" name="secondName" value="<%=currTask.getNameProject()%>">
-    <p class="title" align=center>Change userEntity name to:
-        <input type="text" name="userName" value="<%=currUser.getUserName()%>">
-    <p class="title" align=center>Change password to:
-        <input type="text" name="password" value="<%=currUser.getPassword()%>">
-    <p class="title" align=center>Change status to:
-        <input type="text" name="status" value="<%=currUser.getStatus()%>">
-    <p class="title" align=center><input type="submit" value="Update">
-</form>
-
-    <%!
-
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
+    Project project = null;
+    String param = request.getParameter("id");
+    if (param != null && param != "") {
+        Long id = Long.parseLong(param);
+        project = projectOperations.findProject(id);
+    } else {
+        response.sendRedirect("projects.jsp");
+    }
+
+%>
+<html>
+<jsp:include page='header.jsp'/>
+<body>
+<jsp:include page='navbar.jsp'/>
+<main class="container">
+    <div class="container-fluid">
+        <h1 class="title" align=center>UPDATE USER</h1>
+        <form action="updateProject.jsp?id=<%=project.getID()%>" method="POST">
+            <div class="mb-3 row form-floating">
+                <input type="text" class="form-control" id="floatingName" name="name" placeholder="Name"
+                       value="<%=project.getNameProject()%>">
+                <label for="floatingName">Name</label>
+            </div>
+            <div class="mb-3 row form-floating">
+                <input type="text" class="form-control" id="floatingDescription" name="description"
+                       placeholder="Description" value="<%=project.getDescription()%>">
+                <label for="floatingDescription">Description</label>
+            </div>
+            <div class="mb-3">
+                <input class="btn btn-primary" type="submit" value="Update">
+            </div>
+        </form>
+    </div>
+</main>
+    <% if (request.getMethod().equals(HttpMethod.POST)) {
+    project.setNameProject(request.getParameter("name"));
+    project.setDescription(request.getParameter("description"));
+    //TODO Сделать здесь же обновление участников проекта
+    projectOperations.updateProject(project);
+    response.sendRedirect("users.jsp");
+}
 %>

@@ -1,15 +1,7 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: HP
-  Date: 09.05.2021
-  Time: 18:06
-  To change this template use File | Settings | File Templates.
---%>
 
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.taskmanager.BeansStore" %>
-<%@ page import="com.taskmanager.entity.Project" %>
 <%@ page import="com.taskmanager.entity.Task" %>
 <%@ page import="com.taskmanager.operations.ProjectOperations" %>
 <%@ page import="com.taskmanager.operations.TaskOperations" %>
@@ -21,10 +13,9 @@
     }
 %>
 <html>
-<head>
-    <jsp:include page='header.jsp'/>
-</head>
+<jsp:include page='header.jsp'/>
 <body>
+<jsp:include page='navbar.jsp'/>
 <%!
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);

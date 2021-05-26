@@ -27,11 +27,10 @@
 
 %>
 
-<html>
-<head>
-    <jsp:include page='header.jsp'/>
-</head>
+<<html>
+<jsp:include page='header.jsp'/>
 <body>
+<jsp:include page='navbar.jsp'/>
 <form action="project.jsp" method="GET"></form>
 <p>ID: <%=currProject.getID()%></p>
 <p>User name:  <%=currProject.getNameProject()%></p>
