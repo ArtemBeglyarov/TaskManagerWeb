@@ -50,6 +50,6 @@
     project.setDescription(request.getParameter("description"));
     //TODO Сделать здесь же обновление участников проекта
     projectOperations.updateProject(project);
-    response.sendRedirect("users.jsp");
+    response.sendRedirect("projects.jsp");
 }
 %>

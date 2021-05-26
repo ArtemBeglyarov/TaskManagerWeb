@@ -1,9 +1,12 @@
 package com.taskmanager.entity;
 
 
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
+
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.List;
+import java.util.Set;
 
 import static javax.persistence.CascadeType.ALL;
 
@@ -17,11 +20,12 @@ public class Project implements Serializable {
     private long ID;
 
     private String nameProject;
-    @ManyToMany
-    private List<User> users;
-    @OneToMany(targetEntity = Task.class, cascade = ALL,
-            mappedBy = "project")
-    private List<Task> tasks;
+    @ManyToMany(fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    private Set<User> users;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(targetEntity = Task.class, cascade = ALL, mappedBy = "project", fetch = FetchType.EAGER)
+    private Set<Task> tasks;
     private String description;
     @ManyToOne
     @JoinColumn(name = "creator_id", nullable = false)
@@ -31,7 +35,7 @@ public class Project implements Serializable {
 
     }
 
-    public Project(String nameProject, List<User> users, List<Task> tasks, String description, User creator) {
+    public Project(String nameProject, Set<User> users, Set<Task> tasks, String description, User creator) {
         this.nameProject = nameProject;
         this.users = users;
         this.tasks = tasks;
@@ -39,7 +43,7 @@ public class Project implements Serializable {
         this.creator = creator;
     }
 
-    public Project(long ID, String nameProject, List<User> users, List<Task> tasks, String description, User creator) {
+    public Project(long ID, String nameProject, Set<User> users, Set<Task> tasks, String description, User creator) {
         this(nameProject, users, tasks, description, creator);
         this.ID = ID;
 
@@ -73,19 +77,19 @@ public class Project implements Serializable {
         this.nameProject = nameProject;
     }
 
-    public List<User> getUsers() {
+    public Set<User> getUsers() {
         return users;
     }
 
-    public void setUsers(List<User> users) {
+    public void setUsers(Set<User> users) {
         this.users = users;
     }
 
-    public List<Task> getTasks() {
+    public Set<Task> getTasks() {
         return tasks;
     }
 
-    public void setTasks(List<Task> tasks) {
+    public void setTasks(Set<Task> tasks) {
         this.tasks = tasks;
     }
 

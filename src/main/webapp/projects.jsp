@@ -58,8 +58,8 @@
                         <div class="modal-body">
 
                             <div class="mb-3 row form-floating">
-                                <input type="text" class="form-control" id="floatingUsername" name="name" placeholder="Description">
-                                <label for="floatingUsername">Description</label>
+                                <input type="text" class="form-control" id="floatingUsername" name="name" placeholder="Name">
+                                <label for="floatingUsername">Name</label>
                             </div>
                             <div class="mb-3 row form-floating">
                                 <input type="text" class="form-control" id="floatingFirstname" name="description" placeholder="Description">

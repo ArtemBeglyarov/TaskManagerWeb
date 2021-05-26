@@ -1,103 +1,119 @@
-<%@ page import="com.taskmanager.entity.Task" %>
-<%@ page import="java.util.List" %>
 <%@ page import="com.taskmanager.operations.ProjectOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="com.taskmanager.entity.Project" %>
-<%@ page import="com.taskmanager.entity.User" %><%--
-  Created by IntelliJ IDEA.
-  User: HP
-  Date: 13.05.2021
-  Time: 23:09
-  To change this template use File | Settings | File Templates.
---%>
+<%@ page import="com.taskmanager.entity.User" %>
+<%@ page import="com.taskmanager.entity.Task" %>
+<%@ page import="java.util.List" %>
+<%@ page import="org.hibernate.Hibernate" %>
+<%@ page import="java.util.Collections" %>
+<%@ page import="java.util.Set" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
         response.sendRedirect("login.jsp");
     }
-%>
-<%!
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
-%>
-<%
     String ID = request.getParameter("id");
     Long id = Long.parseLong(ID);
-    Project currProject = projectOperations.findProject(id);
-
+    Project project = projectOperations.findProject(id);
+    Set<Task> tasks = project.getTasks();
 %>
-
-<<html>
+<html>
 <jsp:include page='header.jsp'/>
 <body>
 <jsp:include page='navbar.jsp'/>
-<form action="project.jsp" method="GET"></form>
-<p>ID: <%=currProject.getID()%></p>
-<p>User name:  <%=currProject.getNameProject()%></p>
-<p class="title" align=center>Project users:
-<table id="projectsTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100">
-    <thead>
-    <tr>
-        <th class="th-sm">ID</th>
-        <th class="th-sm">UsersProject</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%
-        List<Task> listTask = currProject.getTasks() ;
-        for (Task k : listTask) {
-    %>
-    <tr>
-        <td><%=k.getID()%></td>
-        <td><a href="project.jsp?id=<%=k.getID()%>"
-               style="text-decoration: none;
-	color: white;"><%=k.getName()%>
-        </a></td>
-    </tr>
-    <%
-        }
-    %>
-    </tbody>
-    <tfoot>
-    <tr>
-        <th >ID</th>
-        <th >Name Task</th>
-    </tr>
-    </tfoot>
-</table>
-<p class="title" align=center>Project tasks:
-<table id="taskTable" class="table table-striped table-bordered table-sm" cellspacing="0" width="100">
-    <thead>
-    <tr>
-        <th class="th-sm">ID</th>
-        <th class="th-sm">taskProject</th>
-    </tr>
-    </thead>
-    <tbody>
-    <%
-        List<User> listUsers = currProject.getUsers() ;
-        for (User k : listUsers) {
-    %>
-    <tr>
-        <td><%=k.getID()%></td>
-        <td><a href="project.jsp?id=<%=k.getID()%>"
-               style="text-decoration: none;
-	color: white;"><%=k.getUserName()%>
-        </a></td>
-    </tr>
-    <%
-        }
-    %>
-    </tbody>
-    <tfoot>
-    <tr>
-        <th >ID</th>
-        <th >Name User</th>
-    </tr>
-    </tfoot>
-</table>
+<div class="p-5 mb-4 bg-light rounded-3">
+    <div class="container-fluid py-5">
+        <h1 class="display-5 fw-bold"><%=project.getNameProject()%></h1>
+        <p class="col-md-8 fs-4"><%=project.getDescription()%></p>
+    </div>
+</div>
+<div class="table-responsive">
+    <table id="taskTable" class="table table-striped" style="width:100%">
+        <thead>
+        <tr>
+            <th>Name</th>
+            <th>Status</th>
+            <th>Priority</th>
+            <th>Due Date</th>
+            <th>Reporter</th>
+            <th>Assignee</th>
+        </tr>
+        </thead>
+        <tbody>
+        <% for (Task task : tasks) {%>
+        <tr value="<%=task.getID()%>">
+            <td><a href="task.jsp?id=<%=task.getID()%>"><%=task.getName()%>
+            </a></td>
+            <td><%=task.getStatus()%>></td>
+            <td><%=task.getPriority()%>></td>
+            <td><%=task.getDueDate()%>></td>
+            <td><a href="user.jsp?id=<%=task.getReporter().getID()%>"><%=task.getReporter().getUserName()%></a></td>
+            <td><a href="user.jsp?id=<%=task.getAssignee().getID()%>"><%=task.getAssignee().getUserName()%></a></td>
+        </tr>
+        <%}%>
+        </tbody>
+    </table>
+    <!-- Modal -->
+    <div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="createTaskModalLabel">Create Task</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="createTask.jsp?projectId=<%=project.getID()%>" method="POST">
+                    <div class="modal-body">
 
-<p>Description:  <%=currProject.getDescription()%></p>
-<p>Creator:  <%=currProject.getCreator()%></p>
+                        <div class="mb-3 row form-floating">
+                            <input type="text" class="form-control" id="floatingName" name="name" Name="Name">
+                            <label for="floatingName">Name</label>
+                        </div>
+                        <div class="mb-3 row">
+                            <select class="form-select" aria-label="Default select example">
+                                <option selected disabled>Select Priority</option>
+                                <%
+                                    for(Task.Priority priority : Task.Priority.values()){
+                                %>
+                                <option value="<%=priority.toString()%>>"><%=priority.toString()%></option>
+                                <%}%>
+                            </select>
+                        </div>
+                        <div class="mb-3 row form-floating">
+                            <input type="date" class="form-control" id="floatingDueDate" name="dueDate" placeholder="Due Date">
+                            <label for="floatingDueDate">Due Date</label>
+                        </div>
+                        <div class="mb-3 row form-floating">
+                            <input type="text" class="form-control" id="floatingDescription" name="description" placeholder="Description">
+                            <label for="floatingDescription">Description</label>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary"/>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    var buttons =
+        '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add Task</button> ' +
+        '<button type="button" id="editButton" class="btn btn-success">Edit Task</button> ' +
+        '<button type="button" id="deleteButton" class="btn btn-danger"">Delete Task</button';
+    $(document).ready(function () {
+        createTable('#taskTable', buttons);
+    });
+    $('#editButton').click( function () {
+        var data = table.getSelected();
+        sendEdit(data, 'updateTask.jsp')
+    });
+    $('#deleteButton').click( function () {
+        var data = table.getSelected();
+        sendDelete(data, 'removeTask.jsp');
+    });
+</script>
 </body>
 </html>
