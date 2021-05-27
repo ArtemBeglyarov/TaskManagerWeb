@@ -19,13 +19,16 @@ public class UsersOperations {
     public User createUser(User user) {
         return userRepositoryHibernate.create(user);
     }
+
     public void removeUserById(long id) {
         userRepositoryHibernate.delete(id);
     }
+
     public User findUser(long id) {
-       return userRepositoryHibernate.find(id);
+        return userRepositoryHibernate.find(id);
 
     }
+
     public void updateUser(User user) {
         userRepositoryHibernate.update(user);
     }
@@ -34,6 +37,7 @@ public class UsersOperations {
         User user = userRepositoryHibernate.login(userName);
         return password.equals(user.getPassword()) ? user : null;
     }
+
     public List<User> findUsers() {
         return userRepositoryHibernate.findUsers();
     }
