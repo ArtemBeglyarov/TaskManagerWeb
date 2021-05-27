@@ -104,15 +104,15 @@
         '<button type="button" id="editButton" class="btn btn-success">Edit Task</button> ' +
         '<button type="button" id="deleteButton" class="btn btn-danger"">Delete Task</button';
     $(document).ready(function () {
-        createTable('#taskTable', buttons);
-    });
-    $('#editButton').click( function () {
-        var data = table.getSelected();
-        sendEdit(data, 'updateTask.jsp')
-    });
-    $('#deleteButton').click( function () {
-        var data = table.getSelected();
-        sendDelete(data, 'removeTask.jsp');
+        table = createTable('#taskTable', buttons);
+        $('#editButton').click( function () {
+            var data = table.getSelected();
+            sendEdit(data, 'updateTask.jsp')
+        });
+        $('#deleteButton').click( function () {
+            var data = table.getSelected();
+            sendDelete(data, 'removeTask.jsp');
+        });
     });
 </script>
 </body>

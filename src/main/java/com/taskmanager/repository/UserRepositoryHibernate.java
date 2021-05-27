@@ -10,6 +10,7 @@ import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import java.util.ArrayList;
 import java.util.List;
 
 @Stateless
@@ -21,7 +22,6 @@ public class UserRepositoryHibernate implements Repository<User> {
 
     @Override
     public User create(User user) {
-        entityManager.persist(user);
         return user;
     }
 
@@ -45,7 +45,7 @@ public class UserRepositoryHibernate implements Repository<User> {
 
     @Override
     public List<User> findAll() {
-        return null;
+        return findUsers();
     }
 
     public User login(String username) {
@@ -59,8 +59,12 @@ public class UserRepositoryHibernate implements Repository<User> {
     }
 
     public List<User> findUsers() {
-        entityManager.flush();
-        entityManager.clear();
-        return entityManager.createQuery("from User", User.class).getResultList();
+        List<Long> ids = getAllUsersIds();
+        List<User> users = new ArrayList<>();
+        for(Long id : ids){
+            users.add(find(id));
+        }
+        return users;
+        //return entityManager.createQuery("from User", User.class).getResultList();
     }
 }
