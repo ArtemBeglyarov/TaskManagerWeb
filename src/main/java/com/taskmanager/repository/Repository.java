@@ -9,5 +9,5 @@ public interface Repository<T> {
      T update(T t) throws SQLException;
      void delete(long t) throws SQLException;
 
-     List<T> findAll();
+     List<T> findAll() throws SQLException;
  }

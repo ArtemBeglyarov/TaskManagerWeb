@@ -7,6 +7,7 @@ import com.taskmanager.repository.UserRepositoryHibernate;
 import javax.ejb.EJB;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.sql.SQLException;
 import java.util.List;
 
 @Stateless
@@ -38,7 +39,7 @@ public class UsersOperations {
         return password.equals(user.getPassword()) ? user : null;
     }
 
-    public List<User> findUsers() {
-        return userRepositoryHibernate.findUsers();
+    public List<User> findUsers() throws SQLException {
+        return userRepositoryHibernate.findAll();
     }
 }

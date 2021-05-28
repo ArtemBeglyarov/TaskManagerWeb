@@ -54,6 +54,8 @@
     </div>
 </main>
 <script>
+    var buttons =
+        '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add Tasks</button> '
     $(document).ready(function () {
         createTable('#taskTable', buttons);
     });

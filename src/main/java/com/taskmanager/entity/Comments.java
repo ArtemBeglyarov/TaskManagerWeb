@@ -1,10 +1,8 @@
 package com.taskmanager.entity;
 
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.util.Date;
-
 
 @Entity
 @Table(name = "commnts")
@@ -17,26 +15,24 @@ public class Comments {
 
     private  Date createData;
     private String comment;
-    @OneToOne
-    @JoinColumn(name="creator_id", nullable=false)
-    private User creatorComment;
 
     @ManyToOne
-    @JoinColumn(name="task_id", nullable=false)
-    private Task taskComment;
+    @JoinColumn(name = "creator_id", nullable = false)
+    private User creatorComment;
+
 
     public Comments() {
 
     }
 
-    public Comments(Date createData, String comment, User creatorComment, Task taskComment) {
+    public Comments(Date createData, String comment, User creatorComment) {
         this.createData = createData;
         this.comment = comment;
         this.creatorComment = creatorComment;
-        this.taskComment = taskComment;
+
     }
-    public Comments(long ID, Date createData, String comment, User creatorComment, Task taskComment) {
-        this(createData,comment,creatorComment,taskComment);
+    public Comments(long ID, Date createData, String comment, User creatorComment) {
+        this(createData,comment,creatorComment);
         this.ID = ID;
     }
     public long getID() {
@@ -71,13 +67,6 @@ public class Comments {
         this.creatorComment = creatorComment;
     }
 
-    public Task getTaskComment() {
-        return taskComment;
-    }
-
-    public void setTaskComment(Task taskComment) {
-        this.taskComment = taskComment;
-    }
 
     @Override
     public String toString() {
@@ -86,7 +75,7 @@ public class Comments {
                 ", creatData=" + createData +
                 ", comment='" + comment + '\'' +
                 ", creatorComment=" + creatorComment +
-                ", taskComment=" + taskComment +
+                ", taskComment="  +
                 '}';
     }
 }
