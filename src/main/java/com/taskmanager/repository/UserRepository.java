@@ -101,7 +101,7 @@ public class UserRepository  {
         return userEntities;
     }
 
-     */
+
     public User loginUser(String userName, String password) throws SQLException {
 
         Connection connection = dataSource.getConnection();
@@ -121,5 +121,7 @@ public class UserRepository  {
             user.setStatus(resultSet.getString("status"));
         }
         return user;
+
     }
+ */
 }

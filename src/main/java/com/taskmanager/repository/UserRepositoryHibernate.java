@@ -87,10 +87,13 @@ public class UserRepositoryHibernate implements Repository<User> {
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(findAllUserId);
 
+
         while (resultSet.next()) {
             idAllUsers.add(resultSet.getLong("id"));
+
         }
         return idAllUsers;
+
     }
     public User login(String username) {
 
@@ -101,5 +104,4 @@ public class UserRepositoryHibernate implements Repository<User> {
         TypedQuery<User> allQuery = entityManager.createQuery(userByNameQuery);
         return allQuery.getSingleResult();
     }
-
 }

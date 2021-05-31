@@ -49,4 +49,5 @@ public class TaskHibernateRepository implements Repository<Task> {
         TypedQuery<Task> allQuery = entityManager.createQuery(all);
         return allQuery.getResultList();
     }
+
 }

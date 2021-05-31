@@ -4,19 +4,21 @@
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="com.taskmanager.operations.ProjectOperations" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page import="com.taskmanager.operations.TaskOperations" %>
+<%@ page import="com.taskmanager.entity.Task" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
         response.sendRedirect("login.jsp");
     }
-    ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
-    User user = null;
+    TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
+    Task task = null;
     String param = request.getParameter("id");
     if (param != null && param != "") {
         Long id = Long.parseLong(param);
-        user = usersOperations.findUser(id);
+        task = taskOperations.findTask(id);
     } else {
-        response.sendRedirect("projects.jsp");
+        response.sendRedirect("tasks.jsp");
     }
 
 %>
