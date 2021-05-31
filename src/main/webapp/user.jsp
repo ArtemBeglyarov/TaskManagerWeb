@@ -1,6 +1,7 @@
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
+<%@ page import="java.util.List" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
@@ -15,6 +16,7 @@
     } else {
         user = currUser;
     }
+
 %>
 <!DOCTYPE html>
 <html lang="ru">
