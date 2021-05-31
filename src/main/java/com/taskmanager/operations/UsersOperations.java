@@ -42,4 +42,5 @@ public class UsersOperations {
     public List<User> findUsers() throws SQLException {
         return userRepositoryHibernate.findAll();
     }
+
 }

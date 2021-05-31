@@ -8,6 +8,8 @@ import javax.ejb.Stateless;
 import javax.inject.Inject;
 import javax.sql.DataSource;
 import java.sql.SQLException;
+import java.util.Collections;
+import java.util.Comparator;
 import java.util.List;
 
 @Stateless
@@ -35,8 +37,14 @@ public class CommentsOperations {
 //    }
 //
     public List<Comments> getAllComments() throws SQLException {
-
-      return cr.findAll();
+       List<Comments> sort = cr.findAll();
+        Collections.sort(sort, new Comparator<Comments>() {
+            @Override
+            public int compare(Comments o1, Comments o2) {
+                return o1.getCreateData().compareTo(o2.getCreateData());
+            }
+        });
+        return sort;
     }
 }
 

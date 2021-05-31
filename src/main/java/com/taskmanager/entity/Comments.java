@@ -5,7 +5,7 @@ import javax.persistence.*;
 import java.util.Date;
 
 @Entity
-@Table(name = "commnts")
+@Table(name = "comments")
 public class Comments {
 
     @Id
@@ -17,7 +17,7 @@ public class Comments {
     private String comment;
 
     @ManyToOne
-    @JoinColumn(name = "creator_id", nullable = false)
+    @JoinColumn(name = "user_creater_id", nullable = false)
     private User creatorComment;
 
 

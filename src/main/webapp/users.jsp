@@ -16,7 +16,12 @@
 <jsp:include page='navbar.jsp'/>
 <%!
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
-    List<User> users = usersOperations.findUsers();
+//    List<User> users = usersOperations.findUsers();
+%>
+<%List<User> users = usersOperations.findUsers();
+    for (User check : users) {
+        System.out.println(check.toString());
+    }
 %>
 <main class="container">
     <div class="container-fluid">
@@ -77,7 +82,7 @@
 
                         </div>
                         <div class="modal-footer">
-                            <input type="submit" class="btn btn-primary">Save changes</input>
+                            <input type="submit" class="btn btn-primary"></input>
                             <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                         </div>
                         </form>
