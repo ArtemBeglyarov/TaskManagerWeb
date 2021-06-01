@@ -1,12 +1,10 @@
 package com.taskmanager.operations;
 
+;
 import com.taskmanager.entity.Comments;
 import com.taskmanager.repository.CommentsRepository;
-
-import javax.annotation.Resource;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
-import javax.sql.DataSource;
 import java.sql.SQLException;
 import java.util.Collections;
 import java.util.Comparator;
@@ -32,11 +30,8 @@ public class CommentsOperations {
         return cr.find(id);
     }
 
-//    public void updateUser(Comments user) {
-//        cr.update(user);
-//    }
-//
     public List<Comments> getAllComments() throws SQLException {
+
        List<Comments> sort = cr.findAll();
         Collections.sort(sort, new Comparator<Comments>() {
             @Override
@@ -46,6 +41,7 @@ public class CommentsOperations {
         });
         return sort;
     }
+
 }
 
 

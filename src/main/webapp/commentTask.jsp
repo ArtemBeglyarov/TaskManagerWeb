@@ -8,6 +8,7 @@
 <%@ page import="com.taskmanager.operations.TaskOperations" %>
 <%@ page import="java.util.List" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -23,7 +24,7 @@
     }
 
 %>
-<form action="commentTask.jsp" method="post">
+<form action="task.jsp?id=" method="post">
     <p><b>Your comment:</b></p>
     <p><textarea rows="10" cols="45"
                  name="comment"><%currUser.getUserName();%></textarea></p>
@@ -35,6 +36,7 @@
 %>
 <%
     Date format = new Date(Calendar.getInstance().getTimeInMillis());
+
     if (request.getMethod().equals(HttpMethod.POST)){
         Comments comments = new Comments();
     comments.setCreatorComment(currUser);

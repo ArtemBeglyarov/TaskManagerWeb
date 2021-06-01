@@ -2,11 +2,13 @@ package com.taskmanager.entity;
 
 import org.hibernate.annotations.GenericGenerator;
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.Date;
+import java.util.TreeSet;
 
 @Entity
 @Table(name = "comments")
-public class Comments {
+public class Comments implements Serializable {
 
     @Id
     @GenericGenerator(name = "random",strategy = "com.taskmanager.GenerateID")
@@ -19,7 +21,8 @@ public class Comments {
     @ManyToOne
     @JoinColumn(name = "user_creater_id", nullable = false)
     private User creatorComment;
-
+    @ManyToOne
+    private Task commentTask;
 
     public Comments() {
 

@@ -1,8 +1,6 @@
 package com.taskmanager.repository;
 
 import com.taskmanager.entity.Task;
-import com.taskmanager.entity.User;
-
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -20,6 +18,7 @@ public class TaskHibernateRepository implements Repository<Task> {
     public Task create(Task task)  {
         entityManager.persist(task);
         return task;
+
     }
 
     @Override

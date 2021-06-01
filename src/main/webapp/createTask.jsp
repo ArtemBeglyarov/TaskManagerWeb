@@ -101,11 +101,11 @@
     task.setPriority(Task.Priority.valueOf(request.getParameter("Prioritet")));
     task.setDescription(request.getParameter("Description"));
     task.setCreateDate(format1);
-    try {
-        task.setDueDate(format.parse(request.getParameter("EndDate")));
-    } catch (ParseException e) {
-        throw new RuntimeException(e);
-    }
+//    try {
+//        task.setDueDate(format.parse(request.getParameter("EndDate")));
+//    } catch (ParseException e) {
+//        throw new RuntimeException(e);
+//    }
     String ID = request.getParameter("projectID");
     Long id = Long.parseLong(ID);
     task.setProject(projectOperations.findProject(id));
