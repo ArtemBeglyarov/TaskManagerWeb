@@ -40,7 +40,7 @@
             <tbody>
             <% for(Project projects : projects){%>
             <tr value="<%=projects.getID()%>">
-                <td><a href="project.jsp?id=<%=projects.getID()%>"><%=projects.getNameProject()%></a></td>
+                <td><a href="project.jsp?id=<%=projects.getID()%>"><%=projects.getName()%></a></td>
                 <td><%=projects.getDescription()%></td>
             </tr>
             <%}%>

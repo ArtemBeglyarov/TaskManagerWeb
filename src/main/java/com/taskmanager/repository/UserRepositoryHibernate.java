@@ -1,7 +1,6 @@
 package com.taskmanager.repository;
 
 import com.taskmanager.entity.User;
-
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
@@ -24,13 +23,14 @@ public class UserRepositoryHibernate implements Repository<User> {
     @Resource(lookup = "java:/AppDS")
     DataSource dataSource;
     private static final String findAllUserId = "SELECT id FROM users";
-
+    private static final String findAllUser = "SELECT * FROM users";
 
     @PersistenceContext(unitName = "tm")
     EntityManager entityManager;
 
     @Override
     public User create(User user) {
+        entityManager.persist(user);
         return user;
     }
 
@@ -52,31 +52,47 @@ public class UserRepositoryHibernate implements Repository<User> {
         entityManager.remove(user);
     }
 
-    public List<Long> getAllUsersIds() throws SQLException {
-        List<Long> idAllUsers = new ArrayList<>();
-        Connection connection = dataSource.getConnection();
-        Statement statement = connection.createStatement();
-        ResultSet resultSet = statement.executeQuery(findAllUserId);
-
-
-        while (resultSet.next()) {
-            idAllUsers.add(resultSet.getLong("id"));
-
-        }
-        return idAllUsers;
-
-    }
-
-    @Override
+//    @Override
+//    public List<User> findAll() throws SQLException {
+//        List<User> userEntities = new ArrayList<User>();
+//        Connection connection = dataSource.getConnection();
+//        Statement statement = connection.createStatement();
+//        ResultSet resultSet = statement.executeQuery(findAllUserId);
+//
+//        while (resultSet.next()) {
+//            User user = new User();
+//            user.setID(resultSet.getInt("id"));
+//            user.setFirstName(resultSet.getString("first_name"));
+//            user.setLastName(resultSet.getString("last_name"));
+//            user.setUserName(resultSet.getString("user_name"));
+//            user.setPassword(resultSet.getString("password"));
+//            user.setStatus(resultSet.getString("status"));
+//            userEntities.add(user);
+//        }
+//
+//        return userEntities;
+//    }
+ @Override
     public List<User> findAll() throws SQLException {
         List<Long> ids = getAllUsersIds();
         List<User> users = new ArrayList<>();
-        for (Long id : ids) {
+        for(Long id : ids){
             users.add(find(id));
         }
         return users;
     }
 
+    public List<Long> getAllUsersIds() throws SQLException {
+        List<Long> idAllUsers= new ArrayList<>();
+        Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(findAllUserId);
+
+        while (resultSet.next()) {
+            idAllUsers.add(resultSet.getLong("id"));
+        }
+        return idAllUsers;
+    }
     public User login(String username) {
 
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
@@ -86,4 +102,5 @@ public class UserRepositoryHibernate implements Repository<User> {
         TypedQuery<User> allQuery = entityManager.createQuery(userByNameQuery);
         return allQuery.getSingleResult();
     }
+
 }

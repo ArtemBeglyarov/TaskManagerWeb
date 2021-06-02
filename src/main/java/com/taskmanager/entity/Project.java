@@ -19,7 +19,7 @@ public class Project implements Serializable {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long ID;
 
-    private String nameProject;
+    private String name;
     @ManyToMany(fetch = FetchType.EAGER)
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<User> users;
@@ -35,16 +35,16 @@ public class Project implements Serializable {
 
     }
 
-    public Project(String nameProject, Set<User> users, Set<Task> tasks, String description, User creator) {
-        this.nameProject = nameProject;
+    public Project(String name, Set<User> users, Set<Task> tasks, String description, User creator) {
+        this.name = name;
         this.users = users;
         this.tasks = tasks;
         this.description = description;
         this.creator = creator;
     }
 
-    public Project(long ID, String nameProject, Set<User> users, Set<Task> tasks, String description, User creator) {
-        this(nameProject, users, tasks, description, creator);
+    public Project(long ID, String name, Set<User> users, Set<Task> tasks, String description, User creator) {
+        this(name, users, tasks, description, creator);
         this.ID = ID;
 
     }
@@ -53,7 +53,7 @@ public class Project implements Serializable {
     public String toString() {
         return
                 "projectID=" + ID +
-                        ", nameProject='" + nameProject +
+                        ", nameProject='" + name +
                         ", users=" + users +
                         ", tasks=" + tasks +
                         ", description='" + description +
@@ -69,12 +69,12 @@ public class Project implements Serializable {
         this.ID = ID;
     }
 
-    public String getNameProject() {
-        return nameProject;
+    public String getName() {
+        return name;
     }
 
-    public void setNameProject(String nameProject) {
-        this.nameProject = nameProject;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public Set<User> getUsers() {

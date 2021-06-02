@@ -13,7 +13,7 @@
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
     if (request.getMethod().equals(HttpMethod.POST)) {
         Project project = new Project();
-        project.setNameProject(request.getParameter("name"));
+        project.setName(request.getParameter("name"));
         project.setDescription(request.getParameter("description"));
         //TODO Сделать здесь же доюавление участников проекта
         project.setCreator(currUser);

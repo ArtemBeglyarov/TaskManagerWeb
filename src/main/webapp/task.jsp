@@ -7,8 +7,9 @@
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="com.taskmanager.operations.CommentsOperations" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
-<%@ page import="com.taskmanager.entity.Comments" %>
+<%@ page import="com.taskmanager.entity.Comment" %>
 <%@ page import="java.util.*" %>
+<%@ page import="com.taskmanager.entity.Comment" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
@@ -19,12 +20,10 @@
 <jsp:include page='header.jsp'/>
 <body>
 <jsp:include page='navbar.jsp'/>
-<%!
+<%
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
     CommentsOperations co = (CommentsOperations) BeansStore.getBean(CommentsOperations.class);
-%>
-<%
     String ID = request.getParameter("id");
     Long id = Long.parseLong(ID);
     Task currTask = taskOperations.findTask(id);
@@ -73,21 +72,22 @@
 
     if (request.getMethod().equals(HttpMethod.POST)) {
         Date format = new Date(Calendar.getInstance().getTimeInMillis());
-        Comments comments = new Comments();
-        comments.setCreatorComment(currUser);
-        comments.setCreateData(format);
-        comments.setComment(request.getParameter("comment"));
-        co.create(comments);
+        Comment comment = new Comment();
+        comment.setCreatorComment(currUser);
+        comment.setCreateData(format);
+        comment.setComment(request.getParameter("comment"));
+        comment.setTask(currTask);
+        co.create(comment);
+
     }
 
-        Set<Comments> commentsTask = currTask.getComments();
-        for (Comments k : commentsTask) {%>
+        Set<Comment> commentTask = currTask.getComments();
+        for (Comment k : commentTask) {%>
 
 <p><%=k.getCreateData()%> <%=k.getCreatorComment().getUserName()%>:
     <%=k.getComment()%>
 </p>
 <%
-
     }
 %>
 

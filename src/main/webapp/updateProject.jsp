@@ -31,7 +31,7 @@
         <form action="updateProject.jsp?id=<%=project.getID()%>" method="POST">
             <div class="mb-3 row form-floating">
                 <input type="text" class="form-control" id="floatingName" name="name" placeholder="Name"
-                       value="<%=project.getNameProject()%>">
+                       value="<%=project.getName()%>">
                 <label for="floatingName">Name</label>
             </div>
             <div class="mb-3 row form-floating">
@@ -46,7 +46,7 @@
     </div>
 </main>
     <% if (request.getMethod().equals(HttpMethod.POST)) {
-    project.setNameProject(request.getParameter("name"));
+    project.setName(request.getParameter("name"));
     project.setDescription(request.getParameter("description"));
     //TODO Сделать здесь же обновление участников проекта
     projectOperations.updateProject(project);

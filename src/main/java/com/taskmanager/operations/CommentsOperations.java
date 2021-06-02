@@ -1,7 +1,7 @@
 package com.taskmanager.operations;
 
 ;
-import com.taskmanager.entity.Comments;
+import com.taskmanager.entity.Comment;
 import com.taskmanager.repository.CommentsRepository;
 import javax.ejb.Stateless;
 import javax.inject.Inject;
@@ -18,24 +18,24 @@ public class CommentsOperations {
     @Inject
     CommentsRepository cr;
 
-    public Comments create(Comments comments) {
-        return cr.create(comments);
+    public Comment create(Comment comment) {
+        return cr.create(comment);
     }
 
     public void remove(long id) {
         cr.delete(id);
     }
 
-    public Comments findUser(long id) {
+    public Comment findUser(long id) {
         return cr.find(id);
     }
 
-    public List<Comments> getAllComments() throws SQLException {
+    public List<Comment> getAllComments() throws SQLException {
 
-       List<Comments> sort = cr.findAll();
-        Collections.sort(sort, new Comparator<Comments>() {
+       List<Comment> sort = cr.findAll();
+        Collections.sort(sort, new Comparator<Comment>() {
             @Override
-            public int compare(Comments o1, Comments o2) {
+            public int compare(Comment o1, Comment o2) {
                 return o1.getCreateData().compareTo(o2.getCreateData());
             }
         });

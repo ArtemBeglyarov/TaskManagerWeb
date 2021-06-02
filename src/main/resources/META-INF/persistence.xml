@@ -9,7 +9,7 @@
     <class>com.taskmanager.entity.User</class>
     <class>com.taskmanager.entity.Task</class>
     <class>com.taskmanager.entity.Project</class>
-    <class>com.taskmanager.entity.Comments</class>
+    <class>com.taskmanager.entity.Comment</class>
 
     <properties>
         <property name="hibernate.show_sql" value="true" />
@@ -19,5 +19,4 @@
 
     </properties>
 </persistence-unit>
-
 </persistence>

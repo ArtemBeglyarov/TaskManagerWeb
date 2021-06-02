@@ -5,7 +5,6 @@ import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.Set;
 
@@ -56,10 +55,9 @@ public class Task implements Serializable {
     //TODO если сгенерируется 0
     //private final long DEFAULT_LONG = -1;
 
-//    @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany
-//            (targetEntity = Comments.class, cascade = ALL, mappedBy = "task", fetch = FetchType.EAGER)
-    private Set<Comments> comments;
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @OneToMany(targetEntity = Comment.class, cascade = ALL, fetch = FetchType.EAGER)
+    private Set<Comment> comments;
 
     public Task() {
         priority = Priority.NORMAL;
@@ -67,7 +65,7 @@ public class Task implements Serializable {
     }
 
     public Task(String name, Status status, Priority priority, String description,
-                Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporter, User assignee, Set<Comments> comments) {
+                Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporter, User assignee, Set<Comment> comments) {
         this();
         this.name = name;
         this.status = status;
@@ -83,7 +81,7 @@ public class Task implements Serializable {
         this.comments = comments;
     }
 
-    public Task(long ID, Set<Comments> comments, String name, Status status, Priority priority, String description,
+    public Task(long ID, Set<Comment> comments, String name, Status status, Priority priority, String description,
                 Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporter, User assignee) {
         this(name, status, priority, description, startData, dueDate, endDate, createDate, project, reporter, assignee,comments);
         this.ID = ID;
@@ -187,11 +185,11 @@ public class Task implements Serializable {
     }
 
 
-    public Set<Comments> getComments() {
+    public Set<Comment> getComments() {
         return comments;
     }
 
-    public void setComments(Set<Comments> comments) {
+    public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
 
