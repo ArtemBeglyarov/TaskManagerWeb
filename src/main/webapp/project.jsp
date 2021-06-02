@@ -67,16 +67,16 @@
                     <div class="modal-body">
 
                         <div class="mb-3 row form-floating">
-                            <input type="text" class="form-control" id="floatingName" name="name" Name="Name">
+                            <input type="text" class="form-control" id="floatingName" name="name" Name="name">
                             <label for="floatingName">Name</label>
                         </div>
                         <div class="mb-3 row">
-                            <select class="form-select" aria-label="Default select example">
+                            <select class="form-select" aria-label="Default select example" name="priority">
                                 <option selected disabled>Select Priority</option>
                                 <%
                                     for(Task.Priority priority : Task.Priority.values()){
                                 %>
-                                <option value="<%=priority.toString()%>>"><%=priority.toString()%></option>
+                                <option value="<%=priority.name()%>>"><%=priority.name()%></option>
                                 <%}%>
                             </select>
                         </div>
@@ -84,6 +84,7 @@
                             <input type="date" class="form-control" id="floatingDueDate" name="dueDate" placeholder="Due Date">
                             <label for="floatingDueDate">Due Date</label>
                         </div>
+
                         <div class="mb-3 row form-floating">
                             <input type="text" class="form-control" id="floatingDescription" name="description" placeholder="Description">
                             <label for="floatingDescription">Description</label>

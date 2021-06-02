@@ -29,7 +29,7 @@
 <main class="container">
     <div class="container-fluid">
         <h1 class="title" align=center>UPDATE USER</h1>
-        <form action="updateUser.jsp?id=<%=user.getID()%>" method="POST">
+        <form action="updateUser.jsp?id=<%=task.getID()%>" method="POST">
             <div class="mb-3 row form-floating">
                 <input type="text" class="form-control" id="floatingUsername" name="userName" placeholder="Username" value="<%=user.getUserName()%>">
                 <label for="floatingUsername">Username</label>

@@ -30,96 +30,41 @@
         response.sendRedirect("login.jsp");
     }
 
-%>
-<html>
-<head>
-    <jsp:include page='header.jsp'/>
-</head>
-<body>
-
-<h1 class="title" align=center>CREATE TASK</h1>
-<form action="createTask.jsp" method="POST">
-    <p class="title" align=center>Task name:
-        <input type="text" name="TaskName">
-    <p class="title" align=center>Status of your task - open:
-    <p class="title" align=center>Priority:
-        <select name="Prioritet">
-            <option value="NORMAL">NORMAL</option>
-            <option value="LOW">LOW</option>
-            <option value="HIGH">HIGH</option>
-            <option value="HIGHEST">HIGHEST</option>
-        </select>
-    <p class="title" align=center>Description:
-        <input type="text" name="Description">
-    <p class="title" align=center>StartDate:
-        <%
-        Date format1 = new Date(Calendar.getInstance().getTimeInMillis());
-        System.out.println(format1);
-    %>
-
-        <input type="date" name="startDate">
-    <p class="title" align=center>DueDate:
-        <input type="date" name="endDate">
-            <%
-        SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
-    %>
-    <p class="title" align=center> enter ProjectID :
-    <input type="text" name="projectID">
-    <p class="title" align=center>enter ReporterID:
-        <input type="text" value="<%=currUser.getUserName()%>">
-    <p class="title" align=center>AssigneeID:
-        <select name="Users">
-            <%
-
-                List<User> assigneeArrayList = usersOperations.findUsers();
-                for (User k : assigneeArrayList) {
-
-            %>
-            <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
-            <%
-                }
-            %>
-        </select>
 
 
-    <p class="title" align=center><input type="submit" value="Create">
+    SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
 
-</form>
-<%!
+
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
+
+
+    if (request.getMethod().equals(HttpMethod.POST)) {
+        Task task = new Task();
+
+        task.setName(request.getParameter("name"));
+        task.setPriority(Task.Priority.valueOf(request.getParameter("priority")));
+        task.setStatus(Task.Status.OPENED);
+        task.setDescription(request.getParameter("description")); //
+        task.setCreateDate(new Date());
+        try {
+            task.setDueDate(format.parse(request.getParameter("dueDate")));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
+        String ID = request.getParameter("projectID");
+        Long id = Long.parseLong(ID);
+        task.setProject(projectOperations.findProject(id));
+
+        //String assID = request.getParameter("Users");
+        //Long idd = Long.parseLong(assID);
+        //task.setAssignee(usersOperations.findUser(idd));
+
+        task.setReporter(currUser);
+
+        taskOperations.createTask(task);
+        response.sendRedirect("tasks.jsp");
+    }
 %>
 
-
-
-<% if (request.getMethod().equals(HttpMethod.POST)) {
-    Task task = new Task();
-
-    task.setName(request.getParameter("TaskName"));
-
-    task.setPriority(Task.Priority.valueOf(request.getParameter("Prioritet")));
-    task.setDescription(request.getParameter("Description"));
-    task.setCreateDate(format1);
-//    try {
-//        task.setDueDate(format.parse(request.getParameter("EndDate")));
-//    } catch (ParseException e) {
-//        throw new RuntimeException(e);
-//    }
-    String ID = request.getParameter("projectID");
-    Long id = Long.parseLong(ID);
-    task.setProject(projectOperations.findProject(id));
-
-    String assID = request.getParameter("Users");
-    Long idd = Long.parseLong(assID);
-    task.setAssignee(usersOperations.findUser(idd));
-
-    task.setReporter(currUser);
-
-    taskOperations.createTask(task);
-    response.sendRedirect("tasks.jsp");
-}
-%>
-
-</body>
-</html>

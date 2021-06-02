@@ -20,7 +20,7 @@
 <%
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
     List<Task> tasks = taskOperations.findAllTasks();
-    Project project = new Project();
+
 %>
 <main class="container">
     <div class="container-fluid">
@@ -54,63 +54,14 @@
             </table>
         </div>
     </div>
-    <!-- Modal -->
-    <div class="modal fade" id="createTaskModal" tabindex="-1" aria-labelledby="createTaskModalLabel" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="createTaskModalLabel">Create Task</h5>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <form action="createTask.jsp" method="POST"> ///???? зачем
-                    <div class="modal-body">
-                        <div class="mb-3 row form-floating">
-                            <input type="text" class="form-control" id="floatingName" name="name" Name="Name">
-                            <label for="floatingName">Name</label>
-                        </div>
-                        <div class="mb-3 row">
-                            <select class="form-select" aria-label="Default select example">
-                                <option selected disabled>Select Priority</option>
-                                <%
-                                    for(Task.Priority priority : Task.Priority.values()){
-                                %>
-                                <option value="<%=priority.toString()%>>"><%=priority.toString()%></option>
-                                <%}%>
-                            </select>
-                        </div>
-                        <div class="mb-3 row form-floating">
-                            <input type="date" class="form-control" id="floatingDueDate" name="dueDate" placeholder="Due Date">
-                            <label for="floatingDueDate">Due Date</label>
-                        </div>
-                        <div class="mb-3 row form-floating">
-                            <input type="text" class="form-control" id="floatingDescription" name="description" placeholder="Description">
-                            <label for="floatingDescription">Description</label>
-                        </div>
-                    </div>
-                    <div class="modal-footer">
-                        <input type="submit" class="btn btn-primary"/>
-                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    </div>
-                </form>
-            </div>
-        </div>
-    </div>
+
 </main>
 <script>
-    var buttons =
-        '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add Task</button> ' +
-        '<button type="button" id="editButton" class="btn btn-success">Edit Task</button> ' +
-        '<button type="button" id="deleteButton" class="btn btn-danger"">Delete Task</button';
+
     $(document).ready(function () {
         createTable('#taskTable', buttons);
-        $('#editButton').click( function () {
-            var data = table.getSelected();
-            sendEdit(data, 'updateProject.jsp')
-        });
-        $('#deleteButton').click( function () {
-            var data = table.getSelected();
-            sendDelete(data, 'removeProject.jsp');
-        });
+
+
     });
 </script>
 </body>

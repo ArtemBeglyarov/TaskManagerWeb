@@ -23,10 +23,10 @@ public class Task implements Serializable {
     }
 
     public enum Status {
-        OPEN,
-        SUSPENDED, //endDate
-        ASSIGNED, //появляется пользователь
-        DISCUSSION, //startDate
+        OPENED, //createdate
+        IN_PROGRESS, // startdate
+        RESOLVE, // end date
+        ADDITIONAL_INFO_REQUIRED, //
         CLOSED, //
         }
 
@@ -61,7 +61,7 @@ public class Task implements Serializable {
 
     public Task() {
         priority = Priority.NORMAL;
-        status = Status.OPEN;
+        status = Status.OPENED;
     }
 
     public Task(String name, Status status, Priority priority, String description,
@@ -85,7 +85,7 @@ public class Task implements Serializable {
                 Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporter, User assignee) {
         this(name, status, priority, description, startData, dueDate, endDate, createDate, project, reporter, assignee,comments);
         this.ID = ID;
-
+        CANCELLED,
     }
 
     public long getID() {
