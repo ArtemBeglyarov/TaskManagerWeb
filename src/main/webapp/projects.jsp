@@ -23,7 +23,7 @@
 <jsp:include page='header.jsp'/>
 <body>
 <jsp:include page='navbar.jsp'/>
-<%!
+<%
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
     List<Project> projects = projectOperations.findAllProjects();
 %>
@@ -38,10 +38,10 @@
             </tr>
             </thead>
             <tbody>
-            <% for(Project projects : projects){%>
-            <tr value="<%=projects.getID()%>">
-                <td><a href="project.jsp?id=<%=projects.getID()%>"><%=projects.getName()%></a></td>
-                <td><%=projects.getDescription()%></td>
+            <% for(Project project : projects){%>
+            <tr value="<%=project.getID()%>">
+                <td><a href="project.jsp?id=<%=project.getID()%>"><%=project.getName()%></a></td>
+                <td><%=project.getDescription()%></td>
             </tr>
             <%}%>
             </tbody>
