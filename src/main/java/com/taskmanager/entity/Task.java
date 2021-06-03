@@ -19,7 +19,14 @@ public class Task implements Serializable {
         HIGHEST,
         HIGH,
         NORMAL,
-        LOW,
+        LOW;
+
+        public static Priority get(String name){
+            for(Priority priority : Priority.values()){
+                if(name.equalsIgnoreCase(priority.name())) return priority;
+            }
+            return null;
+        }
     }
 
     public enum Status {
@@ -85,7 +92,7 @@ public class Task implements Serializable {
                 Date startData, Date dueDate, Date endDate, Date createDate, Project project, User reporter, User assignee) {
         this(name, status, priority, description, startData, dueDate, endDate, createDate, project, reporter, assignee,comments);
         this.ID = ID;
-        CANCELLED,
+
     }
 
     public long getID() {

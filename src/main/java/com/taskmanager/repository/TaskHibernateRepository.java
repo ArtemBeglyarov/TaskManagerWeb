@@ -1,6 +1,9 @@
 package com.taskmanager.repository;
 
+import com.taskmanager.entity.Project;
 import com.taskmanager.entity.Task;
+
+import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
@@ -8,10 +11,20 @@ import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
+import javax.sql.DataSource;
+import java.sql.Connection;
+import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.sql.Statement;
+import java.util.ArrayList;
 import java.util.List;
 @ApplicationScoped
 public class TaskHibernateRepository implements Repository<Task> {
+    @Resource(lookup = "java:/AppDS")
+    DataSource dataSource;
+    private static final String findAllTasksId = "SELECT id FROM tasks";
+    private static final String findAllUser = "SELECT * FROM users";
+
     @PersistenceContext(unitName = "tm")
     EntityManager entityManager;
     @Override
@@ -40,7 +53,34 @@ public class TaskHibernateRepository implements Repository<Task> {
     }
 
     @Override
-    public List<Task> findAll() {
+    public List<Task> findAll() throws SQLException {
+        List<Long> ids = getAllProjectsIds();
+        List<Task> tasks = new ArrayList<>();
+        for(Long id : ids){
+            tasks.add(find(id));
+        }
+        return tasks;
+    }
+
+    public List<Long> getAllProjectsIds() throws SQLException {
+        List<Long> idAllUsers= new ArrayList<>();
+        Connection connection = dataSource.getConnection();
+        Statement statement = connection.createStatement();
+        ResultSet resultSet = statement.executeQuery(findAllTasksId);
+        while (resultSet.next()) {
+            idAllUsers.add(resultSet.getLong("id"));
+        }
+        return idAllUsers;
+    }
+
+
+
+
+
+
+
+
+    /*public List<Task> findAll() {
         CriteriaBuilder cb = entityManager.getCriteriaBuilder();
         CriteriaQuery<Task> cq = cb.createQuery(Task.class);
         Root<Task> taskRoot = cq.from(Task.class);
@@ -48,5 +88,6 @@ public class TaskHibernateRepository implements Repository<Task> {
         TypedQuery<Task> allQuery = entityManager.createQuery(all);
         return allQuery.getResultList();
     }
+     */
 
 }

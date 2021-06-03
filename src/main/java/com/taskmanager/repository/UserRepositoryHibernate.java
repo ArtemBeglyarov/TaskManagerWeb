@@ -78,6 +78,7 @@ public class UserRepositoryHibernate implements Repository<User> {
         List<User> users = new ArrayList<>();
         for(Long id : ids){
             users.add(find(id));
+
         }
         return users;
     }

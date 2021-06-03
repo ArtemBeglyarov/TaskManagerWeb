@@ -30,7 +30,7 @@ public class ProjectOperations {
     public Project updateProject(Project project) {
          return projectHibernateRepository.update(project);
     }
-    public List<Project> findAllProjects() {
+    public List<Project> findAllProjects() throws SQLException {
         return projectHibernateRepository.findAll();
     }
 }

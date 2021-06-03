@@ -6,6 +6,7 @@ import com.taskmanager.repository.TaskRepository;
 
 import javax.ejb.Stateless;
 import javax.inject.Inject;
+import java.sql.SQLException;
 import java.util.List;
 
 @Stateless
@@ -32,7 +33,7 @@ public class TaskOperations {
         return taskHibernateRepository.update(task);
     }
 
-    public List<Task> findAllTasks() {
+    public List<Task> findAllTasks() throws SQLException {
         return taskHibernateRepository.findAll();
     }
 
