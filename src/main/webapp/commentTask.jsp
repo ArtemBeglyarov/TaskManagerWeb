@@ -1,15 +1,13 @@
-<%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="com.taskmanager.operations.CommentsOperations" %>
-<%@ page import="com.taskmanager.entity.Comment" %>
-<%@ page import="java.util.Calendar" %>
-<%@ page import="java.util.Date" %>
 <%@ page import="com.taskmanager.operations.TaskOperations" %>
-<%@ page import="java.util.List" %>
 <%@ page import="javax.ws.rs.HttpMethod" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="com.taskmanager.entity.Comment" %>
+<%@ page import="com.taskmanager.operations.ProjectOperations" %>
+<%@ page import="com.taskmanager.entity.Project" %>
+<%@ page import="java.util.*" %>
+<%@ page import="com.taskmanager.entity.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 
 <html>
@@ -24,36 +22,26 @@
         response.sendRedirect("login.jsp");
     }
 
-%>
-<form action="task.jsp?id=" method="post">
-    <p><b>Your comment:</b></p>
-    <p><textarea rows="10" cols="45"
-                 name="comment"><%currUser.getUserName();%></textarea></p>
-    <p><input type="submit" value="Отправить"></p>
-</form>
-<hr>
-<%!
-    CommentsOperations co = (CommentsOperations) BeansStore.getBean(CommentsOperations.class);
+    CommentsOperations commentsOperations = (CommentsOperations) BeansStore.getBean(CommentsOperations.class);
+    TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
 %>
 <%
-    Date format = new Date(Calendar.getInstance().getTimeInMillis());
-
-    if (request.getMethod().equals(HttpMethod.POST)){
+    Task currTask = null;
+    String getIdTask = request.getParameter("id");
+    Long idCurrTask = Long.parseLong(getIdTask);
+    if (request.getMethod().equals(HttpMethod.POST)) {
+        Date format = new Date(Calendar.getInstance().getTimeInMillis());
+        currTask = taskOperations.findTask(idCurrTask);
         Comment comment = new Comment();
-    comment.setCreatorComment(currUser);
-    comment.setCreateData(format);
-    comment.setComment(request.getParameter("comment"));
-    co.create(comment);
+        comment.setCreatorComment(currUser);
+        comment.setCreateData(format);
+        comment.setComment(request.getParameter("comment"));
+        comment.setTask(currTask);
+        commentsOperations.create(comment);
 
-  List<Comment> allComments = co.getAllComments();
-    for (Comment k : allComments) {%>
-
-<p><%=k.getCreateData()%> <%=k.getCreatorComment().getUserName()%>:
-    <%=k.getComment()%></p>
-<%} }%>
-
-
-
+        response.sendRedirect("task.jsp?id="+getIdTask);
+    }
+%>
 
 
 </body>

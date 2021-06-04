@@ -16,23 +16,23 @@ public class CommentsOperations {
 
 
     @Inject
-    CommentsRepository cr;
+    CommentsRepository repository;
 
     public Comment create(Comment comment) {
-        return cr.create(comment);
+        return repository.create(comment);
     }
 
     public void remove(long id) {
-        cr.delete(id);
+        repository.delete(id);
     }
 
     public Comment findUser(long id) {
-        return cr.find(id);
+        return repository.find(id);
     }
 
     public List<Comment> getAllComments() throws SQLException {
 
-       List<Comment> sort = cr.findAll();
+       List<Comment> sort = repository.findAll();
         Collections.sort(sort, new Comparator<Comment>() {
             @Override
             public int compare(Comment o1, Comment o2) {

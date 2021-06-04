@@ -58,38 +58,26 @@
 </p>
 <p>Assignee: <%=currTask.getAssignee()%>
 </p>
-<%--<jsp:include page="commentTask.jsp"/>--%>
-%>
-<form action="task.jsp?id=<%=currTask.getID()%>" method="post">
-    <p><b>Your comment:</b></p>
-    <p><textarea rows="10" cols="30"
-                 name="comment"><%currUser.getUserName();%></textarea></p>
-    <p><input type="submit" value="Отправить"></p>
-</form>
+
 <hr>
-
 <%
-
-    if (request.getMethod().equals(HttpMethod.POST)) {
-        Date format = new Date(Calendar.getInstance().getTimeInMillis());
-        Comment comment = new Comment();
-        comment.setCreatorComment(currUser);
-        comment.setCreateData(format);
-        comment.setComment(request.getParameter("comment"));
-        comment.setTask(currTask);
-        co.create(comment);
-
-    }
+    if (currTask.getComments() != null) {
 
         Set<Comment> commentTask = currTask.getComments();
-        for (Comment k : commentTask) {%>
+        for (Comment k : commentTask){%>
 
 <p><%=k.getCreateData()%> <%=k.getCreatorComment().getUserName()%>:
     <%=k.getComment()%>
 </p>
-<%
-    }
-%>
+<%}}%>
+
+<form action="commentTask.jsp?id=<%=currTask.getID()%>" method="post">
+    <p><b>Your comment:</b></p>
+    <p><textarea rows="5" cols="55"
+                 name="comment"><%currUser.getUserName();%></textarea></p>
+    <p><input type="submit" value="Отправить"></p>
+</form>
+
 
 </body>
 </html>

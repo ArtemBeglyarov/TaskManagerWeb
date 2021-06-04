@@ -11,10 +11,7 @@
 <%@ page import="com.taskmanager.operations.TaskOperations" %>
 <%@ page import="com.taskmanager.BeansStore" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
-<%@ page import="javax.ws.rs.HttpMethod" %>
-<%@ page import="java.sql.ResultSet" %>
-<%@ page import="java.util.Calendar" %>
-<%@ page import="java.text.DateFormat" %>
+<%@ page import="javax.ws.rs.HttpMethod" %> %>
 <%@ page import="java.text.SimpleDateFormat" %>
 <%@ page import="java.sql.SQLException" %>
 <%@ page import="java.text.ParseException" %>
@@ -53,7 +50,8 @@
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-        String ID = request.getParameter("projectID");
+        String ID = request.getParameter("projectId");
+
         Long id = Long.parseLong(ID);
         task.setProject(projectOperations.findProject(id));
 
