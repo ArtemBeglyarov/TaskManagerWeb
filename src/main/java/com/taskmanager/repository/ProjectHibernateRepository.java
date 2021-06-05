@@ -68,14 +68,14 @@ public class ProjectHibernateRepository implements Repository<Project> {
     }
 
     public List<Long> getAllProjectsIds() throws SQLException {
-        List<Long> idAllUsers= new ArrayList<>();
+        List<Long> idAllProject= new ArrayList<>();
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(findAllPrijectsId);
         while (resultSet.next()) {
-            idAllUsers.add(resultSet.getLong("id"));
+            idAllProject.add(resultSet.getLong("id"));
         }
-        return idAllUsers;
+        return idAllProject;
     }
 
 

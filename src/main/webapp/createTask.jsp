@@ -27,14 +27,13 @@
         response.sendRedirect("login.jsp");
     }
 
-
-
     SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
 
 
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
+
 
 
     if (request.getMethod().equals(HttpMethod.POST)) {

@@ -5,7 +5,6 @@
 <%@ page import="com.taskmanager.entity.Task" %>
 <%@ page import="com.taskmanager.operations.TaskOperations" %>
 <%@ page import="com.taskmanager.entity.Project" %>
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
@@ -54,14 +53,11 @@
             </table>
         </div>
     </div>
-
 </main>
 <script>
 
     $(document).ready(function () {
         createTable('#taskTable', buttons);
-
-
     });
 </script>
 </body>

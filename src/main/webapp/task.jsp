@@ -28,6 +28,16 @@
     Long id = Long.parseLong(ID);
     Task currTask = taskOperations.findTask(id);
 %>
+<%
+    if(currUser.getID() != currTask.getReporter().getID()){
+%>
+    <div class="nav-scroller bg-body shadow-sm">
+
+
+
+            <%
+    }
+%>
 <h1 class="title" align=center>Task</h1>
 <a class="btn btn-success"
    style="background-color:  #0B614B; margin-left:90%;  margin-top: 30px"

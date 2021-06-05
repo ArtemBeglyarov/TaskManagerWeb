@@ -54,7 +54,7 @@ public class TaskHibernateRepository implements Repository<Task> {
 
     @Override
     public List<Task> findAll() throws SQLException {
-        List<Long> ids = getAllProjectsIds();
+        List<Long> ids = getAllTasksIds();
         List<Task> tasks = new ArrayList<>();
         for(Long id : ids){
             tasks.add(find(id));
@@ -62,20 +62,16 @@ public class TaskHibernateRepository implements Repository<Task> {
         return tasks;
     }
 
-    public List<Long> getAllProjectsIds() throws SQLException {
-        List<Long> idAllUsers= new ArrayList<>();
+    public List<Long> getAllTasksIds() throws SQLException {
+        List<Long> idAllTasks= new ArrayList<>();
         Connection connection = dataSource.getConnection();
         Statement statement = connection.createStatement();
         ResultSet resultSet = statement.executeQuery(findAllTasksId);
         while (resultSet.next()) {
-            idAllUsers.add(resultSet.getLong("id"));
+            idAllTasks.add(resultSet.getLong("id"));
         }
-        return idAllUsers;
+        return idAllTasks;
     }
-
-
-
-
 
 
 

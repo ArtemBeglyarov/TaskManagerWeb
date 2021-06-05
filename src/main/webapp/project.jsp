@@ -89,6 +89,8 @@
                             <input type="text" class="form-control" id="floatingDescription" name="description" placeholder="Description">
                             <label for="floatingDescription">Description</label>
                         </div>
+
+
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-primary"/>
