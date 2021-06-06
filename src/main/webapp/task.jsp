@@ -10,6 +10,7 @@
 <%@ page import="com.taskmanager.entity.Comment" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.taskmanager.entity.Comment" %>
+
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
@@ -32,10 +33,13 @@
     if(currUser.getID() != currTask.getReporter().getID()){
 %>
     <div class="nav-scroller bg-body shadow-sm">
+        <a class="nav-link active" aria-current="page" href="" value="<%=currTask.setStatus(Task.Status.ADDITIONAL_INFO_REQUIRED)%>">Status is AIR</a>
 
-
-
+        <a class="nav-link" href=""></a>
+        <a class="nav-link" href=""></a>
             <%
+
+
     }
 %>
 <h1 class="title" align=center>Task</h1>
@@ -60,7 +64,7 @@
 </p>
 <p>Status: <%=currTask.getStatus()%>
 </p>
-<p>Start Date: <%=currTask.getAssignee()%>
+<p>Start Date: <%=currTask.getStartData()%>
 </p>
 <p>Due Date: <%=currTask.getDueDate()%>
 </p>

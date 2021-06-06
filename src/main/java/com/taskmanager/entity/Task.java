@@ -34,8 +34,16 @@ public class Task implements Serializable {
         IN_PROGRESS, // startdate
         RESOLVE, // end date
         ADDITIONAL_INFO_REQUIRED, //
-        CLOSED, //
+        CLOSED,
+        CANCELLED,
+        RE_OPENED; // end date = null
+        public static Status get(String name){
+            for(Status status : Status.values()){
+                if(name.equalsIgnoreCase(status.name())) return status;
+            }
+            return null;
         }
+    }
 
 
     @Id
@@ -179,17 +187,17 @@ public class Task implements Serializable {
         return reporter;
     }
 
-    public void setReporter(User reporterId) {
-        this.reporter = reporterId;
+    public void setReporter(User reporter) { ////
+        this.reporter = reporter;
     }
 
     public User getAssignee() {
         return assignee;
     }
 
-    public void setAssignee(User assigneeId) {
-        this.assignee = assigneeId;
-    }
+    public void setAssignee(User assignee) {
+        this.assignee = assignee;
+    }////изменил на assegneeId
 
 
     public Set<Comment> getComments() {

@@ -31,28 +31,48 @@
         <h1 class="title" align=center>UPDATE USER</h1>
         <form action="updateUser.jsp?id=<%=task.getID()%>" method="POST">
             <div class="mb-3 row form-floating">
-                <input type="text" class="form-control" id="floatingUsername" name="userName" placeholder="Username" value="<%=user.getUserName()%>">
-                <label for="floatingUsername">Username</label>
+                <input type="text" class="form-control" id="floatingTaskname" name="taskName" placeholder="TaskName" value="<%=task.getName()%>">
+                <label for="floatingTaskname">TaskName</label>
             </div>
             <div class="mb-3 row form-floating">
-                <input type="text" class="form-control" id="floatingFirstname" name="firstName" placeholder="Firstname" value="<%=user.getFirstName()%>">
-                <label for="floatingFirstname">Firstname</label>
+                <input type="text" class="form-control" id="floatingFDescription" name="description" placeholder="Description" value="<%=task.getDescription()%>">
+                <label for="floatingFDescription">Description</label>
             </div>
             <div class="mb-3 row form-floating">
-                <input type="text" class="form-control" id="floatingLastname" name="lastName" placeholder="Lastname" value="<%=user.getLastName()%>">
-                <label for="floatingLastname">Lastname</label>
+                <select class="form-select" aria-label="Default select example" name="priority">
+                    <option selected disabled>Select Priority</option>
+                    <%
+                        for(Task.Priority priority : Task.Priority.values()){
+                    %>
+                    <option value="<%=priority.name()%>>"><%=priority.name()%></option>
+                    <%}%>
+                </select>
+            </div>
+            <div class="mb-3 row ">
+                <select class="form-select" aria-label="Default select example" name="status">
+                    <option selected disabled>Select Status</option>
+                    <%
+                        for(Task.Status status : Task.Status.values()){
+                    %>
+                    <option value="<%=status.name()%>>"><%=status.name()%></option>
+                    <%}%>
+                </select>
+            </div>
+            <div class="mb-3 row ">
+                <input type="text" class="form-control" id="floatingStartDate" name="startDate" placeholder="StartDate" value="<%=task.getStartData()%>">
+                <label for="floatingStartDate">StartData</label>
             </div>
             <div class="mb-3 row form-floating">
-                <input type="password" class="form-control" id="floatingPassword" name="password"
-                       placeholder="Password">
-                <label for="floatingPassword">Password</label>
+                <input type="text" class="form-control" id="floatingDueDate" name="dueDate" placeholder="DueDate" value="<%=task.getDueDate()%>">
+                <label for="floatingDueDate">DueDate</label>
             </div>
-            <div class="form-check">
-                <input class="form-check-input" type="checkbox" value="admin" name="status"
-                       id="isAdminCheck" <%="admin".equals(user.getStatus()) ? "checked" : ""%>>
-                <label class="form-check-label" for="isAdminCheck">
-                    Is Admin?
-                </label>
+            <div class="mb-3 row form-floating">
+                <input type="text" class="form-control" id="floatingReporter" name="reporter" placeholder="Reporter" value="<%=task.getReporter()%>">
+                <label for="floatingReporter">Reporter</label>
+            </div>
+            <div class="mb-3 row form-floating">
+                <input type="text" class="form-control" id="floatingAssignee" name="dueDate" placeholder="DueDate" value="<%=task.getAssignee()%>">
+                <label for="floatingAssignee">Assignee</label>
             </div>
             <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="Update">
@@ -61,12 +81,15 @@
     </div>
 </main>
     <% if (request.getMethod().equals(HttpMethod.POST)) {
-    user.setFirstName(request.getParameter("firstName"));
-    user.setLastName(request.getParameter("lastName"));
-    user.setUserName(request.getParameter("userName"));
-    user.setPassword(request.getParameter("password"));
-    user.setStatus(request.getParameter("status"));
-    usersOperations.updateUser(user);
-    response.sendRedirect("users.jsp");
+    task.setName(request.getParameter("taskName"));
+    task.setDescription(request.getParameter("description"));
+    task.setPriority(Task.Priority.get(request.getParameter("priority")));
+    task.setStatus(Task.Status.get(request.getParameter("status")));
+    task.setStartData(request.getParameter("firstName"));
+    task.setDueDate(request.getParameter("firstName"));
+    task.setReporter(request.getParameter("firstName"));
+    task.setAssignee(request.getParameter("firstName"));
+    taskOperations.updateTask(task);
+    response.sendRedirect("tasks.jsp");
 }
 %>

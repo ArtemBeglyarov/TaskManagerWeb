@@ -52,8 +52,8 @@ public class ProjectHibernateRepository implements Repository<Project> {
 
     @Override
     public void delete(long id)  {
-        Task task = entityManager.find(Task.class, id);
-        entityManager.remove(task);
+        Project project = entityManager.find(Project.class, id);
+        entityManager.remove(project);
     }
 
 

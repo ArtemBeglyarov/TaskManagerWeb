@@ -38,7 +38,6 @@
 
     if (request.getMethod().equals(HttpMethod.POST)) {
         Task task = new Task();
-
         task.setName(request.getParameter("name"));
         task.setPriority(Task.Priority.get(request.getParameter("priority")));
         task.setStatus(Task.Status.OPENED);
@@ -50,7 +49,6 @@
             throw new RuntimeException(e);
         }
         String ID = request.getParameter("projectId");
-
         Long id = Long.parseLong(ID);
         task.setProject(projectOperations.findProject(id));
 
