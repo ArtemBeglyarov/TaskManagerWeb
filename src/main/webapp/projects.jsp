@@ -11,6 +11,8 @@
 <%@ page import="com.taskmanager.entity.Project" %>
 <%@ page import="com.taskmanager.operations.ProjectOperations" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -26,6 +28,7 @@
 <%
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
     List<Project> projects = projectOperations.findAllProjects();
+    UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
 %>
 <main class="container">
 <div class="container-fluid">

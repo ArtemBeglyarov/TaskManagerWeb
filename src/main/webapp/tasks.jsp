@@ -41,12 +41,16 @@
                 <tr value="<%=task.getID()%>">
                     <td><a href="task.jsp?id=<%=task.getID()%>"><%=task.getName()%>
                     </a></td>
-                    <td><%=task.getStatus()%>></td>
-                    <td><%=task.getPriority()%>></td>
-                    <td><%=task.getDueDate()%>></td>
+                    <td><%=task.getStatus()%></td>
+                    <td><%=task.getPriority()%></td>
+                    <td><%=task.getDueDate()%></td>
                     <td><a href="project.jsp?id=<%=task.getProject().getID()%>"><%=task.getProject().getName()%></a></td>
                     <td><a href="user.jsp?id=<%=task.getReporter().getID()%>"><%=task.getReporter().getUserName()%></a></td>
-<%--                    <td><a href="user.jsp?id=<%=task.getAssignee().getID()%>"><%=task.getAssignee().getUserName()%></a></td>--%>
+                    <td>
+                        <% if(task.getAssignee() != null){%>
+                        <a href="user.jsp?id=<%=task.getAssignee().getID()%>"><%=task.getAssignee().getUserName()%></a>
+                    <%}%>
+                    </td>
                 </tr>
                 <%}%>
                 </tbody>

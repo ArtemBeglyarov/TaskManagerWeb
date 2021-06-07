@@ -29,19 +29,15 @@
     Long id = Long.parseLong(ID);
     Task currTask = taskOperations.findTask(id);
 %>
-<%--<%--%>
-<%--    if(currUser.getID() != currTask.getReporter().getID()){--%>
-<%--%>--%>
-<%--    <div class="nav-scroller bg-body shadow-sm">--%>
-<%--        <a class="nav-link active" aria-current="page" href="" value="<%=currTask.setStatus(Task.Status.ADDITIONAL_INFO_REQUIRED)%>">Status is AIR</a>--%>
+<%
+    if(currUser.getID() != currTask.getReporter().getID()){
+%>
 
-<%--        <a class="nav-link" href=""></a>--%>
-<%--        <a class="nav-link" href=""></a>--%>
-<%--            <%--%>
+            <%
 
 
-<%--    }--%>
-<%--%>--%>
+    }
+%>
 <h1 class="title" align=center>Task</h1>
 <a class="btn btn-success"
    style="background-color:  #0B614B; margin-left:90%;  margin-top: 30px"
@@ -91,7 +87,5 @@
                  name="comment"><%currUser.getUserName();%></textarea></p>
     <p><input type="submit" value="Отправить"></p>
 </form>
-
-
 </body>
 </html>

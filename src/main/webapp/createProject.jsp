@@ -21,6 +21,7 @@
         project.setName(request.getParameter("name"));
         project.setDescription(request.getParameter("description"));
         //TODO Сделать здесь же доюавление участников проекта
+
         Set<User> users = project.getUsers();
 
         project.setCreator(currUser);

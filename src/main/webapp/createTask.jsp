@@ -40,6 +40,7 @@
         Task task = new Task();
         task.setName(request.getParameter("name"));
         task.setPriority(Task.Priority.get(request.getParameter("priority")));
+
         task.setStatus(Task.Status.OPENED);
         task.setDescription(request.getParameter("description")); //
         task.setCreateDate(new Date());
@@ -59,7 +60,7 @@
         task.setReporter(currUser);
 
         taskOperations.createTask(task);
-        response.sendRedirect("tasks.jsp");
+        response.sendRedirect("project.jsp?id"+ id);
     }
 %>
 

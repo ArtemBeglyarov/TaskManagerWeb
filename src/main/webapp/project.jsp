@@ -80,7 +80,6 @@
                                 <%}%>
                             </select>
                         </div>
-
                         <div class="mb-3 row form-floating">
                             <input type="date" class="form-control" id="floatingDueDate" name="dueDate" placeholder="Due Date">
                             <label for="floatingDueDate">Due Date</label>
@@ -90,7 +89,6 @@
                             <input type="text" class="form-control" id="floatingDescription" name="description" placeholder="Description">
                             <label for="floatingDescription">Description</label>
                         </div>
-
 
                     </div>
                     <div class="modal-footer">
