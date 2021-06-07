@@ -207,7 +207,15 @@ public class Task implements Serializable {
     public void setComments(Set<Comment> comments) {
         this.comments = comments;
     }
+    public void addComment(Comment comment) {
+        comments.add(comment);
+        comment.setTask(this);
+    }
 
+    public void removeComment(Comment comment) {
+        comments.remove(comment);
+        comment.setTask(null);
+    }
     @Override
     public String toString() {
         return "Task{" +

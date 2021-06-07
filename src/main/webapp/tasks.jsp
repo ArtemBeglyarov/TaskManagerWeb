@@ -46,7 +46,7 @@
                     <td><%=task.getDueDate()%>></td>
                     <td><a href="project.jsp?id=<%=task.getProject().getID()%>"><%=task.getProject().getName()%></a></td>
                     <td><a href="user.jsp?id=<%=task.getReporter().getID()%>"><%=task.getReporter().getUserName()%></a></td>
-                    <td><a href="user.jsp?id=<%=task.getAssignee().getID()%>"><%=task.getAssignee().getUserName()%></a></td>
+<%--                    <td><a href="user.jsp?id=<%=task.getAssignee().getID()%>"><%=task.getAssignee().getUserName()%></a></td>--%>
                 </tr>
                 <%}%>
                 </tbody>

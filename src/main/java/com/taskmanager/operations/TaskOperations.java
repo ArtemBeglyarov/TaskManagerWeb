@@ -1,5 +1,6 @@
 package com.taskmanager.operations;
 
+import com.taskmanager.entity.Comment;
 import com.taskmanager.entity.Task;
 import com.taskmanager.repository.TaskHibernateRepository;
 import com.taskmanager.repository.TaskRepository;
@@ -37,4 +38,9 @@ public class TaskOperations {
         return taskHibernateRepository.findAll();
     }
 
+//    public void addCommentInTask(Long id, Comment comment) {
+//        Task task = findTask(id);
+//        task.getComments().add(comment);
+//
+//    }
 }

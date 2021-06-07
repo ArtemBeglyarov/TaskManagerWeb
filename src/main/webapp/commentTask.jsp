@@ -26,17 +26,19 @@
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
 %>
 <%
-    Task currTask = null;
+
     String getIdTask = request.getParameter("id");
     Long idCurrTask = Long.parseLong(getIdTask);
     if (request.getMethod().equals(HttpMethod.POST)) {
         Date format = new Date(Calendar.getInstance().getTimeInMillis());
-        currTask = taskOperations.findTask(idCurrTask);
+        Task   currTask = taskOperations.findTask(idCurrTask);
         Comment comment = new Comment();
         comment.setCreatorComment(currUser);
         comment.setCreateData(format);
         comment.setComment(request.getParameter("comment"));
         comment.setTask(currTask);
+//        taskOperations.addCommentInTask(currTask.getID(),comment);
+//        currTask.addComment(comment);
         commentsOperations.create(comment);
 
         response.sendRedirect("task.jsp?id="+getIdTask);

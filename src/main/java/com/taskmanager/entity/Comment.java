@@ -7,7 +7,7 @@ import java.io.Serializable;
 import java.util.Date;
 
 @Entity
-@Table(name = "comments")
+@Table(name = "comment")
 public class Comment implements Serializable {
 
     @Id
@@ -23,7 +23,7 @@ public class Comment implements Serializable {
     private User creatorComment;
 
     @ManyToOne
-    @JoinColumn(name ="task_id",nullable = false)
+    @JoinColumn(name ="task_id", nullable = false)
     private Task task;
 
     public Comment() {
@@ -83,7 +83,7 @@ public class Comment implements Serializable {
 
     @Override
     public String toString() {
-        return "Comments{" +
+        return "Comment{" +
                 "ID=" + ID +
                 ", creatData=" + createData +
                 ", comment='" + comment + '\'' +
