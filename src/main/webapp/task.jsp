@@ -24,7 +24,7 @@
 <%
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
-    CommentsOperations co = (CommentsOperations) BeansStore.getBean(CommentsOperations.class);
+    CommentsOperations commentsOperations = (CommentsOperations) BeansStore.getBean(CommentsOperations.class);
     String ID = request.getParameter("id");
     Long id = Long.parseLong(ID);
     Task currTask = taskOperations.findTask(id);
@@ -34,7 +34,6 @@
 %>
 
             <%
-
 
     }
 %>
@@ -72,8 +71,7 @@
 <hr>
 <%
     if (currTask.getComments() != null) {
-
-        Set<Comment> commentTask = currTask.getComments();
+        List<Comment> commentTask = commentsOperations.getSortComment(currTask.getComments());
         for (Comment k : commentTask){%>
 
 <p><%=k.getCreateData()%> <%=k.getCreatorComment().getUserName()%>:

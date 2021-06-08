@@ -53,9 +53,9 @@
         Long id = Long.parseLong(ID);
         task.setProject(projectOperations.findProject(id));
 
-        //String assID = request.getParameter("Users");
-        //Long idd = Long.parseLong(assID);
-        //task.setAssignee(usersOperations.findUser(idd));
+        String assID = request.getParameter("Users");
+        Long idd = Long.parseLong(assID);
+        task.setAssignee(usersOperations.findUser(idd));
 
         task.setReporter(currUser);
 

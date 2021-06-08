@@ -37,10 +37,4 @@ public class TaskOperations {
     public List<Task> findAllTasks() throws SQLException {
         return taskHibernateRepository.findAll();
     }
-
-//    public void addCommentInTask(Long id, Comment comment) {
-//        Task task = findTask(id);
-//        task.getComments().add(comment);
-//
-//    }
 }

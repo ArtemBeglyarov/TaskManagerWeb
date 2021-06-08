@@ -212,10 +212,6 @@ public class Task implements Serializable {
         comment.setTask(this);
     }
 
-    public void removeComment(Comment comment) {
-        comments.remove(comment);
-        comment.setTask(null);
-    }
     @Override
     public String toString() {
         return "Task{" +
