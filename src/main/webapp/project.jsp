@@ -78,7 +78,7 @@
                                 <%
                                     for(Task.Priority priority : Task.Priority.values()){
                                 %>
-                                <option value="<%=priority.name()%>>"><%=priority.name()%></option>
+                                <option value="<%=priority.name()%>"><%=priority.name()%></option>
                                 <%}%>
                             </select>
                         </div>
@@ -93,7 +93,7 @@
                                     List<User> listUsers = usersOperations.findUsers();
                                     for(User k : listUsers){
                                 %>
-                                <option value="<%=k.getID()%>>"><%=k.getUserName()%></option>
+                                <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
                                 <%}%>
                             </select>
                         </div>
