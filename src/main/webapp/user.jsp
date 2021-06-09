@@ -26,21 +26,21 @@
     List<Task> AssignedTaskCurrUser = new ArrayList<>();
 
     for (Task k : allTasks) {
-        if (k.getReporter().equals(null)) {
+        if (k.getReporter() == null) {
             break;
         }
         if (k.getReporter().getID() == user.getID()) {
             ReporterTasksCurrUser.add(k);
         }
     }
-//    for (Task k : allTasks) {
-//        if (k.getAssignee().equals(null)) {
-//            break;
-//        }
-//        if (k.getAssignee().getID() == user.getID()) {
-//            AssignedTaskCurrUser.add(k);
-//        }
-//    }
+    for (Task k : allTasks) {
+        if (k.getAssignee() == null) {
+            break;
+        }
+        if (k.getAssignee().getID() == user.getID()) {
+            AssignedTaskCurrUser.add(k);
+        }
+    }
 
 %>
 <!DOCTYPE html>
@@ -55,13 +55,13 @@
 
     <p style=" margin-top: 20px"><b>ID:</b> <%=user.getID()%>
     </p>
-    <p><b>User name:</b>  <%=user.getUserName() %>
+    <p><b>User name:</b> <%=user.getUserName() %>
     </p>
     <p><b>Fist name:</b> <%=user.getFirstName()%>
     </p>
-    <p><b>Last name:</b>  <%=user.getLastName() %>
+    <p><b>Last name:</b> <%=user.getLastName() %>
     </p>
-    <p><b>Status:</b>     <%=user.getStatus()%>
+    <p><b>Status:</b> <%=user.getStatus()%>
     </p>
     <a class="btn btn-success"
        style="background-color:  #0e0d0d"
@@ -72,11 +72,10 @@
 <div class="container" style="
      float:left">
     <div class="table-responsive">
-        <table id="taskTable" class="table table-striped" style="width:65%">
+        <table id="taskTable" class="table table-striped" style="width:30%">
             <thead>
             <tr style="align-items: center">
                 <th>Created tasks</th>
-                <th>Assigned tasks</th>
             </tr>
             </thead>
             <tbody>
@@ -88,22 +87,41 @@
                 </a></td>
             </tr>
             <%}%>
-            <%--                <%    for (Task task2 : AssignedTaskCurrUser) {%>--%>
-            <%--                <tr value="<%=task2.getID()%>">--%>
-            <%--                    <td><a href="task.jsp?id=<%=task2.getID()%>"--%>
-            <%--                               style="color:--%>
-            <%--                     black"><%=task2.getName()%></a></td>--%>
-            <%--                </tr>--%>
-            <%--                <%}%>--%>
+            </tbody>
+        </table>
+    </div>
+    <div class="table-responsive">
+        <table id="taskTable2" class="table table-striped" style="width:30%">
+            <thead>
+            <tr style="align-items: center">
+                <th>Assigned tasks</th>
+            </tr>
+            </thead>
+            <tbody>
+            <% for (Task task2 : AssignedTaskCurrUser) {%>
+            <tr value="<%=task2.getID()%>">
+                <td><a href="task.jsp?id=<%=task2.getID()%>"
+                       style="color:
+                                 black"><%=task2.getName()%>
+                </a></td>
+            </tr>
+            <%}%>
             </tbody>
         </table>
     </div>
 </div>
 
+
 <script>
 
     $(document).ready(function () {
         createTable('#taskTable', buttons);
+    });
+</script>
+<script>
+
+    $(document).ready(function () {
+        createTable('#taskTable2', buttons);
     });
 </script>
 </body>
