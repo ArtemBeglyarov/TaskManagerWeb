@@ -7,6 +7,7 @@
 <%@ page import="org.hibernate.Hibernate" %>
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.Set" %>
+<%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -14,6 +15,7 @@
         response.sendRedirect("login.jsp");
     }
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
+    UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
     String ID = request.getParameter("id");
     Long id = Long.parseLong(ID);
     Project project = projectOperations.findProject(id);
@@ -84,7 +86,17 @@
                             <input type="date" class="form-control" id="floatingDueDate" name="dueDate" placeholder="Due Date">
                             <label for="floatingDueDate">Due Date</label>
                         </div>
-
+                        <div class="mb-3 row">
+                            <select class="form-select" aria-label="Default select example" name="users">
+                                <option selected disabled>Select asignee</option>
+                                <%
+                                    List<User> listUsers = usersOperations.findUsers();
+                                    for(User k : listUsers){
+                                %>
+                                <option value="<%=k.getID()%>>"><%=k.getUserName()%></option>
+                                <%}%>
+                            </select>
+                        </div>
                         <div class="mb-3 row form-floating">
                             <input type="text" class="form-control" id="floatingDescription" name="description" placeholder="Description">
                             <label for="floatingDescription">Description</label>

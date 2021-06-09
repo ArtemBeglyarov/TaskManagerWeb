@@ -53,14 +53,15 @@
         Long id = Long.parseLong(ID);
         task.setProject(projectOperations.findProject(id));
 
-        String assID = request.getParameter("Users");
+        String assID = request.getParameter("users");
+        System.out.println(assID + " АЙДИ ЮСЕРА");
         Long idd = Long.parseLong(assID);
         task.setAssignee(usersOperations.findUser(idd));
 
         task.setReporter(currUser);
 
         taskOperations.createTask(task);
-        response.sendRedirect("project.jsp?id"+ id);
+        response.sendRedirect("project.jsp?id="+ id);
     }
 %>
 
