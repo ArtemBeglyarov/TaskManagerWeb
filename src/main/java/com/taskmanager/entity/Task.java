@@ -33,7 +33,8 @@ public class Task implements Serializable {
         OPENED, //createdate
         IN_PROGRESS, // startdate
         RESOLVE, // end date
-        ADDITIONAL_INFO_REQUIRED, //
+        ADDITIONAL_INFO_REQUIRED,
+        INFO_PROVIDED,
         CLOSED,
         CANCELLED,
         RE_OPENED; // end date = null

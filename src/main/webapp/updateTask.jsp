@@ -84,7 +84,7 @@
     task.setName(request.getParameter("taskName"));
     task.setDescription(request.getParameter("description"));
     task.setPriority(Task.Priority.get(request.getParameter("priority")));
-    task.setStatus(Task.Status.get(request.getParameter("status")));
+
     task.setStartData(request.getParameter("firstName"));
     task.setDueDate(request.getParameter("firstName"));
     task.setReporter(request.getParameter("firstName"));

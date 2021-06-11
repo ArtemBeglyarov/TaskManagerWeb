@@ -13,6 +13,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -29,6 +30,7 @@
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
     List<Project> projects = projectOperations.findAllProjects();
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
+
 %>
 <main class="container">
 <div class="container-fluid">
@@ -49,6 +51,7 @@
             <%}%>
             </tbody>
         </table>
+
         <!-- Modal -->
         <div class="modal fade" id="createProjectModal" tabindex="-1" aria-labelledby="createProjectModalLabel" aria-hidden="true">
             <div class="modal-dialog">
@@ -59,7 +62,6 @@
                     </div>
                     <form action="createProject.jsp" method="POST">
                         <div class="modal-body">
-
                             <div class="mb-3 row form-floating">
                                 <input type="text" class="form-control" id="floatingUsername" name="name" placeholder="Name">
                                 <label for="floatingUsername">Name</label>
@@ -67,6 +69,17 @@
                             <div class="mb-3 row form-floating">
                                 <input type="text" class="form-control" id="floatingFirstname" name="description" placeholder="Description">
                                 <label for="floatingFirstname">Description</label>
+                            </div>
+                            <div class="mb-3 row">
+                                <select class="form-select" aria-label="Default select example" name="users">
+                                    <option selected disabled>Select Users</option>
+                                    <%
+                                        List <User> users = usersOperations.findUsers();
+                                        for(User user : users){
+                                    %>
+                                    <option value="<%=user.getID()%>"><%=user.getUserName()%></option>
+                                    <%}%>
+                                </select>
                             </div>
                         </div>
                         <div class="modal-footer">

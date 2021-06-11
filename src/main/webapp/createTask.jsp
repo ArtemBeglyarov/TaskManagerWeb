@@ -54,7 +54,6 @@
         task.setProject(projectOperations.findProject(id));
 
         String assID = request.getParameter("users");
-        System.out.println(assID + " АЙДИ ЮСЕРА");
         Long idd = Long.parseLong(assID);
         task.setAssignee(usersOperations.findUser(idd));
 

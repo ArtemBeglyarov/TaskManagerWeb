@@ -8,6 +8,7 @@
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -19,7 +20,10 @@
     String ID = request.getParameter("id");
     Long id = Long.parseLong(ID);
     Project project = projectOperations.findProject(id);
-    Set<Task> tasks = project.getTasks();
+
+
+
+
 %>
 <html>
 <jsp:include page='header.jsp'/>
@@ -31,6 +35,20 @@
         <p class="col-md-8 fs-4"><%=project.getDescription()%></p>
     </div>
 </div>
+<table id="projectUsers" class="table table-striped" style="width:100%">
+    <thead>
+    <tr>
+        <th>project Users</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr>
+        <% for (User user : project.getUsers()) {%>
+        <td><a href="project.jsp?id=<%=user.getID()%>"><%=user.getUserName()%></a></td>
+        <%}%>
+    </tr>
+    </tbody>
+</table>
 <div class="table-responsive">
     <table id="taskTable" class="table table-striped" style="width:100%">
         <thead>
@@ -44,7 +62,7 @@
         </tr>
         </thead>
         <tbody>
-        <% for (Task task : tasks) {%>
+        <% for (Task task : project.getTasks()) {%>
         <tr value="<%=task.getID()%>">
             <td><a href="task.jsp?id=<%=task.getID()%>"><%=task.getName()%>
             </a></td>
@@ -111,6 +129,9 @@
             </div>
         </div>
     </div>
+
+
+
 </div>
 <script>
     var buttons =

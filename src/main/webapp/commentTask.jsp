@@ -24,7 +24,7 @@
     Long idCurrTask = Long.parseLong(getIdTask);
     if (request.getMethod().equals(HttpMethod.POST)) {
         Date format = new Date(Calendar.getInstance().getTimeInMillis());
-        Task   currTask = taskOperations.findTask(idCurrTask);
+        Task currTask = taskOperations.findTask(idCurrTask);
         Comment comment = new Comment();
         comment.setCreatorComment(currUser);
         comment.setCreateData(format);

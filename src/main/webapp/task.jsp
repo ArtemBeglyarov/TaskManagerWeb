@@ -10,6 +10,7 @@
 <%@ page import="com.taskmanager.entity.Comment" %>
 <%@ page import="java.util.*" %>
 <%@ page import="com.taskmanager.entity.Comment" %>
+<%@ page import="com.taskmanager.exchange.Download" %>
 
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -29,15 +30,40 @@
     Long id = Long.parseLong(ID);
     Task currTask = taskOperations.findTask(id);
 %>
+<h1 class="title" align=center>Task</h1>
 <%
-    if(currUser.getID() != currTask.getReporter().getID()){
+    if(currUser.getID() == currTask.getReporter().getID()){
+        if(currTask.getStatus() == Task.Status.OPENED){
 %>
+<form action="statusForAsignee.jsp?id=<%=currTask.getID()%>" method="post">
+    <p><input type="submit" value="In Progress"></p>
+</form>
+<%
+    }else if(currTask.getStatus() == Task.Status.IN_PROGRESS){
 
-            <%
+%>
+<form action="statusAIR.jsp?id=<%=currTask.getID()%>" method="post">
+    <p><input type="submit" value="AIR"></p>
+</form>
+<%
+    }else if(currTask.getStatus() == Task.Status.INFO_PROVIDED){
+%>
+<form action="statusForAsignee.jsp?id=<%=currTask.getID()%>" method="post">
+    <p><input type="submit" value="In progress"></p>
+</form>
+<%
+    }
+
+
+    }else if(currUser.getID() == currTask.getAssignee().getID()){
 
     }
 %>
-<h1 class="title" align=center>Task</h1>
+
+
+
+
+
 <a class="btn btn-success"
    style="background-color:  #0B614B; margin-left:90%;  margin-top: 30px"
    href="removeTask.jsp?id=<%=currTask.getID()%>"

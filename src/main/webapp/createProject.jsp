@@ -4,8 +4,9 @@
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="com.taskmanager.operations.ProjectOperations" %>
 <%@ page import="com.taskmanager.entity.Project" %>
-<%@ page import="java.util.Set" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
+<%@ page import="java.util.*" %>
+<%@ page import="java.sql.ResultSet" %>
 <%@ page contentType="text/html; charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -22,7 +23,10 @@
         project.setDescription(request.getParameter("description"));
         //TODO Сделать здесь же доюавление участников проекта
 
-        Set<User> users = project.getUsers();
+        String ID = request.getParameter("users");
+        Long id = Long.parseLong(ID);
+        User user = usersOperations.findUser(id);
+
 
         project.setCreator(currUser);
         projectOperations.createProject(project);
