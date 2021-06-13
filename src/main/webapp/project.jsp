@@ -35,19 +35,26 @@
         <p class="col-md-8 fs-4"><%=project.getDescription()%></p>
     </div>
 </div>
-<table id="projectUsers" class="table table-striped" style="width:100%">
+<table id="usersTable" class="table table-striped" style="width:100%">
     <thead>
     <tr>
-        <th>project Users</th>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Status</th>
     </tr>
     </thead>
     <tbody>
-    <tr>
-        <% for (User user : project.getUsers()) {%>
-        <td><a href="project.jsp?id=<%=user.getID()%>"><%=user.getUserName()%></a></td>
-        <%}%>
+    <% for(User user : project.getUsers()){%>
+    <tr value="<%=user.getID()%>">
+        <td><a href="user.jsp?id=<%=user.getID()%>"><%=user.getUserName()%></a></td>
+        <td><%=user.getFirstName()%></td>
+        <td><%=user.getLastName()%></td>
+        <td><%=user.getStatus()%></td>
     </tr>
+    <%}%>
     </tbody>
+</table>
 </table>
 <div class="table-responsive">
     <table id="taskTable" class="table table-striped" style="width:100%">
@@ -129,16 +136,16 @@
             </div>
         </div>
     </div>
-
-
-
 </div>
 <script>
+    var button =
+        '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUser">Add User</button> ';
     var buttons =
         '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add Task</button> ' +
         '<button type="button" id="editButton" class="btn btn-success">Edit Task</button> ' +
         '<button type="button" id="deleteButton" class="btn btn-danger"">Delete Task</button';
     $(document).ready(function () {
+        tableUser = createTable('#usersTable', button);
         table = createTable('#taskTable', buttons);
         $('#editButton').click( function () {
             var data = table.getSelected();

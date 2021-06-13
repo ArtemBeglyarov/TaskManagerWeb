@@ -30,50 +30,67 @@
     Long id = Long.parseLong(ID);
     Task currTask = taskOperations.findTask(id);
 %>
-<h1 class="title" align=center>Task</h1>
-<%
-    if(currUser.getID() == currTask.getReporter().getID()){
-        if(currTask.getStatus() == Task.Status.OPENED){
-%>
-<form action="statusForAsignee.jsp?id=<%=currTask.getID()%>" method="post">
-    <p><input type="submit" value="In Progress"></p>
-</form>
-<%
-    }else if(currTask.getStatus() == Task.Status.IN_PROGRESS){
+<div class="nav-scroller bg-body shadow-sm">
+    <nav class="nav nav-underline" aria-label="Secondary navigation">
+        <a class="nav-link"
+           href="removeTask.jsp?id=<%=currTask.getID()%>">Delete Task</a>
+        <a class="nav-link"
+           href="updateTask.jsp?id=<%=currTask.getID()%>">Update Task</a>
+        <%
+            if (currUser.getID() == currTask.getAssignee().getID()) {
+                if (currTask.getStatus() == Task.Status.OPENED) {
+        %>
+        <a class="nav-link" href="statusForAsignee.jsp?id=<%=currTask.getID()%>">In Progress
+        </a>
+        <%
+        } else if (currTask.getStatus() == Task.Status.IN_PROGRESS) {
 
-%>
-<form action="statusAIR.jsp?id=<%=currTask.getID()%>" method="post">
-    <p><input type="submit" value="AIR"></p>
-</form>
-<%
-    }else if(currTask.getStatus() == Task.Status.INFO_PROVIDED){
-%>
-<form action="statusForAsignee.jsp?id=<%=currTask.getID()%>" method="post">
-    <p><input type="submit" value="In progress"></p>
-</form>
-<%
-    }
+        %>
+        <a class="nav-link" href="statusAIR.jsp?id=<%=currTask.getID()%>">AIR
+        </a>
+        <a class="nav-link" href="statusResolve.jsp?id=<%=currTask.getID()%>">Resolve
+        </a>
+        <%
+        } else if (currTask.getStatus() == Task.Status.INFO_PROVIDED) {
+        %>
+        <a class="nav-link" href="statusForAsignee.jsp?id=<%=currTask.getID()%>">In progress
+        </a>
+        <%
+        } else if (currTask.getStatus() == Task.Status.RE_OPENED) {
+        %>
+        <a class="nav-link" href="statusForAsignee.jsp?id=<%=currTask.getID()%>">In progress
+        </a>
+        <%
+            }
+        } else if (currUser.getID() == currTask.getReporter().getID()) {
+            if (currTask.getStatus() == Task.Status.OPENED) {
 
 
-    }else if(currUser.getID() == currTask.getAssignee().getID()){
-
-    }
-%>
-
-
+        %><a class="nav-link" href="statusCancelled.jsp?id=<%=currTask.getID()%>">Cancelled
+    </a>
+        <%
+        } else if (currTask.getStatus() == Task.Status.ADDITIONAL_INFO_REQUIRED) {
 
 
+        %> <a class="nav-link" href="statusInfoProvided.jsp?id=<%=currTask.getID()%>">Info Provided
+    </a>
 
-<a class="btn btn-success"
-   style="background-color:  #0B614B; margin-left:90%;  margin-top: 30px"
-   href="removeTask.jsp?id=<%=currTask.getID()%>"
-   role="button">Remove Task
-</a>
-<a class="btn btn-success"
-   style="background-color:  #0B614B; margin-left:90%;  margin-top: 30px"
-   href="updateTask.jsp?id=<%=currTask.getID()%>"
-   role="button">Update task
-</a>
+        <%
+        } else if (currTask.getStatus() == Task.Status.RESOLVE) {
+
+
+        %> <a class="nav-link" href="statusReOpened.jsp?id=<%=currTask.getID()%>">Re Opened
+    </a>
+        <a class="nav-link" href="statusClosed.jsp?id=<%=currTask.getID()%>">Closed
+        </a>
+        <%
+                }
+            }
+        %>
+    </nav>
+</div>
+
+
 <form action="task.jsp" method="GET"></form>
 <p>ID: <%=currTask.getID()%>
 </p>
@@ -98,12 +115,15 @@
 <%
     if (currTask.getComments() != null) {
         List<Comment> commentTask = commentsOperations.getSortComment(currTask.getComments());
-        for (Comment k : commentTask){%>
+        for (Comment k : commentTask) {%>
 
 <p><%=k.getCreateData()%> <%=k.getCreatorComment().getUserName()%>:
     <%=k.getComment()%>
 </p>
-<%}}%>
+<%
+        }
+    }
+%>
 
 <form action="commentTask.jsp?id=<%=currTask.getID()%>" method="post">
     <p><b>Your comment:</b></p>

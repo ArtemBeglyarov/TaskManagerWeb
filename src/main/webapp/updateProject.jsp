@@ -27,7 +27,7 @@
 <jsp:include page='navbar.jsp'/>
 <main class="container">
     <div class="container-fluid">
-        <h1 class="title" align=center>UPDATE USER</h1>
+        <h1 class="title" align=center>UPDATE PROJECT</h1>
         <form action="updateProject.jsp?id=<%=project.getID()%>" method="POST">
             <div class="mb-3 row form-floating">
                 <input type="text" class="form-control" id="floatingName" name="name" placeholder="Name"
