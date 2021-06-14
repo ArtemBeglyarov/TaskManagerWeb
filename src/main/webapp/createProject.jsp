@@ -21,10 +21,8 @@
         Project project = new Project();
         project.setName(request.getParameter("name"));
         project.setDescription(request.getParameter("description"));
-        String ID = request.getParameter("users");
-        Long id = Long.parseLong(ID);
-        User user = usersOperations.findUser(id);
-        project.addUsers(user);
+
+
         project.setCreator(currUser);
         projectOperations.createProject(project);
         response.sendRedirect("projects.jsp");

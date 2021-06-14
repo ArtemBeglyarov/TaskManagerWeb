@@ -70,17 +70,7 @@
                                 <input type="text" class="form-control" id="floatingFirstname" name="description" placeholder="Description">
                                 <label for="floatingFirstname">Description</label>
                             </div>
-                            <div class="mb-3 row">
-                                <select class="form-select" aria-label="Default select example" name="users">
-                                    <option selected disabled>Select Users</option>
-                                    <%
-                                        List <User> users = usersOperations.findUsers();
-                                        for(User user : users){
-                                    %>
-                                    <option value="<%=user.getID()%>"><%=user.getUserName()%></option>
-                                    <%}%>
-                                </select>
-                            </div>
+
                         </div>
                         <div class="modal-footer">
                             <input type="submit" class="btn btn-primary"/>
