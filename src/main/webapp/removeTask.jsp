@@ -16,5 +16,5 @@
     for (Long k:listID){
         taskOperations.removeTaskById(k);
     }
-    response.sendRedirect("projects.jsp" + checkID);
+    response.sendRedirect("tasks.jsp");
 %>

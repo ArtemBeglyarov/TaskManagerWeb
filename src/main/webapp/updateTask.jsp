@@ -85,10 +85,9 @@
     task.setDescription(request.getParameter("description"));
     task.setPriority(Task.Priority.get(request.getParameter("priority")));
 
-    task.setStartData(request.getParameter("firstName"));
-    task.setDueDate(request.getParameter("firstName"));
-    task.setReporter(request.getParameter("firstName"));
-    task.setAssignee(request.getParameter("firstName"));
+    task.setDueDate();
+    task.setReporter();
+    task.setAssignee();
     taskOperations.updateTask(task);
     response.sendRedirect("tasks.jsp");
 }

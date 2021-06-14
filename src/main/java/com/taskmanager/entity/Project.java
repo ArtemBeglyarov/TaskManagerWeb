@@ -86,6 +86,7 @@ public class Project implements Serializable {
     }
     public void addUsers(User user){
        users.add(user);
+
     }
     public Set<Task> getTasks() {
         return tasks;

@@ -136,6 +136,34 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserLabel">Select User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="addUserInProject.jsp?id=<%=project.getID()%>" method="POST">
+                    <div class="mb-3 row">
+                        <select class="form-select" aria-label="Default select example" name="users">
+                            <option selected disabled>Select User</option>
+                            <%
+                                List<User> listUserss = usersOperations.findUsers();
+                                for(User k : listUserss){
+                            %>
+                            <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary"/>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
     var button =

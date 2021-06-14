@@ -33,7 +33,7 @@
 <div class="nav-scroller bg-body shadow-sm">
     <nav class="nav nav-underline" aria-label="Secondary navigation">
         <a class="nav-link"
-           href="removeTask.jsp?id=<%=currTask.getID()%>">Delete Task</a>
+           href="deleteTask.jsp?ID=<%=currTask.getID()%>">Delete Task</a>
         <a class="nav-link"
            href="updateTask.jsp?id=<%=currTask.getID()%>">Update Task</a>
         <%
