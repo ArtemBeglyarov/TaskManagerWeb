@@ -28,7 +28,7 @@
 <jsp:include page='navbar.jsp'/>
 <main class="container">
     <div class="container-fluid">
-        <h1 class="title" align=center>UPDATE USER</h1>
+        <h1 class="title" align=center>UPDATE TASK</h1>
         <form action="updateUser.jsp?id=<%=task.getID()%>" method="POST">
             <div class="mb-3 row form-floating">
                 <input type="text" class="form-control" id="floatingTaskname" name="taskName" placeholder="TaskName" value="<%=task.getName()%>">
@@ -84,11 +84,10 @@
     task.setName(request.getParameter("taskName"));
     task.setDescription(request.getParameter("description"));
     task.setPriority(Task.Priority.get(request.getParameter("priority")));
-    task.setStatus(Task.Status.get(request.getParameter("status")));
-    task.setStartData(request.getParameter("firstName"));
-    task.setDueDate(request.getParameter("firstName"));
-    task.setReporter(request.getParameter("firstName"));
-    task.setAssignee(request.getParameter("firstName"));
+
+    task.setDueDate();
+    task.setReporter();
+    task.setAssignee();
     taskOperations.updateTask(task);
     response.sendRedirect("tasks.jsp");
 }

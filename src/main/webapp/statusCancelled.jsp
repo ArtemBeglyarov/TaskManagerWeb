@@ -1,10 +1,3 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: HP
-  Date: 05.06.2021
-  Time: 18:48
-  To change this template use File | Settings | File Templates.
---%>
 <%@ page import="com.taskmanager.entity.Task" %>
 <%@ page import="java.util.Date" %>
 <%@ page import="com.taskmanager.entity.User" %>
@@ -31,8 +24,7 @@
     String param = request.getParameter("id");
     Long id = Long.parseLong(param);
     task = taskOperations.findTask(id);
-    task.setStatus(Task.Status.IN_PROGRESS);
-    task.setStartData(new Date());
+    task.setStatus(Task.Status.CANCELLED);
     taskOperations.updateTask(task);
     response.sendRedirect("task.jsp?id="+id);
 

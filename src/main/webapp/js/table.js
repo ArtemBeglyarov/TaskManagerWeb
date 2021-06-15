@@ -1,9 +1,14 @@
+function getRandomArbitrary(min, max) {
+    return Math.round(Math.random() * (max - min) + min);
+}
+
 function createTable(tableId, toolBarButtons){
+    var toolbar = "toolbar"+ getRandomArbitrary(0, 100000);
     var table = $(tableId).DataTable({
         "paging": false,
-        "dom": 'f<"toolbar">rtip'
+        "dom": 'f<"'+ toolbar +'">rtip'
     });
-    $("div.toolbar").html(toolBarButtons);
+    $("div." + toolbar).html(toolBarButtons);
     $(tableId + ' tbody').on( 'click', 'tr', function () {
         $(this).toggleClass('selected_row');
     } );

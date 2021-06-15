@@ -8,6 +8,7 @@
 <%@ page import="java.util.Collections" %>
 <%@ page import="java.util.Set" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
+<%@ page import="java.util.ArrayList" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -19,7 +20,10 @@
     String ID = request.getParameter("id");
     Long id = Long.parseLong(ID);
     Project project = projectOperations.findProject(id);
-    Set<Task> tasks = project.getTasks();
+
+
+
+
 %>
 <html>
 <jsp:include page='header.jsp'/>
@@ -31,6 +35,27 @@
         <p class="col-md-8 fs-4"><%=project.getDescription()%></p>
     </div>
 </div>
+<table id="usersTable" class="table table-striped" style="width:100%">
+    <thead>
+    <tr>
+        <th>Username</th>
+        <th>First Name</th>
+        <th>Last Name</th>
+        <th>Status</th>
+    </tr>
+    </thead>
+    <tbody>
+    <% for(User user : project.getUsers()){%>
+    <tr value="<%=user.getID()%>">
+        <td><a href="user.jsp?id=<%=user.getID()%>"><%=user.getUserName()%></a></td>
+        <td><%=user.getFirstName()%></td>
+        <td><%=user.getLastName()%></td>
+        <td><%=user.getStatus()%></td>
+    </tr>
+    <%}%>
+    </tbody>
+</table>
+</table>
 <div class="table-responsive">
     <table id="taskTable" class="table table-striped" style="width:100%">
         <thead>
@@ -44,13 +69,13 @@
         </tr>
         </thead>
         <tbody>
-        <% for (Task task : tasks) {%>
+        <% for (Task task : project.getTasks()) {%>
         <tr value="<%=task.getID()%>">
             <td><a href="task.jsp?id=<%=task.getID()%>"><%=task.getName()%>
             </a></td>
-            <td><%=task.getStatus()%>></td>
-            <td><%=task.getPriority()%>></td>
-            <td><%=task.getDueDate()%>></td>
+            <td><%=task.getStatus()%></td>
+            <td><%=task.getPriority()%></td>
+            <td><%=task.getDueDate()%></td>
             <td><a href="user.jsp?id=<%=task.getReporter().getID()%>"><%=task.getReporter().getUserName()%></a></td>
             <td><a href="user.jsp?id=<%=task.getAssignee().getID()%>"><%=task.getAssignee().getUserName()%></a></td>
         </tr>
@@ -111,13 +136,44 @@
             </div>
         </div>
     </div>
+    <!-- Modal -->
+    <div class="modal fade" id="addUser" tabindex="-1" aria-labelledby="addUserLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addUserLabel">Select User</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <form action="addUserInProject.jsp?id=<%=project.getID()%>" method="POST">
+                    <div class="mb-3 row">
+                        <select class="form-select" aria-label="Default select example" name="users">
+                            <option selected disabled>Select User</option>
+                            <%
+                                List<User> listUserss = usersOperations.findUsers();
+                                for(User k : listUserss){
+                            %>
+                            <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
+                            <%}%>
+                        </select>
+                    </div>
+                    <div class="modal-footer">
+                        <input type="submit" class="btn btn-primary"/>
+                        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
 </div>
 <script>
+    var button =
+        '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUser">Add User</button> ';
     var buttons =
         '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add Task</button> ' +
         '<button type="button" id="editButton" class="btn btn-success">Edit Task</button> ' +
         '<button type="button" id="deleteButton" class="btn btn-danger"">Delete Task</button';
     $(document).ready(function () {
+        tableUser = createTable('#usersTable', button);
         table = createTable('#taskTable', buttons);
         $('#editButton').click( function () {
             var data = table.getSelected();

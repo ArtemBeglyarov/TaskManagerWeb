@@ -31,9 +31,9 @@
     String param = request.getParameter("id");
     Long id = Long.parseLong(param);
     task = taskOperations.findTask(id);
-    task.setStatus(Task.Status.IN_PROGRESS);
-    task.setStartData(new Date());
+    task.setStatus(Task.Status.ADDITIONAL_INFO_REQUIRED);
     taskOperations.updateTask(task);
     response.sendRedirect("task.jsp?id="+id);
 
 %>
+

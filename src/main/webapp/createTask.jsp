@@ -27,7 +27,7 @@
         response.sendRedirect("login.jsp");
     }
 
-    SimpleDateFormat format = new SimpleDateFormat("YYYY-MM-DD");
+    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
@@ -54,7 +54,6 @@
         task.setProject(projectOperations.findProject(id));
 
         String assID = request.getParameter("users");
-        System.out.println(assID + " АЙДИ ЮСЕРА");
         Long idd = Long.parseLong(assID);
         task.setAssignee(usersOperations.findUser(idd));
 

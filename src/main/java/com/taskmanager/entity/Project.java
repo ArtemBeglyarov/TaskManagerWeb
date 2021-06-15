@@ -84,7 +84,10 @@ public class Project implements Serializable {
     public void setUsers(Set<User> users) {
         this.users = users;
     }
+    public void addUsers(User user){
+       users.add(user);
 
+    }
     public Set<Task> getTasks() {
         return tasks;
     }
@@ -108,5 +111,7 @@ public class Project implements Serializable {
     public void setCreator(User creator) {
         this.creator = creator;
     }
+
+
 }
 
