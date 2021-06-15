@@ -100,8 +100,9 @@
 <%--    </p>--%>
 
 <%--</div>--%>
-<div class="container" style="margin-top: 6%">
-    <div class="row" style="width:60%; margin: auto" >
+
+<div class="container" style="margin-top: 3%">
+    <div class="row" style="width:70%; margin: auto" >
         <div class="col">
             <ul class="list-group mb-3">
                 <li class="list-group-item d-flex justify-content-between lh-sm">
@@ -150,9 +151,9 @@
                     <tbody>
                     <% for (Task task : ReporterTasksCurrUser) {%>
                     <tr value="<%=task.getID()%>">
-                        <td><a href="task.jsp?id=<%=task.getID()%>"
+                        <td><b>Name: </b><a href="task.jsp?id=<%=task.getID()%>"
                                style="color:
-                     black"><%=task.getName()%></a> <%=task.getStatus()%>
+                     black"><%=task.getName()%></a>;<b>   Status: </b><%=task.getStatus()%>;
                         </td>
                     </tr>
                     <%}%>
@@ -172,11 +173,10 @@
                 <tbody>
                 <% for (Task task2 : AssignedTaskCurrUser) {%>
                 <tr value="<%=task2.getID()%>">
-                    <td><a href="task.jsp?id=<%=task2.getID()%>"
-                           style="color:
-                                 black"><%=task2.getName()%>
-                    </a><%=task2.getStatus()%></td>
-
+                    <td><b>Name: </b><a href="task.jsp?id=<%=task2.getID()%>"
+                                        style="color:
+                     black"><%=task2.getName()%></a>;<b>   Status: </b><%=task2.getStatus()%>;
+                    </td>
                 </tr>
                 <%}%>
                 </tbody>
