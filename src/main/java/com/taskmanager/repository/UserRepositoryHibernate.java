@@ -23,7 +23,6 @@ public class UserRepositoryHibernate implements Repository<User> {
     @Resource(lookup = "java:/AppDS")
     DataSource dataSource;
     private static final String findAllUserId = "SELECT id FROM users";
-    private static final String findAllUser = "SELECT * FROM users";
 
     @PersistenceContext(unitName = "tm")
     EntityManager entityManager;
@@ -52,26 +51,6 @@ public class UserRepositoryHibernate implements Repository<User> {
         entityManager.remove(user);
     }
 
-//    @Override
-//    public List<User> findAll() throws SQLException {
-//        List<User> userEntities = new ArrayList<User>();
-//        Connection connection = dataSource.getConnection();
-//        Statement statement = connection.createStatement();
-//        ResultSet resultSet = statement.executeQuery(findAllUserId);
-//
-//        while (resultSet.next()) {
-//            User user = new User();
-//            user.setID(resultSet.getInt("id"));
-//            user.setFirstName(resultSet.getString("first_name"));
-//            user.setLastName(resultSet.getString("last_name"));
-//            user.setUserName(resultSet.getString("user_name"));
-//            user.setPassword(resultSet.getString("password"));
-//            user.setStatus(resultSet.getString("status"));
-//            userEntities.add(user);
-//        }
-//
-//        return userEntities;
-//    }
  @Override
     public List<User> findAll() throws SQLException {
         List<Long> ids = getAllUsersIds();

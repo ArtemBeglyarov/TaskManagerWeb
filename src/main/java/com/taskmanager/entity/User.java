@@ -1,11 +1,7 @@
 package com.taskmanager.entity;
-
-
-
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.GenericGenerator;
-
 import javax.persistence.*;
 import java.io.Serializable;
 @JsonView
@@ -36,12 +32,8 @@ public class User implements Serializable {
         this.status = status;
 
     } public User(Long id, String firstName, String lastName, String userName, String password, String status) {
+        this(firstName,lastName, userName, password, status);
         this.ID = id;
-        this.firstName = firstName;
-        this.lastName = lastName;
-        this.userName = userName;
-        this.password = password;
-        this.status = status;
     }
 
     public long getID() {
