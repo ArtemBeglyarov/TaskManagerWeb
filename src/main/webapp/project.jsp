@@ -9,6 +9,7 @@
 <%@ page import="java.util.Set" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
 <%@ page import="java.util.ArrayList" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -20,8 +21,7 @@
     String ID = request.getParameter("id");
     Long id = Long.parseLong(ID);
     Project project = projectOperations.findProject(id);
-
-
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 
 
 %>
@@ -33,6 +33,7 @@
     <div class="container-fluid py-5">
         <h1 class="display-5 fw-bold"><%=project.getName()%></h1>
         <p class="col-md-8 fs-4"><%=project.getDescription()%></p>
+        <p class="col-md-8 fs-4"><%=project.getCreator().getUserName()%></p>
     </div>
 </div>
 <table id="usersTable" class="table table-striped" style="width:100%">
@@ -41,16 +42,14 @@
         <th>Username</th>
         <th>First Name</th>
         <th>Last Name</th>
-        <th>Status</th>
     </tr>
     </thead>
     <tbody>
-    <% for(User user : project.getUsers()){%>
+    <% for(User user : project.getUsers()) {%>
     <tr value="<%=user.getID()%>">
         <td><a href="user.jsp?id=<%=user.getID()%>"><%=user.getUserName()%></a></td>
         <td><%=user.getFirstName()%></td>
         <td><%=user.getLastName()%></td>
-        <td><%=user.getStatus()%></td>
     </tr>
     <%}%>
     </tbody>
@@ -92,7 +91,6 @@
                 </div>
                 <form action="createTask.jsp?projectId=<%=project.getID()%>" method="POST">
                     <div class="modal-body">
-
                         <div class="mb-3 row form-floating">
                             <input type="text" class="form-control" id="floatingName" name="name" Name="name">
                             <label for="floatingName">Name</label>
@@ -115,7 +113,9 @@
                             <select class="form-select" aria-label="Default select example" name="users">
                                 <option selected disabled>Select asignee</option>
                                 <%
-                                    List<User> listUsers = usersOperations.findUsers();
+                                    List<User> listUsers = new ArrayList<>();
+                                    listUsers.add(project.getCreator());
+                                    listUsers.addAll(project.getUsers());
                                     for(User k : listUsers){
                                 %>
                                 <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
@@ -149,7 +149,11 @@
                         <select class="form-select" aria-label="Default select example" name="users">
                             <option selected disabled>Select User</option>
                             <%
-                                List<User> listUserss = usersOperations.findUsers();
+                                List<User> listUserss = new ArrayList<>();
+                                listUserss.addAll(usersOperations.findUsers());
+                                listUserss.remove(project.getCreator());
+                                listUserss.removeAll(project.getUsers());
+                                //List<User> listUserss = usersOperations.findUsers();
                                 for(User k : listUserss){
                             %>
                             <option value="<%=k.getID()%>"><%=k.getUserName()%></option>

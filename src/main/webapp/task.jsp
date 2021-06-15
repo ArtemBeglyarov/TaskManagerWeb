@@ -33,7 +33,7 @@
 <div class="nav-scroller bg-body shadow-sm">
     <nav class="nav nav-underline" aria-label="Secondary navigation">
         <a class="nav-link"
-           href="deleteTask.jsp?ID=<%=currTask.getID()%>">Delete Task</a>
+           href="removeTask.jsp?ID=<%=currTask.getID()%>">Delete Task</a>
         <a class="nav-link"
            href="updateTask.jsp?id=<%=currTask.getID()%>">Update Task</a>
         <%
@@ -106,9 +106,11 @@
 </p>
 <p>Due Date: <%=currTask.getDueDate()%>
 </p>
-<p>Reporter: <%=currTask.getReporter()%>
+<p>Reporter: <a href="user.jsp?id=<%=currTask.getReporter().getID()%>"><%=currTask.getReporter().getUserName()%>
+</a>
 </p>
-<p>Assignee: <%=currTask.getAssignee()%>
+<p>Assignee: <a href="user.jsp?id=<%=currTask.getAssignee().getID()%>"><%=currTask.getAssignee().getUserName()%>
+</a>
 </p>
 
 <hr>

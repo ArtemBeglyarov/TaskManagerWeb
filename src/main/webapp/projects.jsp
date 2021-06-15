@@ -70,7 +70,6 @@
                                 <input type="text" class="form-control" id="floatingFirstname" name="description" placeholder="Description">
                                 <label for="floatingFirstname">Description</label>
                             </div>
-
                         </div>
                         <div class="modal-footer">
                             <input type="submit" class="btn btn-primary"/>

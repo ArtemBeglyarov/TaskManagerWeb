@@ -20,14 +20,16 @@
 <%@ page import="com.taskmanager.entity.Project" %>
 <%@ page import="com.taskmanager.operations.ProjectOperations" %>
 <%@ page import="java.util.List" %>
+<%@ page import="java.text.Format" %>
+<%@ page import="java.text.DateFormat" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
         response.sendRedirect("login.jsp");
     }
+    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
 
-    SimpleDateFormat format = new SimpleDateFormat("yyyy-MM-dd");
 
 
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
@@ -44,8 +46,9 @@
         task.setStatus(Task.Status.OPENED);
         task.setDescription(request.getParameter("description")); //
         task.setCreateDate(new Date());
+
         try {
-            task.setDueDate(format.parse(request.getParameter("dueDate")));
+            task.setDueDate(format1.parse(request.getParameter("dueDate")));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }

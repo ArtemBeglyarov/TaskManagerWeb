@@ -21,8 +21,6 @@
         Project project = new Project();
         project.setName(request.getParameter("name"));
         project.setDescription(request.getParameter("description"));
-
-
         project.setCreator(currUser);
         projectOperations.createProject(project);
         response.sendRedirect("projects.jsp");

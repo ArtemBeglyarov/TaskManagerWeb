@@ -6,11 +6,15 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.taskmanager.operations.TaskOperations" %>
 <%@ page import="com.taskmanager.entity.Task" %>
+<%@ page import="java.util.List" %>
+<%@ page import="java.text.ParseException" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
         response.sendRedirect("login.jsp");
     }
+    UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
     Task task = null;
     String param = request.getParameter("id");
@@ -44,13 +48,13 @@
                     <%
                         for(Task.Priority priority : Task.Priority.values()){
                     %>
-                    <option value="<%=priority.name()%>>"><%=priority.name()%></option>
+                    <option value="<%=priority.name()%>"><%=priority.name()%></option>
                     <%}%>
                 </select>
             </div>
             <div class="mb-3 row ">
-                <select class="form-select" aria-label="Default select example" name="status">
-                    <option selected disabled>Select Status</option>
+                <select class="form-select" aria-label="Default select example" name="status" >
+                    <option selected disabled >Select task </option>
                     <%
                         for(Task.Status status : Task.Status.values()){
                     %>
@@ -58,19 +62,20 @@
                     <%}%>
                 </select>
             </div>
-            <div class="mb-3 row ">
-                <input type="text" class="form-control" id="floatingStartDate" name="startDate" placeholder="StartDate" value="<%=task.getStartData()%>">
-                <label for="floatingStartDate">StartData</label>
-            </div>
             <div class="mb-3 row form-floating">
-                <input type="text" class="form-control" id="floatingDueDate" name="dueDate" placeholder="DueDate" value="<%=task.getDueDate()%>">
+                <input type="date" class="form-control" id="floatingDueDate" name="dueDate" placeholder="<%=task.getDueDate()%>" >
                 <label for="floatingDueDate">DueDate</label>
             </div>
             <div class="mb-3 row form-floating">
-                <input type="text" class="form-control" id="floatingReporter" name="reporter" placeholder="Reporter" value="<%=task.getReporter()%>">
-                <label for="floatingReporter">Reporter</label>
-            </div>
-            <div class="mb-3 row form-floating">
+                <select class="form-select" aria-label="Default select example" name="users">
+                    <option selected disabled>Select User</option>
+                    <%
+                        List<User> listUserss = usersOperations.findUsers();
+                        for(User k : listUserss){
+                    %>
+                    <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
+                    <%}%>
+                </select>
                 <input type="text" class="form-control" id="floatingAssignee" name="dueDate" placeholder="DueDate" value="<%=task.getAssignee()%>">
                 <label for="floatingAssignee">Assignee</label>
             </div>
@@ -84,10 +89,17 @@
     task.setName(request.getParameter("taskName"));
     task.setDescription(request.getParameter("description"));
     task.setPriority(Task.Priority.get(request.getParameter("priority")));
+    task.setStatus(Task.Status.get(request.getParameter("status")));
 
-    task.setDueDate();
-    task.setReporter();
-    task.setAssignee();
+    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+    String assID = request.getParameter("users");
+    Long idd = Long.parseLong(assID);
+    task.setAssignee(usersOperations.findUser(idd));
+     try {
+            task.setDueDate(format1.parse(request.getParameter("dueDate")));
+        } catch (ParseException e) {
+            throw new RuntimeException(e);
+        }
     taskOperations.updateTask(task);
     response.sendRedirect("tasks.jsp");
 }
