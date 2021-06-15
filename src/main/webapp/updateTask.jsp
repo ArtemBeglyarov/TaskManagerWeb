@@ -44,21 +44,11 @@
             </div>
             <div class="mb-3 row form-floating">
                 <select class="form-select" aria-label="Default select example" name="priority">
-                    <option selected disabled>Select Priority</option>
+
                     <%
                         for(Task.Priority priority : Task.Priority.values()){
                     %>
-                    <option value="<%=priority.name()%>"><%=priority.name()%></option>
-                    <%}%>
-                </select>
-            </div>
-            <div class="mb-3 row ">
-                <select class="form-select" aria-label="Default select example" name="status" >
-                    <option selected disabled >Select task </option>
-                    <%
-                        for(Task.Status status : Task.Status.values()){
-                    %>
-                    <option value="<%=status.name()%>>"><%=status.name()%></option>
+                    <option <%=priority.equals(task.getPriority()) ? "selected" : ""%> value="<%=priority.name()%>"><%=priority.name()%></option>
                     <%}%>
                 </select>
             </div>
@@ -68,7 +58,8 @@
             </div>
             <div class="mb-3 row form-floating">
                 <select class="form-select" aria-label="Default select example" name="users">
-                    <option selected disabled>Select User</option>
+                    <option selected disabled >Select User</option>
+
                     <%
                         List<User> listUserss = usersOperations.findUsers();
                         for(User k : listUserss){
@@ -76,8 +67,7 @@
                     <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
                     <%}%>
                 </select>
-                <input type="text" class="form-control" id="floatingAssignee" name="dueDate" placeholder="DueDate" value="<%=task.getAssignee()%>">
-                <label for="floatingAssignee">Assignee</label>
+
             </div>
             <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="Update">
@@ -89,7 +79,6 @@
     task.setName(request.getParameter("taskName"));
     task.setDescription(request.getParameter("description"));
     task.setPriority(Task.Priority.get(request.getParameter("priority")));
-    task.setStatus(Task.Status.get(request.getParameter("status")));
 
     SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
     String assID = request.getParameter("users");

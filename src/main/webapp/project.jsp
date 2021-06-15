@@ -154,9 +154,9 @@
                                 listUserss.remove(project.getCreator());
                                 listUserss.removeAll(project.getUsers());
                                 //List<User> listUserss = usersOperations.findUsers();
-                                for(User k : listUserss){
+                                for(User user : listUserss){
                             %>
-                            <option value="<%=k.getID()%>"><%=k.getUserName()%></option>
+                            <option value="<%=user.getID()%>"><%=user.getUserName()%></option>
                             <%}%>
                         </select>
                     </div>

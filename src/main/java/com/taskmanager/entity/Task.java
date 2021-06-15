@@ -1,5 +1,6 @@
 package com.taskmanager.entity;
 
+import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -58,13 +59,13 @@ public class Task implements Serializable {
     private Date dueDate; //ожидание конца работы
     private Date endDate;
     private Date createDate;
-    @ManyToOne
+    @ManyToOne( cascade = CascadeType.DETACH)
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "reporter_id", nullable = false)
     private User reporter;// исполнитель задачи
-    @ManyToOne
+    @ManyToOne(cascade = CascadeType.DETACH)
     @JoinColumn(name = "asignee_id", nullable = true)
     private User assignee; //создател задачи
 

@@ -50,6 +50,7 @@ public class TaskHibernateRepository implements Repository<Task> {
     public void delete(long id)  {
         Task task = entityManager.find(Task.class, id);
         entityManager.remove(task);
+        entityManager.flush();
     }
 
     @Override
