@@ -61,7 +61,6 @@
     <% if (request.getMethod().equals(HttpMethod.POST)) {
     project.setName(request.getParameter("name"));
     project.setDescription(request.getParameter("description"));
-    //TODO Сделать здесь же обновление участников проекта
     String ID = request.getParameter("users");
     Long id = Long.parseLong(ID);
     User user = usersOperations.findUser(id);

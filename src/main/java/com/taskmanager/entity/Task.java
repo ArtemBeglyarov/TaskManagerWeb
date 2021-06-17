@@ -59,13 +59,13 @@ public class Task implements Serializable {
     private Date dueDate; //ожидание конца работы
     private Date endDate;
     private Date createDate;
-    @ManyToOne( cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "project_id", nullable = false)
     private Project project;
-    @ManyToOne(cascade = CascadeType.MERGE)
+    @ManyToOne
     @JoinColumn(name = "reporter_id", nullable = false)
     private User reporter;// исполнитель задачи
-    @ManyToOne(cascade = CascadeType.MERGE )
+    @ManyToOne
     @JoinColumn(name = "asignee_id", nullable = true)
     private User assignee; //создател задачи
 

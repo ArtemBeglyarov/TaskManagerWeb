@@ -49,3 +49,4 @@ function sendEdit(data, url){
         window.location.href = url + "?id=" + data[0];
     }
 }
+

@@ -170,10 +170,12 @@
 <script>
     var button =
         '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUser">Add User</button> ';
+
+        //'<button type="button" id="deleteUser" class="btn btn-danger">Delete user</button';
     var buttons =
         '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add Task</button> ' +
         '<button type="button" id="editButton" class="btn btn-success">Edit Task</button> ' +
-        '<button type="button" id="deleteButton" class="btn btn-danger"">Delete Task</button';
+        '<button type="button" id="deleteButton" class="btn btn-danger">Delete Task</button';
     $(document).ready(function () {
         tableUser = createTable('#usersTable', button);
         table = createTable('#taskTable', buttons);
@@ -185,6 +187,13 @@
             var data = table.getSelected();
             sendDelete(data, 'removeTask.jsp');
         });
+       /*
+        $('#deleteUser').click( function () {
+
+            var data = table.getSelected();
+            sendDeleteUser(data, 'deleteUserInProject');
+        });
+    */
     });
 </script>
 </body>

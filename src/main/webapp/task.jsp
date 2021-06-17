@@ -33,8 +33,6 @@
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
     String duodate = simpleDateFormat.format(currTask.getDueDate());
 
-   // String startdate = simpleDateFormat.format(currTask.getStartData());
-
 %>
 <div class="nav-scroller bg-body shadow-sm">
     <nav class="nav nav-underline" aria-label="Secondary navigation">
@@ -220,6 +218,5 @@
 <%--</p>--%>
 
 <%--<hr>--%>
-
 </body>
 </html>
