@@ -89,49 +89,115 @@
         %>
     </nav>
 </div>
-
-
 <form action="task.jsp" method="GET"></form>
-<p>ID: <%=currTask.getID()%>
-</p>
-<p>Task name:  <%=currTask.getName()%>
-</p>
-<p>Description: <%=currTask.getDescription()%>
-</p>
-<p>Priority: <%=currTask.getPriority()%>
-</p>
-<p>Status: <%=currTask.getStatus()%>
-</p>
-<p>Start Date: <%=currTask.getStartData()%>
-</p>
-<p>Due Date: <%=currTask.getDueDate()%>
-</p>
-<p>Reporter: <a href="user.jsp?id=<%=currTask.getReporter().getID()%>"><%=currTask.getReporter().getUserName()%>
-</a>
-</p>
-<p>Assignee: <a href="user.jsp?id=<%=currTask.getAssignee().getID()%>"><%=currTask.getAssignee().getUserName()%>
-</a>
-</p>
+<div class="container" style="margin-top: 3%">
+    <div class="row" style="width:70%; margin: auto" >
+        <div class="col">
+            <ul class="list-group mb-3">
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Task name</h6>
+                        <small class="text-muted"> <%=currTask.getName()%></small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Task description</h6>
+                        <small class="text-muted"> <%=currTask.getDescription()%></small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Task priority</h6>
+                        <small class="text-muted"> <%=currTask.getPriority()%></small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Status</h6>
+                        <small class="text-muted"><%=currTask.getStatus()%></small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Start date</h6>
+                        <small class="text-muted"><%=currTask.getStartData()%></small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Due date</h6>
+                        <small class="text-muted"><%=currTask.getDueDate()%></small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Reporter</h6>
+                        <small class="text-muted"><a href="user.jsp?id=<%=currTask.getReporter().getID()%>"><%=currTask.getReporter().getUserName()%>
+                        </a></small>
+                    </div>
+                </li>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Assignee</h6>
+                        <small class="text-muted"><a href="user.jsp?id=<%=currTask.getAssignee().getID()%>"><%=currTask.getAssignee().getUserName()%>
+                        </a></small>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <div class="col">
+            <li class="list-group-item d-flex justify-content-between lh-sm">
+                <div>
+                    <h6 class="my-0">Comments</h6>
+                    <small class="text-muted">    <%
+                        if (currTask.getComments() != null) {
+                            List<Comment> commentTask = commentsOperations.getSortComment(currTask.getComments());
+                            for (Comment k : commentTask) {%>
 
-<hr>
-<%
-    if (currTask.getComments() != null) {
-        List<Comment> commentTask = commentsOperations.getSortComment(currTask.getComments());
-        for (Comment k : commentTask) {%>
+                        <p><%=k.getCreateData()%> <%=k.getCreatorComment().getUserName()%>:
+                            <%=k.getComment()%>
+                        </p>
+                        <%
+                                }
+                            }
+                        %></small>
+                </div>
+            </li>
 
-<p><%=k.getCreateData()%> <%=k.getCreatorComment().getUserName()%>:
-    <%=k.getComment()%>
-</p>
-<%
-        }
-    }
-%>
+            <hr>
+            <form action="commentTask.jsp?id=<%=currTask.getID()%>" method="post">
+                <p><b>Your comment:</b></p>
+                <p><textarea rows="5" cols="55"
+                             name="comment"><%currUser.getUserName();%></textarea></p>
+                <p><input type="submit" value="Отправить"></p>
+            </form>
+        </div>
+    </div>
+</div>
 
-<form action="commentTask.jsp?id=<%=currTask.getID()%>" method="post">
-    <p><b>Your comment:</b></p>
-    <p><textarea rows="5" cols="55"
-                 name="comment"><%currUser.getUserName();%></textarea></p>
-    <p><input type="submit" value="Отправить"></p>
-</form>
+<%--<p>ID: <%=currTask.getID()%>--%>
+<%--</p>--%>
+<%--<p>Task name:  <%=currTask.getName()%>--%>
+<%--</p>--%>
+<%--<p>Description: <%=currTask.getDescription()%>--%>
+<%--</p>--%>
+<%--<p>Priority: <%=currTask.getPriority()%>--%>
+<%--</p>--%>
+<%--<p>Status: <%=currTask.getStatus()%>--%>
+<%--</p>--%>
+<%--<p>Start Date: <%=currTask.getStartData()%>--%>
+<%--</p>--%>
+<%--<p>Due Date: <%=currTask.getDueDate()%>--%>
+<%--</p>--%>
+<%--<p>Reporter: <a href="user.jsp?id=<%=currTask.getReporter().getID()%>"><%=currTask.getReporter().getUserName()%>--%>
+<%--</a>--%>
+<%--</p>--%>
+<%--<p>Assignee: <a href="user.jsp?id=<%=currTask.getAssignee().getID()%>"><%=currTask.getAssignee().getUserName()%>--%>
+<%--</a>--%>
+<%--</p>--%>
+
+<%--<hr>--%>
+
 </body>
 </html>
