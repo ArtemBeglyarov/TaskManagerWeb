@@ -3,13 +3,10 @@
 <%@ page import="com.taskmanager.entity.Project" %>
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="com.taskmanager.entity.Task" %>
-<%@ page import="java.util.List" %>
 <%@ page import="org.hibernate.Hibernate" %>
-<%@ page import="java.util.Collections" %>
-<%@ page import="java.util.Set" %>
 <%@ page import="com.taskmanager.operations.UsersOperations" %>
-<%@ page import="java.util.ArrayList" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.*" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -22,8 +19,6 @@
     Long id = Long.parseLong(ID);
     Project project = projectOperations.findProject(id);
     SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
-
-
 %>
 <html>
 <jsp:include page='header.jsp'/>
@@ -68,13 +63,15 @@
         </tr>
         </thead>
         <tbody>
-        <% for (Task task : project.getTasks()) {%>
+        <% for (Task task : project.getTasks()) {
+        String duodate = simpleDateFormat.format(task.getDueDate());
+        %>
         <tr value="<%=task.getID()%>">
             <td><a href="task.jsp?id=<%=task.getID()%>"><%=task.getName()%>
             </a></td>
             <td><%=task.getStatus()%></td>
             <td><%=task.getPriority()%></td>
-            <td><%=task.getDueDate()%></td>
+            <td><%=duodate%></td>
             <td><a href="user.jsp?id=<%=task.getReporter().getID()%>"><%=task.getReporter().getUserName()%></a></td>
             <td><a href="user.jsp?id=<%=task.getAssignee().getID()%>"><%=task.getAssignee().getUserName()%></a></td>
         </tr>
@@ -109,7 +106,7 @@
                             <input type="date" class="form-control" id="floatingDueDate" name="dueDate" placeholder="Due Date">
                             <label for="floatingDueDate">Due Date</label>
                         </div>
-                        <div class="mb-3 row">
+                        <div class="mb-3 row ">
                             <select class="form-select" aria-label="Default select example" name="users">
                                 <option selected disabled>Select asignee</option>
                                 <%
@@ -126,7 +123,6 @@
                             <input type="text" class="form-control" id="floatingDescription" name="description" placeholder="Description">
                             <label for="floatingDescription">Description</label>
                         </div>
-
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-primary"/>
@@ -145,6 +141,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form action="addUserInProject.jsp?id=<%=project.getID()%>" method="POST">
+                    <div class="modal-body">
                     <div class="mb-3 row">
                         <select class="form-select" aria-label="Default select example" name="users">
                             <option selected disabled>Select User</option>
@@ -159,6 +156,7 @@
                             <option value="<%=user.getID()%>"><%=user.getUserName()%></option>
                             <%}%>
                         </select>
+                    </div>
                     </div>
                     <div class="modal-footer">
                         <input type="submit" class="btn btn-primary"/>

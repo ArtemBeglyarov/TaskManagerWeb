@@ -88,6 +88,10 @@ public class Project implements Serializable {
        users.add(user);
 
     }
+
+    public  void deleteUser(User user){
+        users.remove(user);
+    }
     public Set<Task> getTasks() {
         return tasks;
     }

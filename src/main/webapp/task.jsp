@@ -11,6 +11,7 @@
 <%@ page import="java.util.*" %>
 <%@ page import="com.taskmanager.entity.Comment" %>
 <%@ page import="com.taskmanager.exchange.Download" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -29,6 +30,11 @@
     String ID = request.getParameter("id");
     Long id = Long.parseLong(ID);
     Task currTask = taskOperations.findTask(id);
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
+    String duodate = simpleDateFormat.format(currTask.getDueDate());
+
+   // String startdate = simpleDateFormat.format(currTask.getStartData());
+
 %>
 <div class="nav-scroller bg-body shadow-sm">
     <nav class="nav nav-underline" aria-label="Secondary navigation">
@@ -118,16 +124,32 @@
                         <small class="text-muted"><%=currTask.getStatus()%></small>
                     </div>
                 </li>
+                <% if(currTask.getStartData() != null) {
+                    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                    String startDate = simpleDateFormat1.format(currTask.getStartData());
+                %>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Start date</h6>
-                        <small class="text-muted"><%=currTask.getStartData()%></small>
+                        <small class="text-muted"><%=startDate%></small>
                     </div>
                 </li>
+                    <%}
+                        else {
+                    %>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">Start date</h6>
+                        <small class="text-muted">Not assigned </small>
+                    </div>
+                </li>
+                    <%
+                        }
+                    %>
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Due date</h6>
-                        <small class="text-muted"><%=currTask.getDueDate()%></small>
+                        <small class="text-muted"><%=duodate%></small>
                     </div>
                 </li>
                 <li class="list-group-item d-flex justify-content-between lh-sm">

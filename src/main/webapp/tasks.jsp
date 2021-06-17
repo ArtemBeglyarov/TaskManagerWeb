@@ -5,6 +5,7 @@
 <%@ page import="com.taskmanager.entity.Task" %>
 <%@ page import="com.taskmanager.operations.TaskOperations" %>
 <%@ page import="com.taskmanager.entity.Project" %>
+<%@ page import="java.text.SimpleDateFormat" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
@@ -19,7 +20,7 @@
 <%
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
     List<Task> tasks = taskOperations.findAllTasks();
-
+    SimpleDateFormat simpleDateFormat = new SimpleDateFormat("yyyy-MM-dd");
 %>
 <main class="container">
     <div class="container-fluid">
@@ -37,13 +38,15 @@
                 </tr>
                 </thead>
                 <tbody>
-                <% for (Task task : tasks) {%>
+                <% for (Task task : tasks) {
+                    String duodate = simpleDateFormat.format(task.getDueDate());
+                %>
                 <tr value="<%=task.getID()%>">
                     <td><a href="task.jsp?id=<%=task.getID()%>"><%=task.getName()%>
                     </a></td>
                     <td><%=task.getStatus()%></td>
                     <td><%=task.getPriority()%></td>
-                    <td><%=task.getDueDate()%></td>
+                    <td><%=duodate%></td>
                     <td><a href="project.jsp?id=<%=task.getProject().getID()%>"><%=task.getProject().getName()%></a></td>
                     <td><a href="user.jsp?id=<%=task.getReporter().getID()%>"><%=task.getReporter().getUserName()%></a></td>
                     <td>
