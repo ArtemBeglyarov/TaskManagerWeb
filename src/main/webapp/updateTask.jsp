@@ -43,6 +43,10 @@
                 <label for="floatingFDescription">Description</label>
             </div>
             <div class="mb-3 row form-floating">
+                <input type="date" class="form-control" id="floatingDueDate" name="dueDate" placeholder="Due Date">
+                <label for="floatingDueDate">Due Date</label>
+            </div>
+            <div class="mb-3 row form-floating">
                 <select class="form-select" aria-label="Default select example" name="priority">
 
                     <%
@@ -56,6 +60,7 @@
                 <select class="form-select" aria-label="Default select example" name="users">
                     <option selected disabled>Select User</option>
                     <%
+
                         List <User>listUserss = usersOperations.findUsers();
                         for(User user : listUserss){
                     %>
