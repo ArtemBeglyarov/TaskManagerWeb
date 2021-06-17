@@ -73,7 +73,7 @@ public class Task implements Serializable {
     //private final long DEFAULT_LONG = -1;
 
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(targetEntity = Comment.class, cascade = ALL, fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Comment.class, orphanRemoval = true, fetch = FetchType.EAGER)
     private Set<Comment> comments;
 
     public Task() {

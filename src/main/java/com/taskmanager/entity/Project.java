@@ -24,7 +24,7 @@ public class Project implements Serializable {
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<User> users;
     @LazyCollection(LazyCollectionOption.FALSE)
-    @OneToMany(targetEntity = Task.class, cascade = ALL, mappedBy = "project", fetch = FetchType.EAGER)
+    @OneToMany(targetEntity = Task.class, orphanRemoval = true, mappedBy = "project", fetch = FetchType.EAGER)
     private Set<Task> tasks;
     private String description;
     @ManyToOne

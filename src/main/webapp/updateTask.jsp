@@ -9,6 +9,7 @@
 <%@ page import="java.util.List" %>
 <%@ page import="java.text.ParseException" %>
 <%@ page import="java.text.SimpleDateFormat" %>
+<%@ page import="java.util.Set" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
     if (currUser == null) {
@@ -60,8 +61,8 @@
                 <select class="form-select" aria-label="Default select example" name="users">
                     <option selected disabled>Select User</option>
                     <%
-
-                        List <User>listUserss = usersOperations.findUsers();
+                        Set<User> listUserss = task.getProject().getUsers();
+                        listUserss.add(task.getProject().getCreator());
                         for(User user : listUserss){
                     %>
                     <option value="<%=user.getID()%>"><%=user.getUserName()%></option>
