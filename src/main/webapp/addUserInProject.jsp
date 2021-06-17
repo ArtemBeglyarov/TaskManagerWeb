@@ -27,6 +27,8 @@
         Long id = Long.parseLong(ID);
         User user = usersOperations.findUser(id);
         project.addUsers(user);
+        user.getProjects().add(project);
+        usersOperations.updateUser(user);
         projectOperations.updateProject(project);
         response.sendRedirect("project.jsp?id=" + param);
     }

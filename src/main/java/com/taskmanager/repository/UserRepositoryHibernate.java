@@ -1,10 +1,16 @@
 package com.taskmanager.repository;
 
+import com.taskmanager.entity.Comment;
+import com.taskmanager.entity.Project;
+import com.taskmanager.entity.Task;
 import com.taskmanager.entity.User;
+
 import javax.annotation.Resource;
 import javax.ejb.LocalBean;
 import javax.ejb.Stateless;
-import javax.persistence.*;
+import javax.persistence.EntityManager;
+import javax.persistence.PersistenceContext;
+import javax.persistence.TypedQuery;
 import javax.persistence.criteria.CriteriaBuilder;
 import javax.persistence.criteria.CriteriaQuery;
 import javax.persistence.criteria.Root;
@@ -48,7 +54,32 @@ public class UserRepositoryHibernate implements Repository<User> {
     @Override
     public void delete(long id) {
         User user = entityManager.find(User.class, id);
+        for (Project project : user.getProjects()) {
+          project.getUsers().remove(user);
+          entityManager.merge(project);
+        }
+        for (Task task : user.getAssignedTasks()) {
+            task.setAssignee(task.getProject().getCreator());
+            entityManager.merge(task);
+        }
+        for (Task task : user.getCreatedTasks()) {
+            task.setReporter(task.getProject().getCreator());
+            entityManager.merge(task);
+        }
+        for (Project project : user.getCreatorProject()) {
+            project.setCreator(find(1));
+            entityManager.merge(project);
+        }
+        for (Comment comment : user.getComments()) {
+            comment.getTask().getComments().remove(comment);
+            entityManager.merge(comment.getTask());
+            comment.setCreatorComment(null);
+            comment.setTask(null);
+            entityManager.remove(comment);
+        }
+        user.getComments().clear();
         entityManager.remove(user);
+
     }
 
  @Override

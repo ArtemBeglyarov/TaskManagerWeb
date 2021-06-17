@@ -30,9 +30,9 @@
         comment.setCreateData(format);
         comment.setComment(request.getParameter("comment"));
         comment.setTask(currTask);
+        commentsOperations.create(comment);
         currTask.addComment(comment);
         taskOperations.updateTask(currTask);
-        commentsOperations.create(comment);
 
         response.sendRedirect("task.jsp?id="+getIdTask);
     }

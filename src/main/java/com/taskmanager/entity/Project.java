@@ -8,8 +8,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Set;
 
-import static javax.persistence.CascadeType.ALL;
-
 
 @Entity
 @Table(name = "projects")
@@ -20,7 +18,7 @@ public class Project implements Serializable {
     private long ID;
 
     private String name;
-    @ManyToMany(fetch = FetchType.EAGER)
+    @ManyToMany(fetch = FetchType.EAGER,mappedBy = "projects")
     @LazyCollection(LazyCollectionOption.FALSE)
     private Set<User> users;
     @LazyCollection(LazyCollectionOption.FALSE)

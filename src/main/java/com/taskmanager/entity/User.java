@@ -3,10 +3,13 @@ package com.taskmanager.entity;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import com.fasterxml.jackson.annotation.JsonView;
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.LazyCollection;
+import org.hibernate.annotations.LazyCollectionOption;
 
 import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Objects;
+import java.util.Set;
 
 @JsonView
 @Entity
@@ -24,6 +27,26 @@ public class User implements Serializable {
     private String userName;
     private String password;
     private String status;
+
+    @ManyToMany(fetch = FetchType.EAGER)
+    @LazyCollection(LazyCollectionOption.FALSE)
+    @JoinTable(name = "projects_users", joinColumns = {@JoinColumn(name = "user_id")}, inverseJoinColumns = {@JoinColumn(name = "project_id")})
+    private Set<Project> projects;
+    @OneToMany(targetEntity = Task.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "reporter_id")
+    private Set<Task> createdTasks;
+
+    @OneToMany(targetEntity = Task.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "asignee_id")
+    private Set<Task> assignedTasks;
+
+    @OneToMany(targetEntity = Project.class, fetch = FetchType.EAGER)
+    @JoinColumn(name = "creator_id")
+    private Set<Project> creatorProject;
+
+    @OneToMany(targetEntity = Comment.class, fetch = FetchType.EAGER, orphanRemoval = true)
+    @JoinColumn(name = "user_id")
+    private Set<Comment> comments;
 
     public User() {
     }
@@ -58,8 +81,24 @@ public class User implements Serializable {
         this.firstName = firstName;
     }
 
+    public Set<Project> getProjects() {
+        return projects;
+    }
+
+    public void setProjects(Set<Project> projects) {
+        this.projects = projects;
+    }
+
     public String getLastName() {
         return lastName;
+    }
+
+    public Set<Comment> getComments() {
+        return comments;
+    }
+
+    public void setComments(Set<Comment> comments) {
+        this.comments = comments;
     }
 
     public void setLastName(String lastName) {
@@ -72,6 +111,30 @@ public class User implements Serializable {
 
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    public Set<Task> getCreatedTasks() {
+        return createdTasks;
+    }
+
+    public void setCreatedTasks(Set<Task> createdTasks) {
+        this.createdTasks = createdTasks;
+    }
+
+    public Set<Project> getCreatorProject() {
+        return creatorProject;
+    }
+
+    public void setCreatorProject(Set<Project> creatorProject) {
+        this.creatorProject = creatorProject;
+    }
+
+    public Set<Task> getAssignedTasks() {
+        return assignedTasks;
+    }
+
+    public void setAssignedTasks(Set<Task> assignedTasks) {
+        this.assignedTasks = assignedTasks;
     }
 
     public String getPassword() {

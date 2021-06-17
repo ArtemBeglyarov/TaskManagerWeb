@@ -1,17 +1,12 @@
 package com.taskmanager.repository;
 
 import com.taskmanager.entity.Project;
-import com.taskmanager.entity.Task;
 import com.taskmanager.entity.User;
 
 import javax.annotation.Resource;
 import javax.enterprise.context.ApplicationScoped;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.sql.DataSource;
 import java.sql.Connection;
 import java.sql.ResultSet;
@@ -53,6 +48,11 @@ public class ProjectHibernateRepository implements Repository<Project> {
     @Override
     public void delete(long id)  {
         Project project = entityManager.find(Project.class, id);
+        for (User user : project.getUsers()) {
+            user.getProjects().remove(project);
+            entityManager.merge(user);
+
+        }
         entityManager.remove(project);
     }
 

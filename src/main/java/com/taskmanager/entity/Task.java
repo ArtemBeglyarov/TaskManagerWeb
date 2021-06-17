@@ -1,6 +1,5 @@
 package com.taskmanager.entity;
 
-import org.hibernate.annotations.Cascade;
 import org.hibernate.annotations.LazyCollection;
 import org.hibernate.annotations.LazyCollectionOption;
 
@@ -8,8 +7,6 @@ import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 import java.util.Set;
-
-import static javax.persistence.CascadeType.ALL;
 
 
 @Entity
@@ -69,8 +66,6 @@ public class Task implements Serializable {
     @JoinColumn(name = "asignee_id", nullable = true)
     private User assignee; //создател задачи
 
-    //TODO если сгенерируется 0
-    //private final long DEFAULT_LONG = -1;
 
     @LazyCollection(LazyCollectionOption.FALSE)
     @OneToMany(targetEntity = Comment.class, orphanRemoval = true, fetch = FetchType.EAGER)
