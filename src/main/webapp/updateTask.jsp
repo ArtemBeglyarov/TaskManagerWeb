@@ -14,6 +14,7 @@
     if (currUser == null) {
         response.sendRedirect("login.jsp");
     }
+    UsersOperations usersOperations =  (UsersOperations) BeansStore.getBean(UsersOperations.class);
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
     Task task = null;
     String param = request.getParameter("id");
@@ -51,7 +52,17 @@
                     <%}%>
                 </select>
             </div>
-
+            <div class="mb-3 row">
+                <select class="form-select" aria-label="Default select example" name="users">
+                    <option selected disabled>Select User</option>
+                    <%
+                        List <User>listUserss = usersOperations.findUsers();
+                        for(User user : listUserss){
+                    %>
+                    <option value="<%=user.getID()%>"><%=user.getUserName()%></option>
+                    <%}%>
+                </select>
+            </div>
             <div class="mb-3">
                 <input class="btn btn-primary" type="submit" value="Update">
             </div>
@@ -61,20 +72,16 @@
     <% if (request.getMethod().equals(HttpMethod.POST)) {
     task.setName(request.getParameter("taskName"));
     task.setDescription(request.getParameter("description"));
-    //task.setPriority(Task.Priority.get(request.getParameter("priority")));
-
-
-    //SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
-    //String assID = request.getParameter("users");
-    //Long idd = Long.parseLong(assID);
-    //task.setAssignee(usersOperations.findUser(idd));
-    /* try {
+    task.setPriority(Task.Priority.get(request.getParameter("priority")));
+    SimpleDateFormat format1 = new SimpleDateFormat("yyyy-MM-dd");
+    String assID = request.getParameter("users");
+    Long idd = Long.parseLong(assID);
+    task.setAssignee(usersOperations.findUser(idd));
+     try {
             task.setDueDate(format1.parse(request.getParameter("dueDate")));
         } catch (ParseException e) {
             throw new RuntimeException(e);
         }
-
-     */
     taskOperations.updateTask(task);
     response.sendRedirect("task.jsp?id=" + task.getID());
 }
