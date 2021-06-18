@@ -12,7 +12,6 @@
     TaskOperations taskOperations = (TaskOperations) BeansStore.getBean(TaskOperations.class);
     String checkID =request.getParameter("id");
     Long id = Long.parseLong(checkID);
-
     taskOperations.removeTaskById(id);
     response.sendRedirect("tasks.jsp");
 %>

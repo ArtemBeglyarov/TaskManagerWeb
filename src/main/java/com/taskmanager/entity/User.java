@@ -48,6 +48,7 @@ public class User implements Serializable {
     @JoinColumn(name = "user_id")
     private Set<Comment> comments;
 
+
     public User() {
     }
 

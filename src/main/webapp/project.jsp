@@ -169,9 +169,8 @@
 </div>
 <script>
     var button =
-        '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUser">Add User</button> ';
-
-        //'<button type="button" id="deleteUser" class="btn btn-danger">Delete user</button';
+        '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#addUser">Add User</button> '+
+        '<button type="button" id="deleteUser" class="btn btn-danger">Delete User</button';
     var buttons =
         '<button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#createTaskModal">Add Task</button> ' +
         '<button type="button" id="editButton" class="btn btn-success">Edit Task</button> ' +
@@ -187,13 +186,10 @@
             var data = table.getSelected();
             sendDelete(data, 'removeTask.jsp');
         });
-       /*
         $('#deleteUser').click( function () {
-
             var data = table.getSelected();
-            sendDeleteUser(data, 'deleteUserInProject');
+            sendDelete(data, 'deleteUserInProject.jsp?id=');
         });
-    */
     });
 </script>
 </body>
