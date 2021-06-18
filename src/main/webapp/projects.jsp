@@ -1,10 +1,4 @@
-<%--
-  Created by IntelliJ IDEA.
-  User: HP
-  Date: 13.05.2021
-  Time: 22:21
-  To change this template use File | Settings | File Templates.
---%>
+
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ page import="com.taskmanager.entity.User" %>
 <%@ page import="com.taskmanager.BeansStore" %>
@@ -52,7 +46,7 @@
             </tbody>
         </table>
 
-        <!-- Modal -->
+
         <div class="modal fade" id="createProjectModal" tabindex="-1" aria-labelledby="createProjectModalLabel" aria-hidden="true">
             <div class="modal-dialog">
                 <div class="modal-content">
