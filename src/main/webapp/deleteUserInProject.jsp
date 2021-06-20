@@ -5,6 +5,9 @@
 <%@ page import="com.taskmanager.operations.ProjectOperations" %>
 <%@ page import="com.taskmanager.entity.Project" %>
 <%@ page import="com.fasterxml.jackson.databind.ObjectMapper" %>
+<%@ page import="java.util.Set" %>
+<%@ page import="java.util.Arrays" %>
+<%@ page import="java.util.stream.Collectors" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%
     User currUser = (User) session.getAttribute("currUser");
@@ -14,23 +17,28 @@
     UsersOperations usersOperations = (UsersOperations) BeansStore.getBean(UsersOperations.class);
     ProjectOperations projectOperations = (ProjectOperations) BeansStore.getBean(ProjectOperations.class);
     Project project = null;
-    String param = request.getParameter("id");
-    if (param != null && param != "") {
-        Long id = Long.parseLong(param);
-        project = projectOperations.findProject(id);
+    String projectId = request.getParameter("id");
+    if (projectId != null && projectId != "") {
+        project = projectOperations.findProject(Long.parseLong(projectId));
     } else {
         response.sendRedirect("projects.jsp");
     }
 
-    if (request.getMethod().equals(HttpMethod.POST)) {
+    String checkID = request.getParameter("IDs");
+    Set<Long> ids = Arrays.stream(checkID.replace("\"", "")
+            .replace("[", "")
+            .replace("]", "")
+            .split(",")).map(Long::parseLong).collect(Collectors.toSet());
 
-        String checkID =request.getParameter("IDs");
-        ObjectMapper mapper = new ObjectMapper();
-        User[] users = mapper.readValue(checkID,User[].class);
-        for (User k:users){
-            project.deleteUser(k);
+    for (Long userId : ids) {
+        User user = usersOperations.findUser(userId);
+        if(true){
+            throw  new RuntimeException(user + "USER YOUR");
         }
-        projectOperations.updateProject(project);
-        response.sendRedirect("project.jsp?id=" + param);
+        project.deleteUser(user);
+        user.getProjects().remove(project);
+        usersOperations.updateUser(user);
     }
+    projectOperations.updateProject(project);
+    response.sendRedirect("project.jsp?id=" + projectId);
 %>

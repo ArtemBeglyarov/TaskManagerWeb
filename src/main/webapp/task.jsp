@@ -70,7 +70,7 @@
             if (currTask.getStatus() == Task.Status.OPENED) {
 
 
-        %><a class="nav-link" href="statusCancelled.jsp?id=<%=currTask.getID()%>">Cancelled
+        %><a class="nav-link" href="statusCancelled.jsp?id=<%=currTask.getID()%>">Cancel
     </a>
         <%
         } else if (currTask.getStatus() == Task.Status.ADDITIONAL_INFO_REQUIRED) {
@@ -157,6 +157,31 @@
                         </a></small>
                     </div>
                 </li>
+                <% if(currTask.getEndDate() != null) {
+                    SimpleDateFormat simpleDateFormat1 = new SimpleDateFormat("yyyy-MM-dd");
+                    String endDate = simpleDateFormat1.format(currTask.getEndDate());
+                %>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">End Date</h6>
+                        <small class="text-muted"><%=endDate%></small>
+                    </div>
+                </li>
+                <%}
+                else {
+                %>
+                <li class="list-group-item d-flex justify-content-between lh-sm">
+                    <div>
+                        <h6 class="my-0">End date</h6>
+                        <small class="text-muted">Not assigned</small>
+                    </div>
+                </li>
+                <%
+                    }
+                %>
+
+
+
                 <li class="list-group-item d-flex justify-content-between lh-sm">
                     <div>
                         <h6 class="my-0">Assignee</h6>

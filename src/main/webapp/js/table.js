@@ -33,10 +33,11 @@ function sendDelete(data, url){
                 alert( 'Oops! Something went wrong.' );
             });
             XHR.addEventListener( 'load', function(event) {
-                location.reload();
+               location.reload();
             });
             XHR.open( 'POST',url);
             XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
+            console.log(data);
             XHR.send('IDs='+JSON.stringify(data));
         }
     }
@@ -47,25 +48,5 @@ function sendEdit(data, url){
         alert('Please, check at one object.');
     }else{
         window.location.href = url + "?id=" + data[0];
-    }
-}
-
-function sendDeleteUser(data, url){
-    if(data.length === 0){
-        alert('Please, check at least one object.');
-    }else{
-        var r = confirm('Are you sure, want to delete the user(s)?');
-        if (r == true) {
-            const XHR = new XMLHttpRequest();
-            XHR.addEventListener( 'error', function(event) {
-                alert( 'Oops! Something went wrong.' );
-            });
-            XHR.addEventListener( 'load', function(event) {
-                location.reload();
-            });
-            XHR.open( 'POST',url);
-            XHR.setRequestHeader( 'Content-Type', 'application/x-www-form-urlencoded' );
-            XHR.send('IDs='+JSON.stringify(data));
-        }
     }
 }

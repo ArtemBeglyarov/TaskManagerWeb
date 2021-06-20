@@ -70,12 +70,7 @@ public class UserRepositoryHibernate implements Repository<User> {
             project.setCreator(find(1));
             entityManager.merge(project);
         }
-        ///
-        for (Project project : user.getProjects()) {
-            project.setCreator(find(1));
-            entityManager.merge(project);
-        }
-        ////
+
         for (Comment comment : user.getComments()) {
             comment.getTask().getComments().remove(comment);
             entityManager.merge(comment.getTask());

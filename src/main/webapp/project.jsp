@@ -187,9 +187,8 @@
             sendDelete(data, 'removeTask.jsp');
         });
         $('#deleteUser').click( function () {
-            var data = table.getSelected();
-            sendDelete(data, 'deleteUserInProject.jsp?id=');
-        });
+            var data = tableUser.getSelected();
+            sendDelete(data, 'deleteUserInProject.jsp?id=' +  <%=project.getID()%>)});
     });
 </script>
 </body>
